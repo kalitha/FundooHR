@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7C3DA0DD5F662FAA2C3B5C865CB05EEF6C681466",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3F0BA527AFC0760AB3F8851AFB55CBFF171432CE" : 9223372036854775807,
+    "7C3DA0DD5F662FAA2C3B5C865CB05EEF6C681466" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DCCC1F9A-E920-4839-93FE-9A18F5E34276",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3F0BA527AFC0760AB3F8851AFB55CBFF171432CE" : "FundooHR\/",
+    "7C3DA0DD5F662FAA2C3B5C865CB05EEF6C681466" : "FundooHR-admin\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FundooHR-admin",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FundooHR-admin.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kalitha\/FundooHR.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3F0BA527AFC0760AB3F8851AFB55CBFF171432CE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kalitha\/FundooHR-admin.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7C3DA0DD5F662FAA2C3B5C865CB05EEF6C681466"
+    }
+  ]
+}

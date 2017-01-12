@@ -1,0 +1,6 @@
+framework module Pods_FundooHR_admin {
+  umbrella header "Pods-FundooHR-admin-umbrella.h"
+
+  export *
+  module * { export * }
+}
