@@ -15,16 +15,21 @@ class FalloutService: NSObject {
     var arrayOfFalloutEmloyees = [Fallout]() //creating model type array
     
     func fetchData(token:String){
-        Alamofire.request("http://192.168.0.171:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=1483591685000").responseJSON{response in
+        let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
+        print("calculatedTimeStamp===>",calculatedTimeStamp)
+        Alamofire.request("http://192.168.0.171:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+            {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary
                 print("---falloutData----",completeFalloutData)
                 
                 let falloutNumberValue = completeFalloutData.value(forKey: "falloutNumber") as! Int
                 let totalEmployeeValue = completeFalloutData.value(forKey: "totalEmployee") as! Int
+                let timeStamp = completeFalloutData.value(forKey: "timeStamp") as! String
+                let falloutTotalEmployeesObj = FalloutTotalEmployees(unmarkedEmployee: falloutNumberValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
                 let falloutEmployeeData =  completeFalloutData.value(forKey: "falloutEmployee") as! [NSDictionary]
                 print("--falloutEmployeeData--",falloutEmployeeData)
-                
+
                 for index in 0..<falloutEmployeeData.count{
                     let valueAtEachIndex = falloutEmployeeData[index] as NSDictionary
                     let employeeNameValue = valueAtEachIndex["employeeName"] as! String
@@ -42,7 +47,7 @@ class FalloutService: NSObject {
                     
                 }
                 print("---count of employees---",self.arrayOfFalloutEmloyees.count)
-                self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [Fallout],totalEmployeeValue:totalEmployeeValue,falloutNumberValue:falloutNumberValue )
+                self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [Fallout],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
             }
         }
     }

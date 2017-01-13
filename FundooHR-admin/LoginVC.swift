@@ -60,11 +60,6 @@ class LoginVC: UIViewController {
         loginViewModelObj.passingEmailAndPasswordToController(email: emailData!, password: pswd!)
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let dash = segue.destination as! DashBoardVC
-//        dash.token = self.token
-//    }
-    
     func performingNavigationToDashboard(status:Int, token: String){
         activityIndicator.isHidden = true
         self.activityIndicator.stopAnimating()

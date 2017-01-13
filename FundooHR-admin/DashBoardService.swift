@@ -13,18 +13,20 @@ class DashBoardService: NSObject {
     var protocolDashBoardController : CallBackInDashBoardController?
     
     func fetchData(token: String){
-        let timeStamp = Double(Date().timeIntervalSince1970 * 1000)
-        print("timestamp@#@#$",timeStamp)
-        Alamofire.request("http://192.168.0.171:3000/readDashboardData?token=\(token)&timeStamp=\(timeStamp)").responseJSON
+        let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
+        print("timestamp@#@#$",calculatedTimeStamp)
+        Alamofire.request("http://192.168.0.171:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
+                
                 if let JSON = response.result.value {
                     let dashboardData = JSON as! NSDictionary
                     //let dataArray = response["attendanceSummary"] as! NSDictionary
                     print("---dashboard data----",dashboardData)
                     let timeStamp = dashboardData.value(forKey: "timeStamp") as! CLong
-                    print("--timeStamp--",timeStamp)
                     
+                    print("==timeStamp==",timeStamp)
+                
                     let attendanceSummary = dashboardData.value(forKey: "attendanceSummary") as! NSDictionary
                     print("---attendanceSummary---",attendanceSummary)
                     

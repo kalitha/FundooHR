@@ -211,9 +211,10 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.shadowOpacity = 1.0
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
-            cell.markedEmployees.text = String(describing: dashBoardViewModelObj.marked!)
-            cell.unmarkedEmployees.text = String(describing:dashBoardViewModelObj.unmarked!)
-           let date = Date.init(timeIntervalSince1970: Double(dashBoardViewModelObj.timeStamp!)/1000)
+            cell.markedEmployees.text = String(describing: (dashBoardViewModelObj.dashBoardContents?.marked)! as Int)
+           // cell.unmarkedEmployees.text = String(describing:dashBoardViewModelObj.dashBoardContents?.unmarked! )
+             cell.unmarkedEmployees.text = dashBoardViewModelObj.dashBoardContents?.unmarked! as! String
+           let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj.dashBoardContents?.timeStamp)!)/1000)
             formatter.dateFormat = "dd MM yyyy"
             formatter.dateStyle = .long
            let convertedDate = formatter.string(from: date)
@@ -232,10 +233,13 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.shadowOpacity = 1.0
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
-            cell.falloutEmployees.text = String(describing:dashBoardViewModelObj.falloutEmployee!)
-            cell.totalEmployees.text = String(describing:dashBoardViewModelObj.totalEmployee!)
+            //cell.falloutEmployees.text = String(describing:dashBoardViewModelObj.dashBoardContents?.falloutEmployee!)
+            cell.falloutEmployees.text = String(describing:(dashBoardViewModelObj.dashBoardContents?.falloutEmployee!)! as Int
+            )
+
+            cell.totalEmployees.text = String(describing:(dashBoardViewModelObj.dashBoardContents?.totalEmployee!)! as Int)
             
-            let date = Date.init(timeIntervalSince1970: Double(dashBoardViewModelObj.timeStamp!)/1000)
+            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj.dashBoardContents?.timeStamp)!)/1000)
             formatter.dateFormat = "MMMM yyyy"
            let convertedDate = formatter.string(from: date)
             cell.date.text = convertedDate
@@ -252,7 +256,7 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.shadowOpacity = 1.0
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
-            cell.leave.text = dashBoardViewModelObj.leave! as String
+            cell.leave.text = dashBoardViewModelObj.dashBoardContents?.leave! as! String
             return cell
         }
         else if(indexPath.row == 3) {

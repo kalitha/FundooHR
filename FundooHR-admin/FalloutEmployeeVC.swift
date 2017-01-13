@@ -42,8 +42,8 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
     func reload(){
-        numberOfUnmarkedEmployees.text = String(describing:falloutViewModelObj.falloutNumberVariable!)
-        totalEmployees.text = String(describing:falloutViewModelObj.totalEmployeeVariable!)
+        numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
+        totalEmployees.text = String(describing:(falloutViewModelObj.falloutTotalEmployeesContents?.totalEmployee)! as Int)
         self.collectionView.reloadData()
     }
     

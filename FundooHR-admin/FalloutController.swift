@@ -29,8 +29,8 @@ class FalloutController: NSObject,CallBackInFalloutController {
 //        }
     }
     
-    func dataFetchedFromFalloutService(_ data:[Fallout],totalEmployeeValue:Int,falloutNumberValue:Int){
-        self.protocolFalloutViewModel?.dataFetchedFromFalloutController(data,totalEmployeeValue:totalEmployeeValue,falloutNumberValue:falloutNumberValue)
+    func dataFetchedFromFalloutService(_ data:[Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees){
+        self.protocolFalloutViewModel?.dataFetchedFromFalloutController(data,falloutTotalEmployeesObj: falloutTotalEmployeesObj)
     }
     
 }

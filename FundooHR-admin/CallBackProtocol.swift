@@ -22,12 +22,12 @@ protocol CallBackInDashBoardViewModel{
     }
 
 protocol CallBackInFalloutController {
-    func dataFetchedFromFalloutService(_ data: [Fallout],totalEmployeeValue:Int,falloutNumberValue:Int)
+    func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     
 }
 
 protocol CallBackInFalloutViewModel {
-    func dataFetchedFromFalloutController(_ data: [Fallout],totalEmployeeValue:Int,falloutNumberValue:Int)
+    func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     
 }
 

@@ -14,6 +14,7 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
     let falloutControllerObj = FalloutController()
     var totalEmployeeVariable : Int?
     var falloutNumberVariable : Int?
+    var falloutTotalEmployeesContents : FalloutTotalEmployees?
     
     func fetchNumberOfCellsFromFalloutController(token:String)->Int{
         falloutControllerObj.protocolFalloutViewModel = self
@@ -23,10 +24,11 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
         }
         return arrayOfFalloutEmployees.count
     }
-    func dataFetchedFromFalloutController(_ data:[Fallout],totalEmployeeValue:Int,falloutNumberValue:Int){
+    func dataFetchedFromFalloutController(_ data:[Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees){
         arrayOfFalloutEmployees = data
-        totalEmployeeVariable = totalEmployeeValue
-        falloutNumberVariable = falloutNumberValue
+        falloutTotalEmployeesContents = falloutTotalEmployeesObj
+//        totalEmployeeVariable = totalEmployeeValue
+//        falloutNumberVariable = falloutNumberValue
         protocolFalloutVC?.reload()
     }
 }
