@@ -2,7 +2,7 @@
 //  LoginVC.swift
 //  FundooHR
 //
-//  Created by BridgeLabz Solutions LLP on 07/12/16.
+//  Created by Kalitha H N on 07/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
 

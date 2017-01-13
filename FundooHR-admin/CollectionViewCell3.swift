@@ -10,6 +10,7 @@ import UIKit
 
 class CollectionViewCell3: UICollectionViewCell {
 
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var leave: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

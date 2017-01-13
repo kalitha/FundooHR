@@ -82,6 +82,7 @@
             </constraints>
             <size key="customSize" width="249" height="170"/>
             <connections>
+                <outlet property="date" destination="rp4-NO-n28" id="j8w-E7-OUa"/>
                 <outlet property="leave" destination="bo3-LD-2p2" id="2fF-2H-cQ9"/>
             </connections>
             <point key="canvasLocation" x="106" y="56"/>

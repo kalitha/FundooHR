@@ -26,6 +26,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
         let token = tokenDictionary.value(forKey: "token") as! String
         falloutViewModelObj.fetchNumberOfCellsFromFalloutController(token:token)
+        
         let currentDate = Date()
         // initialize the date formatter and set the style
         let formatter = DateFormatter()
@@ -35,15 +36,18 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         let convertedDate = formatter.string(from: currentDate)
         date.text = convertedDate
         
-//        let timeStampDate = Date.init(timeIntervalSince1970: Double(dashBoardViewModelObj.timeStamp!)/1000)
-//        formatter.dateFormat = "MMMM yyyy"
-//        let convertedtimeStampDate = formatter.string(from: timeStampDate)
-//        unmarkedDate.text = convertedtimeStampDate
+       
+        
     }
     
     func reload(){
         numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
         totalEmployees.text = String(describing:(falloutViewModelObj.falloutTotalEmployeesContents?.totalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((falloutViewModelObj.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
+         let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM yyyy"
+        let convertedtimeStampDate = formatter.string(from: timeStampDate)
+        unmarkedDate.text = convertedtimeStampDate
         self.collectionView.reloadData()
     }
     

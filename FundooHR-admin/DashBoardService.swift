@@ -23,7 +23,7 @@ class DashBoardService: NSObject {
                     let dashboardData = JSON as! NSDictionary
                     //let dataArray = response["attendanceSummary"] as! NSDictionary
                     print("---dashboard data----",dashboardData)
-                    let timeStamp = dashboardData.value(forKey: "timeStamp") as! CLong
+                    let timeStamp = dashboardData.value(forKey: "timeStamp") as! Double
                     
                     print("==timeStamp==",timeStamp)
                 

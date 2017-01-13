@@ -12,8 +12,6 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
     var protocolFalloutVC : CallBackInFalloutVC?
     var arrayOfFalloutEmployees = [Fallout]()
     let falloutControllerObj = FalloutController()
-    var totalEmployeeVariable : Int?
-    var falloutNumberVariable : Int?
     var falloutTotalEmployeesContents : FalloutTotalEmployees?
     
     func fetchNumberOfCellsFromFalloutController(token:String)->Int{

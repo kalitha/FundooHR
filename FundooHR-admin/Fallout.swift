@@ -20,8 +20,9 @@ class Fallout: NSObject {
     var leaveTaken : Int?
     var falloutEmployee : Int?
     var totalEmployee : Int?
+    var engineerId : String?
     
-    init(employeeName: String, employeeStatus: String, company: String, emailId: String, mobile: String, blStartDate: String, companyJoinDate: String, companyLeaveDate: String, leaveTaken: Int) {
+    init(employeeName: String, employeeStatus: String, company: String, emailId: String, mobile: String, blStartDate: String, companyJoinDate: String, companyLeaveDate: String, leaveTaken: Int, engineerId: String) {
         self.employeeName = employeeName
         self.employeeStatus = employeeStatus
         self.company = company
@@ -31,5 +32,6 @@ class Fallout: NSObject {
         self.companyJoinDate = companyJoinDate
         self.companyLeaveDate = companyLeaveDate
         self.leaveTaken = leaveTaken
+        self.engineerId  = engineerId
         }
 }

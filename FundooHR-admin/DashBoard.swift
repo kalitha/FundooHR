@@ -14,8 +14,8 @@ class DashBoard: NSObject {
     var falloutEmployee : Int?
     var totalEmployee : Int?
     var leave : NSString?
-    var timeStamp : CLong
-    init(marked:Int, unmarked:NSString,falloutEmployee:Int, totalEmployee:Int, leave:NSString, timeStamp:CLong) {
+    var timeStamp : Double!
+    init(marked:Int, unmarked:NSString,falloutEmployee:Int, totalEmployee:Int, leave:NSString, timeStamp:Double) {
         self.marked = marked
         self.unmarked = unmarked
         self.falloutEmployee = falloutEmployee

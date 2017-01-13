@@ -257,6 +257,11 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
             cell.leave.text = dashBoardViewModelObj.dashBoardContents?.leave! as! String
+            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj.dashBoardContents?.timeStamp)!)/1000)
+            formatter.dateFormat = "dd MM yyyy"
+            formatter.dateStyle = .long
+            let convertedDate = formatter.string(from: date)
+            cell.date.text = convertedDate
             return cell
         }
         else if(indexPath.row == 3) {

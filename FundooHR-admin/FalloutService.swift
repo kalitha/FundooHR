@@ -16,7 +16,7 @@ class FalloutService: NSObject {
     
     func fetchData(token:String){
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
-        print("calculatedTimeStamp===>",calculatedTimeStamp)
+        print("==calculatedTimeStamp===>",calculatedTimeStamp)
         Alamofire.request("http://192.168.0.171:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             {response in
             if let JSON = response.result.value{
@@ -41,8 +41,8 @@ class FalloutService: NSObject {
                     let companyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
                     let companyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
                     let leaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
-                    
-                    let eachFalloutEmployeeObj = Fallout(employeeName: employeeNameValue, employeeStatus: employeeStatusValue, company: companyValue, emailId: emailIdValue, mobile: mobileValue, blStartDate: blStartDateValue, companyJoinDate: companyJoinDateValue, companyLeaveDate: companyLeaveDateValue, leaveTaken: leaveTakenValue)
+                    let engineerIdValue = valueAtEachIndex["engineerId"] as! String 
+                    let eachFalloutEmployeeObj = Fallout(employeeName: employeeNameValue, employeeStatus: employeeStatusValue, company: companyValue, emailId: emailIdValue, mobile: mobileValue, blStartDate: blStartDateValue, companyJoinDate: companyJoinDateValue, companyLeaveDate: companyLeaveDateValue, leaveTaken: leaveTakenValue, engineerId: engineerIdValue)
                     self.arrayOfFalloutEmloyees.append(eachFalloutEmployeeObj)
                     
                 }
