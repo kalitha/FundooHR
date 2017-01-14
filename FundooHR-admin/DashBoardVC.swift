@@ -50,9 +50,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         // get the date time String from the date object
         let convertedDate = formatter.string(from: currentDate)
         date.text = convertedDate
-        customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-        customView.backgroundColor = UIColor.lightGray
-        //        slideMenu.layer.shadowOpacity = 1
+                //        slideMenu.layer.shadowOpacity = 1
         //        slideMenu.layer.shadowRadius = 6
     }
     
@@ -88,6 +86,11 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     }
     
     @IBAction func menuOpen(_ sender: UIButton) {
+        
+        print("views width",view.frame.width)
+        customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
+        customView.backgroundColor = UIColor.lightGray
+
         if(menuShowing){
             slideMenuLeadingConstraint.constant = -250
             //1st case of removing tap gesture(papre) when we click on the icon
