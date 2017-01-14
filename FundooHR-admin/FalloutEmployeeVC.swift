@@ -20,6 +20,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
         falloutViewModelObj.protocolFalloutVC = self
         outerLabelOfUnmarkedEmployees.layer.masksToBounds = true;
         outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
@@ -36,8 +37,18 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         let convertedDate = formatter.string(from: currentDate)
         date.text = convertedDate
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeOrientationFunc), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        //-----========----------==========-------
+        self.collectionView!.collectionViewLayout = self.getLayout()
+        
        
         
+    }
+    
+    func changeOrientationFunc()
+    {
+        self.collectionView!.collectionViewLayout = self.getLayout()
     }
     
     func reload(){
@@ -76,9 +87,36 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         cell.layer.masksToBounds = false;
         cell.layer.cornerRadius = 5
         cell.employeeImage.layer.masksToBounds = false;
-        
+        print("cells heigth====",cell.bounds.height)
+        print("cells width====",cell.bounds.width)
         return cell
     }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        
+//        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+//        return CGSize(width: 100, height: 100)
+//        }
+//        return CGSize(width: 64, height: 64)
+//    }
+    
+    //cell size modification
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        
+//        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+//            return
+//        }
+//        
+//        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+//        
+//            flowLayout.itemSize = CGSize(width: 292.0, height: 150)
+//        }
+//        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+//            flowLayout.itemSize = CGSize(width: 292.0, height: 112.0)
+//        }
+//        
+//        flowLayout.invalidateLayout()
+//    }
     
     @IBAction func showAlertOnButtonTapping(_ sender: UIButton) {
         // create the alert
@@ -88,6 +126,38 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
         // show the alert
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    // collection view delegate
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.size.width - 20, height: collectionView.frame.size.width - 20)
+        
+    }
+
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        let kWhateverHeightYouWant = 100
+//        return CGSizeMake(collectionView.bounds.size.width, CGFloat(kWhateverHeightYouWant))
+//    }
+    
+    
+    //--------===========------------==========------------
+    func getLayout() -> UICollectionViewLayout
+    {
+        let layout:UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
+        
+        print(self.view.frame.size.width - 30)
+        
+        layout.itemSize = CGSize(width: self.view.frame.size.width - 30, height: 112)
+        layout.sectionInset = UIEdgeInsets(top: 25, left: 50, bottom: 25, right: 50)
+        
+        return layout as UICollectionViewLayout
+        
     }
     
 }

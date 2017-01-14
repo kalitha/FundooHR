@@ -50,8 +50,28 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         // get the date time String from the date object
         let convertedDate = formatter.string(from: currentDate)
         date.text = convertedDate
-                //        slideMenu.layer.shadowOpacity = 1
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        //        slideMenu.layer.shadowOpacity = 1
         //        slideMenu.layer.shadowRadius = 6
+    }
+    
+    
+    func rotated() {
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            print("Landscape")
+            print("views width",view.frame.width)
+            customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
+            customView.backgroundColor = UIColor.lightGray
+           
+        }
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+            print("Portrait")
+            print("views width",view.frame.width)
+            customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
+            customView.backgroundColor = UIColor.lightGray
+        }
+        
     }
     
     func reload(){
@@ -86,7 +106,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     }
     
     @IBAction func menuOpen(_ sender: UIButton) {
-        
+        //changing the custom view's size while we change to landscape mode
         print("views width",view.frame.width)
         customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
         customView.backgroundColor = UIColor.lightGray

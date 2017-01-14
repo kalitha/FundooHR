@@ -39,7 +39,8 @@ class DashBoardService: NSObject {
                     let totalEmployee = attendanceFallout.value(forKey: "totalEmployee") as! Int
                     
                     let leaveSummary = dashboardData.value(forKey: "leaveSummary") as! NSDictionary
-                    let leave = leaveSummary.value(forKey: "leave") as! NSString
+                    //FIXME:-fix leave string
+                    let leave : NSString = ""//leaveSummary.value(forKey: "leave") as! NSString
                     
                     let dashBoardContent = DashBoard(marked: marked, unmarked: unmarked, falloutEmployee: falloutEmployee, totalEmployee: totalEmployee, leave: leave, timeStamp: timeStamp)
                     
