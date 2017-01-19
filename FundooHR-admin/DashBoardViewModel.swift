@@ -16,11 +16,11 @@ class DashBoardViewModel: NSObject,CallBackInDashBoardViewModel {
     var count = 0
     
     
-    func fetchDataFromDashBoardController(token: String)->Int{
+    func fetchDataFromDashBoardController(_ token: String)->Int{
         let dashBoardControllerObj = DashBoardController()
         dashBoardControllerObj.protocolDashBoardViewModel = self
         if(count == 0){
-            dashBoardControllerObj.fetchDataFromDashBoardService(token: token)
+            dashBoardControllerObj.fetchDataFromDashBoardService(token)
             count+=1
         }
         return responseCount

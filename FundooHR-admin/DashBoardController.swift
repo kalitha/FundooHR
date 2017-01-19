@@ -12,10 +12,10 @@ class DashBoardController: NSObject,CallBackInDashBoardController{
     
     var protocolDashBoardViewModel : CallBackInDashBoardViewModel?
     
-    func fetchDataFromDashBoardService(token: String){
+    func fetchDataFromDashBoardService(_ token: String){
         let dashBoardServiceObj = DashBoardService()
         dashBoardServiceObj.protocolDashBoardController = self
-        dashBoardServiceObj.fetchData(token: token)
+        dashBoardServiceObj.fetchData(token)
     }
     
     //sending fetched data to the view model

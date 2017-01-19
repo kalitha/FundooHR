@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 protocol CallBackInDashBoardController {
     func fetchedDataFromDashBoardService(_ dashBoardData: DashBoard)
     
@@ -23,12 +24,14 @@ protocol CallBackInDashBoardViewModel{
 
 protocol CallBackInFalloutController {
     func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
-    
+    func employeeImageUrlFetchedFromService(url:[FalloutImageModel])
+    func imageFetchedFromService(image: UIImage, index: Int)
 }
 
 protocol CallBackInFalloutViewModel {
     func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
-    
+    func employeeImageUrlFetchedFromController(data:[FalloutImageModel])
+    func imageFetchedFromController(image: UIImage, index: Int)
 }
 
 protocol CallBackInFalloutVC {
@@ -36,9 +39,21 @@ protocol CallBackInFalloutVC {
 }
 
 protocol CallBackInLoginViewModel {
-    func fetchTokenFromController(status:Int, token:String)
+    func fetchTokenFromController(_ status:Int, token:String)
 }
 
 protocol CallBackInLoginController {
-    func fetchTokenFromService(status:Int, token:String)
+    func fetchTokenFromService(_ status:Int, token:String)
+}
+
+protocol CallBackInEngineersController {
+    func dataFetchedFromService(data:[EngineersModel])
+}
+
+protocol CallBackInEngineersviewModel {
+    func dataFetchedFromController(data:[EngineersModel])
+}
+
+protocol CallBackInEngineersVC {
+    func reload()
 }

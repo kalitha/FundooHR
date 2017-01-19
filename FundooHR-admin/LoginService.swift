@@ -15,8 +15,8 @@ class LoginService: NSObject {
     //let token : String?
     let defaults = UserDefaults.standard
     
-    func fetchToken(email:String, password:String){
-        let urlString: String = "http://192.168.0.171:3000/login"
+    func fetchToken(_ email:String, password:String){
+        let urlString: String = "http://192.168.0.144:3000/login"
         let params = ["emailId":  (email), "password" : (password)]
         Alamofire.request(urlString, method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -42,12 +42,12 @@ class LoginService: NSObject {
                         print("dictionaryOfToken===",dictionaryOfToken)
                         let tokenValue = dictionaryOfToken.value(forKey: "token") as! String
                         
-                        self.protocolLoginController?.fetchTokenFromService(status:status, token: tokenValue)
+                        self.protocolLoginController?.fetchTokenFromService(status, token: tokenValue)
                     }
                     else{
                         let token = String(describing:loginData.value(forKey: "token"))
                         print("---token---",token)
-                        self.protocolLoginController?.fetchTokenFromService(status:status, token: token)
+                        self.protocolLoginController?.fetchTokenFromService(status, token: token)
                     }
                     
                 }

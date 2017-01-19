@@ -1,4 +1,4 @@
-//
+ //
 //  FalloutService.swift
 //  FundooHR-admin
 //
@@ -8,16 +8,26 @@
 
 import UIKit
 import Alamofire
+import Firebase
+import FirebaseStorage
+
 class FalloutService: NSObject {
+    
+    //FIXME:-fix leave string
+    var ref: FIRDatabaseReference!
+    let falloutControllerObj = FalloutController()
+    
+    //dont fix
     //creating the variable of falloutcontroller type
     var protocolFalloutController : CallBackInFalloutController?
     var falloutEmployeeData = [NSDictionary]()
     var arrayOfFalloutEmloyees = [Fallout]() //creating model type array
+    var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
     
-    func fetchData(token:String){
+    func fetchData(_ token:String){
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.171:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.144:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary
@@ -48,6 +58,54 @@ class FalloutService: NSObject {
                 }
                 print("---count of employees---",self.arrayOfFalloutEmloyees.count)
                 self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [Fallout],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
+            }
+        }
+    }
+    
+    func fetchEmployeeImageUrlFromFirebase(){
+        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
+        ref.child("falloutEmployee").observeSingleEvent(of: .value, with: { snapshot in
+            
+            let falloutEmployee = (snapshot.value) as! [NSDictionary]
+            
+            print("==falloutEmployee==",falloutEmployee)
+            for index in 0..<falloutEmployee.count{
+                let valueAtEachIndex = falloutEmployee[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
+                let employeeImageValue = valueAtEachIndex["employee_Image"] as! String
+                let employeeNameValue = valueAtEachIndex["employee_name"] as! String
+                let employeeObj = FalloutImageModel(employeeImage: employeeImageValue, employeeName: employeeNameValue)
+                self.arrayOfFalloutEmployeeImages.append(employeeObj)
+                }
+            print("count of arrayOfFalloutEmloyees ",self.arrayOfFalloutEmloyees.count)
+            print("count=======",self.arrayOfFalloutEmployeeImages.count)
+            print("arrayOfFalloutEmployeeImages",self.arrayOfFalloutEmployeeImages)
+            self.protocolFalloutController?.employeeImageUrlFetchedFromService(url: self.arrayOfFalloutEmployeeImages)
+            })
+        { (error) in
+            print(error.localizedDescription)
+        }
+
+    }
+    
+    func fetchEmployeeImage(_ image:[FalloutImageModel]){
+        let storage = FIRStorage.storage()
+        let storageRef = storage.reference(forURL: "gs://fundoohr16-3d816.appspot.com")
+        for i in 0..<image.count{
+            let employeeImageUrl = image[i].employeeImageUrl
+            let path = storageRef.child(employeeImageUrl!)
+            
+            path.data(withMaxSize: 1*1024*1024) {(data,error) -> Void in//we r making rest call here
+                print("count of arrayOfFalloutEmloyees ",self.arrayOfFalloutEmloyees.count)
+                print("i value",i)
+                print("data",data)
+                print("image",UIImage(data: data!))
+                if(error != nil){
+                    print("error occured")
+                }else{
+                    let image = UIImage(data: data!)
+                    self.protocolFalloutController?.imageFetchedFromService(image: image!, index: i)
+                   
+                }
             }
         }
     }

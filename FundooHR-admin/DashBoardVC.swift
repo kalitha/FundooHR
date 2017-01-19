@@ -203,7 +203,7 @@ extension DashBoardVC: UICollectionViewDataSource{
         
        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
        let token = tokenDictionary.value(forKey: "token") as! String
-        dashBoardViewModelObj.fetchDataFromDashBoardController(token: token)
+        dashBoardViewModelObj.fetchDataFromDashBoardController(token)
         
         //dashBoardViewModelObj.fetchDataFromDashBoardController(token:self.token!)
         return dashBoardViewModelObj.responseCount

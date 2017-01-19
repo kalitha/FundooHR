@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A6361561E290B74006B9AD7 /* EngineersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6361551E290B74006B9AD7 /* EngineersVC.swift */; };
 		0A6461971E1B67AC000C417D /* CallBackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6461961E1B67AC000C417D /* CallBackProtocol.swift */; };
 		0A664B6F1E209DF5006AE30D /* FalloutTotalEmployees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A664B6E1E209DF5006AE30D /* FalloutTotalEmployees.swift */; };
 		0A664B711E212411006AE30D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A664B701E212411006AE30D /* LoginViewModel.swift */; };
@@ -16,17 +17,22 @@
 		0A6713481E2214C7009C0BE3 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6713471E2214C7009C0BE3 /* LoginController.swift */; };
 		0A67134A1E2214D8009C0BE3 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6713491E2214D8009C0BE3 /* LoginService.swift */; };
 		0A695B691E1CB425001CAD60 /* DashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A695B681E1CB425001CAD60 /* DashBoard.swift */; };
-		0A6A513B1E1796E600F88ACB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6A513A1E1796E600F88ACB /* GoogleService-Info.plist */; };
+		0A70DA581E2CB5D8001267AC /* FalloutImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A70DA571E2CB5D8001267AC /* FalloutImageModel.swift */; };
+		0A70DA5A1E2CE01C001267AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A70DA591E2CE01C001267AC /* GoogleService-Info.plist */; };
 		0A73F3D91E14C1EA00157449 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A73F3D81E14C1EA00157449 /* AppDelegate.swift */; };
 		0A73F3E11E14C1EA00157449 /* FundooHR_admin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0A73F3DF1E14C1EA00157449 /* FundooHR_admin.xcdatamodeld */; };
 		0A73F3E31E14C1EA00157449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A73F3E21E14C1EA00157449 /* Assets.xcassets */; };
 		0A73F3E61E14C1EA00157449 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A73F3E41E14C1EA00157449 /* LaunchScreen.storyboard */; };
+		0A745A251E30E1F40045AF38 /* EngineersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A745A241E30E1F40045AF38 /* EngineersModel.swift */; };
+		0A745A271E30E3280045AF38 /* EngineersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A745A261E30E3280045AF38 /* EngineersService.swift */; };
+		0A745A291E30E33F0045AF38 /* EngineersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A745A281E30E33F0045AF38 /* EngineersController.swift */; };
+		0A745A2B1E30E3580045AF38 /* EngineersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A745A2A1E30E3580045AF38 /* EngineersViewModel.swift */; };
+		0A7D7C221E29DD3900DC9431 /* ReportsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7D7C211E29DD3900DC9431 /* ReportsVC.swift */; };
 		0A859D3C1E1E5EF600845818 /* FalloutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A859D3B1E1E5EF600845818 /* FalloutService.swift */; };
 		0A859D3E1E1E5F1200845818 /* FalloutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A859D3D1E1E5F1200845818 /* FalloutController.swift */; };
 		0A859D401E1E5FBF00845818 /* FalloutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A859D3F1E1E5FBF00845818 /* FalloutViewModel.swift */; };
 		0A859D421E1E5FEE00845818 /* Fallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A859D411E1E5FEE00845818 /* Fallout.swift */; };
 		0A94849A1E16493200B01371 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484891E16493200B01371 /* LoginVC.swift */; };
-		0A94849B1E16493200B01371 /* SecondViewOf3rdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848A1E16493200B01371 /* SecondViewOf3rdVC.swift */; };
 		0A94849C1E16493200B01371 /* CollectionViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848B1E16493200B01371 /* CollectionViewCell3.swift */; };
 		0A94849D1E16493200B01371 /* CollectionViewCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848C1E16493200B01371 /* CollectionViewCell5.swift */; };
 		0A94849E1E16493200B01371 /* CollectionViewCell6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848D1E16493200B01371 /* CollectionViewCell6.swift */; };
@@ -47,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A6361551E290B74006B9AD7 /* EngineersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersVC.swift; sourceTree = "<group>"; };
 		0A6461961E1B67AC000C417D /* CallBackProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallBackProtocol.swift; sourceTree = "<group>"; };
 		0A664B6E1E209DF5006AE30D /* FalloutTotalEmployees.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutTotalEmployees.swift; sourceTree = "<group>"; };
 		0A664B701E212411006AE30D /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -56,19 +63,24 @@
 		0A6713471E2214C7009C0BE3 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0A6713491E2214D8009C0BE3 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		0A695B681E1CB425001CAD60 /* DashBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoard.swift; sourceTree = "<group>"; };
-		0A6A513A1E1796E600F88ACB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A70DA571E2CB5D8001267AC /* FalloutImageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutImageModel.swift; sourceTree = "<group>"; };
+		0A70DA591E2CE01C001267AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A73F3D51E14C1EA00157449 /* FundooHR-admin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FundooHR-admin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A73F3D81E14C1EA00157449 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A73F3E01E14C1EA00157449 /* FundooHR_admin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FundooHR_admin.xcdatamodel; sourceTree = "<group>"; };
 		0A73F3E21E14C1EA00157449 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A73F3E51E14C1EA00157449 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A73F3E71E14C1EA00157449 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A745A241E30E1F40045AF38 /* EngineersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersModel.swift; sourceTree = "<group>"; };
+		0A745A261E30E3280045AF38 /* EngineersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersService.swift; sourceTree = "<group>"; };
+		0A745A281E30E33F0045AF38 /* EngineersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersController.swift; sourceTree = "<group>"; };
+		0A745A2A1E30E3580045AF38 /* EngineersViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersViewModel.swift; sourceTree = "<group>"; };
+		0A7D7C211E29DD3900DC9431 /* ReportsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsVC.swift; sourceTree = "<group>"; };
 		0A859D3B1E1E5EF600845818 /* FalloutService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutService.swift; sourceTree = "<group>"; };
 		0A859D3D1E1E5F1200845818 /* FalloutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutController.swift; sourceTree = "<group>"; };
 		0A859D3F1E1E5FBF00845818 /* FalloutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutViewModel.swift; sourceTree = "<group>"; };
 		0A859D411E1E5FEE00845818 /* Fallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fallout.swift; sourceTree = "<group>"; };
 		0A9484891E16493200B01371 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		0A94848A1E16493200B01371 /* SecondViewOf3rdVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewOf3rdVC.swift; sourceTree = "<group>"; };
 		0A94848B1E16493200B01371 /* CollectionViewCell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell3.swift; sourceTree = "<group>"; };
 		0A94848C1E16493200B01371 /* CollectionViewCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell5.swift; sourceTree = "<group>"; };
 		0A94848D1E16493200B01371 /* CollectionViewCell6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell6.swift; sourceTree = "<group>"; };
@@ -147,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				0A9484891E16493200B01371 /* LoginVC.swift */,
-				0A94848A1E16493200B01371 /* SecondViewOf3rdVC.swift */,
 				0A94848C1E16493200B01371 /* CollectionViewCell5.swift */,
 				0A94848D1E16493200B01371 /* CollectionViewCell6.swift */,
 				0A94848E1E16493200B01371 /* CollectionViewCell6.xib */,
@@ -158,11 +169,12 @@
 				0A9484921E16493200B01371 /* CollectionViewCell3.xib */,
 				0A9484931E16493200B01371 /* CollectionViewCell2.swift */,
 				0A9484941E16493200B01371 /* CollectionViewCell2.xib */,
-				0A9484951E16493200B01371 /* CollectionViewCell.swift */,
 				0A9484961E16493200B01371 /* CollectionViewCell.xib */,
 				0A9484971E16493200B01371 /* DashBoardVC.swift */,
 				0A9484991E16493200B01371 /* FalloutEmployeeVC.swift */,
 				0A9484981E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift */,
+				0A6361551E290B74006B9AD7 /* EngineersVC.swift */,
+				0A7D7C211E29DD3900DC9431 /* ReportsVC.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -172,7 +184,9 @@
 			children = (
 				0A664ED71E1A33180065E717 /* DashBoardViewModel.swift */,
 				0A859D3F1E1E5FBF00845818 /* FalloutViewModel.swift */,
+				0A9484951E16493200B01371 /* CollectionViewCell.swift */,
 				0A664B701E212411006AE30D /* LoginViewModel.swift */,
+				0A745A2A1E30E3580045AF38 /* EngineersViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -183,6 +197,7 @@
 				0A664ED91E1A33320065E717 /* DashBoardController.swift */,
 				0A859D3D1E1E5F1200845818 /* FalloutController.swift */,
 				0A6713471E2214C7009C0BE3 /* LoginController.swift */,
+				0A745A281E30E33F0045AF38 /* EngineersController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -193,6 +208,7 @@
 				0A664ED51E1A32D90065E717 /* DashBoardService.swift */,
 				0A859D3B1E1E5EF600845818 /* FalloutService.swift */,
 				0A6713491E2214D8009C0BE3 /* LoginService.swift */,
+				0A745A261E30E3280045AF38 /* EngineersService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -203,6 +219,8 @@
 				0A695B681E1CB425001CAD60 /* DashBoard.swift */,
 				0A859D411E1E5FEE00845818 /* Fallout.swift */,
 				0A664B6E1E209DF5006AE30D /* FalloutTotalEmployees.swift */,
+				0A70DA571E2CB5D8001267AC /* FalloutImageModel.swift */,
+				0A745A241E30E1F40045AF38 /* EngineersModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -218,11 +236,11 @@
 		0A73F3F41E14C3AA00157449 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				0A6A513A1E1796E600F88ACB /* GoogleService-Info.plist */,
 				0A9484AB1E16495D00B01371 /* Main.storyboard */,
 				0A73F3E71E14C1EA00157449 /* Info.plist */,
 				0A73F3DF1E14C1EA00157449 /* FundooHR_admin.xcdatamodeld */,
 				0A73F3E41E14C1EA00157449 /* LaunchScreen.storyboard */,
+				0A70DA591E2CE01C001267AC /* GoogleService-Info.plist */,
 				0A73F3E21E14C1EA00157449 /* Assets.xcassets */,
 			);
 			name = Resource;
@@ -313,10 +331,10 @@
 				0A9484A31E16493200B01371 /* CollectionViewCell3.xib in Resources */,
 				0A9484A21E16493200B01371 /* CollectionViewCell4.xib in Resources */,
 				0A9484A51E16493200B01371 /* CollectionViewCell2.xib in Resources */,
-				0A6A513B1E1796E600F88ACB /* GoogleService-Info.plist in Resources */,
 				0A73F3E31E14C1EA00157449 /* Assets.xcassets in Resources */,
 				0A9484AC1E16495D00B01371 /* Main.storyboard in Resources */,
 				0A9484A71E16493200B01371 /* CollectionViewCell.xib in Resources */,
+				0A70DA5A1E2CE01C001267AC /* GoogleService-Info.plist in Resources */,
 				0A94849F1E16493200B01371 /* CollectionViewCell6.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,13 +398,16 @@
 				0A67134A1E2214D8009C0BE3 /* LoginService.swift in Sources */,
 				0A664B6F1E209DF5006AE30D /* FalloutTotalEmployees.swift in Sources */,
 				0A9484A61E16493200B01371 /* CollectionViewCell.swift in Sources */,
+				0A745A251E30E1F40045AF38 /* EngineersModel.swift in Sources */,
 				0A9484AA1E16493200B01371 /* FalloutEmployeeVC.swift in Sources */,
 				0A695B691E1CB425001CAD60 /* DashBoard.swift in Sources */,
 				0A9484A91E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift in Sources */,
-				0A94849B1E16493200B01371 /* SecondViewOf3rdVC.swift in Sources */,
 				0A9484A81E16493200B01371 /* DashBoardVC.swift in Sources */,
+				0A6361561E290B74006B9AD7 /* EngineersVC.swift in Sources */,
 				0A664ED81E1A33180065E717 /* DashBoardViewModel.swift in Sources */,
+				0A745A291E30E33F0045AF38 /* EngineersController.swift in Sources */,
 				0A859D401E1E5FBF00845818 /* FalloutViewModel.swift in Sources */,
+				0A745A271E30E3280045AF38 /* EngineersService.swift in Sources */,
 				0A73F3E11E14C1EA00157449 /* FundooHR_admin.xcdatamodeld in Sources */,
 				0A664EDA1E1A33320065E717 /* DashBoardController.swift in Sources */,
 				0A94849E1E16493200B01371 /* CollectionViewCell6.swift in Sources */,
@@ -397,11 +418,14 @@
 				0A94849A1E16493200B01371 /* LoginVC.swift in Sources */,
 				0A9484A41E16493200B01371 /* CollectionViewCell2.swift in Sources */,
 				0A6713481E2214C7009C0BE3 /* LoginController.swift in Sources */,
+				0A70DA581E2CB5D8001267AC /* FalloutImageModel.swift in Sources */,
+				0A7D7C221E29DD3900DC9431 /* ReportsVC.swift in Sources */,
 				0A94849C1E16493200B01371 /* CollectionViewCell3.swift in Sources */,
 				0A664B711E212411006AE30D /* LoginViewModel.swift in Sources */,
 				0A859D3E1E1E5F1200845818 /* FalloutController.swift in Sources */,
 				0A6461971E1B67AC000C417D /* CallBackProtocol.swift in Sources */,
 				0A9484A11E16493200B01371 /* CollectionViewCell4.swift in Sources */,
+				0A745A2B1E30E3580045AF38 /* EngineersViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

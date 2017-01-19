@@ -11,12 +11,12 @@ import UIKit
 class LoginViewModel: NSObject,CallBackInLoginViewModel {
     var loginvcObj:LoginVC?
     
-    func passingEmailAndPasswordToController(email:String,password:String){
+    func passingEmailAndPasswordToController(_ email:String,password:String){
         let loginControllerObj = LoginController()
         loginControllerObj.protocolLoginViewModel = self
-        loginControllerObj.passingEmailAndPasswordToService(email: email, password: password)
+        loginControllerObj.passingEmailAndPasswordToService(email, password: password)
     }
-    func fetchTokenFromController(status:Int, token:String){
+    func fetchTokenFromController(_ status:Int, token:String){
         loginvcObj?.performingNavigationToDashboard(status:status, token:token)
     }
 }

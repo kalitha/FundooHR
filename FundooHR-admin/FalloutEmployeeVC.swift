@@ -10,7 +10,6 @@ import UIKit
 
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,CallBackInFalloutVC {
     
-    let falloutViewModelObj = FalloutViewModel()
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var numberOfUnmarkedEmployees: UILabel!
     @IBOutlet weak var unmarkedDate: UILabel!
@@ -18,15 +17,19 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     @IBOutlet weak var outerLabelOfUnmarkedEmployees: UILabel!
     @IBOutlet weak var date: UILabel!
     
+    var falloutViewModelObj : FalloutViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
-        falloutViewModelObj.protocolFalloutVC = self
+        //FIXME:-fix falloutViewModelObj
+        //let falloutViewModelObj = FalloutViewModel()
+        falloutViewModelObj = FalloutViewModel()
+        falloutViewModelObj?.protocolFalloutVC = self
         outerLabelOfUnmarkedEmployees.layer.masksToBounds = true;
         outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
         let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
         let token = tokenDictionary.value(forKey: "token") as! String
-        falloutViewModelObj.fetchNumberOfCellsFromFalloutController(token:token)
+        falloutViewModelObj?.fetchNumberOfCellsFromFalloutController(token)
         
         let currentDate = Date()
         // initialize the date formatter and set the style
@@ -52,9 +55,11 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
     func reload(){
-        numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
-        totalEmployees.text = String(describing:(falloutViewModelObj.falloutTotalEmployeesContents?.totalEmployee)! as Int)
-        let timeStampDate = Date.init(timeIntervalSince1970: Double((falloutViewModelObj.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
+        //FIXME:-fix falloutViewModelObj
+        
+        numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
+        totalEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.totalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((falloutViewModelObj?.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
          let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         let convertedtimeStampDate = formatter.string(from: timeStampDate)
@@ -63,19 +68,27 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        //FIXME:-fix falloutViewModelObj
+        //let falloutViewModelObj = FalloutViewModel()
         let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
         
-        return falloutViewModelObj.arrayOfFalloutEmployees.count
+        return falloutViewModelObj!.arrayOfFalloutEmployees.count
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+         //FIXME:-fix falloutViewModelObj
+        //let falloutViewModelObj = FalloutViewModel()
         let color = UIColor.init(red: 240/255, green: 237/255, blue: 234/255, alpha: 1)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FalloutEmployeeCollectionViewCell
-        cell.name.text = falloutViewModelObj.arrayOfFalloutEmployees[indexPath.row].employeeName
-        cell.fellowShip.text = falloutViewModelObj.arrayOfFalloutEmployees[indexPath.row].employeeStatus
-        cell.company.text = falloutViewModelObj.arrayOfFalloutEmployees[indexPath.row].company
-        cell.email.text = falloutViewModelObj.arrayOfFalloutEmployees[indexPath.row].emailId
-        cell.mobileNum.text = falloutViewModelObj.arrayOfFalloutEmployees[indexPath.row].mobile
+        cell.name.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeName
+        cell.fellowShip.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeStatus
+        cell.company.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].company
+        cell.email.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].emailId
+        cell.mobileNum.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mobile
+       let employeeImage = falloutViewModelObj?.fetchEachImage(i: indexPath.row)
+        print("employee image...",employeeImage)
+        cell.employeeImage.image = employeeImage
+        
         cell.layer.borderWidth = 1.0
         //        cell.layer.cornerRadius = 5
         cell.layer.borderColor = color.cgColor
@@ -91,32 +104,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         print("cells width====",cell.bounds.width)
         return cell
     }
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        
-//        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
-//        return CGSize(width: 100, height: 100)
-//        }
-//        return CGSize(width: 64, height: 64)
-//    }
-    
-    //cell size modification
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        
-//        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-//            return
-//        }
-//        
-//        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
-//        
-//            flowLayout.itemSize = CGSize(width: 292.0, height: 150)
-//        }
-//        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
-//            flowLayout.itemSize = CGSize(width: 292.0, height: 112.0)
-//        }
-//        
-//        flowLayout.invalidateLayout()
-//    }
+
     
     @IBAction func showAlertOnButtonTapping(_ sender: UIButton) {
         // create the alert
@@ -128,24 +116,14 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         self.present(alert, animated: true, completion: nil)
     }
     
-    
     // collection view delegate
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.frame.size.width - 20, height: collectionView.frame.size.width - 20)
-        
-    }
+        }
 
-//    func collectionView(_ collectionView: UICollectionView,
-//                        layout collectionViewLayout: UICollectionViewLayout,
-//                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        let kWhateverHeightYouWant = 100
-//        return CGSizeMake(collectionView.bounds.size.width, CGFloat(kWhateverHeightYouWant))
-//    }
-    
-    
     //--------===========------------==========------------
     func getLayout() -> UICollectionViewLayout
     {
@@ -159,5 +137,8 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         return layout as UICollectionViewLayout
         
     }
+    
+   
+    
     
 }

@@ -57,7 +57,7 @@ class LoginVC: UIViewController {
         activityIndicator.startAnimating()
         let emailData = email.text
         let pswd = password.text
-        loginViewModelObj.passingEmailAndPasswordToController(email: emailData!, password: pswd!)
+        loginViewModelObj.passingEmailAndPasswordToController(emailData!, password: pswd!)
     }
     
     func performingNavigationToDashboard(status:Int, token: String){

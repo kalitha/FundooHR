@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,CallBackInEngineersVC {
     
     @IBOutlet weak var tableView: UITableView!
     var menuShowing = false
@@ -17,7 +17,7 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet weak var slideMenu: UIView!
     @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
     
-    
+    var engineersViewModelObj : EngineersViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
@@ -75,11 +75,17 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
   
     }
     
-        public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func reload(){
+        
+        self.tableView.reloadData()//it reloads the tablview so that numberOfRowsInSection and cellForRowAt methods will be called
+    }
+
+    
+        open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return names.count
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         cell.textLabel?.text = names[indexPath.row]
@@ -103,7 +109,7 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
     }
     
     // MARK:- tableview delegate method
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         if(indexPath.row == 1){
             performSegue(withIdentifier: "segueFromFirstIndex", sender: nil)
         }

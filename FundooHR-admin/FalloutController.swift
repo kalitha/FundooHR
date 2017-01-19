@@ -10,27 +10,45 @@ import UIKit
 
 class FalloutController: NSObject,CallBackInFalloutController {
     var protocolFalloutViewModel : CallBackInFalloutViewModel?
+    var falloutServiceObj : FalloutService?
     
-    
-    func fetchNumberOfCellsFromFalloutService(token:String){
-        let falloutServiceObj = FalloutService()
-        falloutServiceObj.protocolFalloutController = self
+    func fetchNumberOfCellsFromFalloutService(_ token:String){
+          falloutServiceObj = FalloutService()
+        falloutServiceObj?.protocolFalloutController = self
         let arrayOfFalloutEmployees = [Fallout]()
         
         if(arrayOfFalloutEmployees.count == 0){
-            falloutServiceObj.fetchData(token : token)
+            falloutServiceObj?.fetchData(token)
         }
-//        else{
-//            for i in 0..<arrayOfFalloutEmployees.count{
-//                let eachFalloutEmployeeObj = Fallout(employeeName: arrayOfFalloutEmployees[i].employeeName!, employeeStatus: arrayOfFalloutEmployees[i].employeeStatus!, company: arrayOfFalloutEmployees[i].company!, emailId:arrayOfFalloutEmployees[i].emailId!, mobile: arrayOfFalloutEmployees[i].mobile!, blStartDate: arrayOfFalloutEmployees[i].blStartDate!, companyJoinDate: arrayOfFalloutEmployees[i].companyJoinDate!, companyLeaveDate: arrayOfFalloutEmployees[i].companyLeaveDate!, leaveTaken: arrayOfFalloutEmployees[i].leaveTaken!)
-//                
-//            }
-// dataFetchedFromFalloutService(data: arrayOfFalloutEmployees)
-//        }
     }
     
     func dataFetchedFromFalloutService(_ data:[Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees){
         self.protocolFalloutViewModel?.dataFetchedFromFalloutController(data,falloutTotalEmployeesObj: falloutTotalEmployeesObj)
     }
     
+   // ----====----- FETCHING IMAGE -----=====----
+    func fetchEmployeeImageUrlFromService(){
+     
+        falloutServiceObj = FalloutService()
+        falloutServiceObj?.protocolFalloutController = self
+        falloutServiceObj?.fetchEmployeeImageUrlFromFirebase()
+    }
+    
+    func employeeImageUrlFetchedFromService(url:[FalloutImageModel]){
+        //FIXME:-fix leave string
+        
+        self.protocolFalloutViewModel?.employeeImageUrlFetchedFromController(data: url)
+    }
+    
+    func fetchImageFromService(_ image:[FalloutImageModel]){
+         falloutServiceObj = FalloutService()
+        falloutServiceObj?.protocolFalloutController = self
+        falloutServiceObj?.fetchEmployeeImage(image)
+        
+    }
+    
+    func imageFetchedFromService(image: UIImage, index: Int){
+        
+        self.protocolFalloutViewModel?.imageFetchedFromController(image: image, index: index)
+    }
 }

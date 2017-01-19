@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>202097341184-rdn0n05k870ae7grkn8mdeug9694dt8k.apps.googleusercontent.com</string>
+	<string>393502206807-8g7oe31eugcp0uaa19host30ft49e92s.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.202097341184-rdn0n05k870ae7grkn8mdeug9694dt8k</string>
+	<string>com.googleusercontent.apps.393502206807-8g7oe31eugcp0uaa19host30ft49e92s</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCn7agKWlHF23qrweAuNTLbiQqoNqiCtDQ</string>
+	<string>AIzaSyAambWa6J2ZY3O14fHvxZ2slgaTjxOzHXc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>202097341184</string>
+	<string>393502206807</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>Bridgelabzit.FundooHR-admin</string>
 	<key>PROJECT_ID</key>
-	<string>fundoohr-a924b</string>
+	<string>fundoohr16-3d816</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fundoohr-a924b.appspot.com</string>
+	<string>fundoohr16-3d816.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:202097341184:ios:fc0723d83549e104</string>
+	<string>1:393502206807:ios:fc0723d83549e104</string>
 	<key>DATABASE_URL</key>
-	<string>https://fundoohr-a924b.firebaseio.com</string>
+	<string>https://fundoohr16-3d816.firebaseio.com</string>
 </dict>
 </plist>

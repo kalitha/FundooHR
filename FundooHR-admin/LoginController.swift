@@ -11,12 +11,12 @@ import UIKit
 class LoginController: NSObject,CallBackInLoginController {
     var protocolLoginViewModel : CallBackInLoginViewModel?
     
-    func passingEmailAndPasswordToService(email:String,password:String){
+    func passingEmailAndPasswordToService(_ email:String,password:String){
         let loginServiceObj = LoginService()
         loginServiceObj.protocolLoginController = self
-        loginServiceObj.fetchToken(email: email, password: password)
+        loginServiceObj.fetchToken(email, password: password)
     }
-    func fetchTokenFromService(status:Int, token:String){
-        self.protocolLoginViewModel?.fetchTokenFromController(status: status, token: token)
+    func fetchTokenFromService(_ status:Int, token:String){
+        self.protocolLoginViewModel?.fetchTokenFromController(status, token: token)
     }
 }
