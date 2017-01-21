@@ -20,14 +20,14 @@ class FalloutService: NSObject {
     //dont fix
     //creating the variable of falloutcontroller type
     var protocolFalloutController : CallBackInFalloutController?
-    var falloutEmployeeData = [NSDictionary]()
+    //var falloutEmployeeData = [NSDictionary]()
     var arrayOfFalloutEmloyees = [Fallout]() //creating model type array
     var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
     
     func fetchData(_ token:String){
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.144:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.9:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary

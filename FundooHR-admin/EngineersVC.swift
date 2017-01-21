@@ -13,16 +13,19 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Ca
     @IBOutlet weak var tableView: UITableView!
     var menuShowing = false
     var customView = UIView()
-    var names: [String] = ["email id", "Dashboard", "Engineers", "Attendance Summary", "Reports" ,"Clients", "Logout"]
+//    var names: [String] = ["email id", "Dashboard", "Engineers", "Attendance Summary", "Reports" ,"Clients", "Logout"]
     @IBOutlet weak var slideMenu: UIView!
     @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
     
     var engineersViewModelObj : EngineersViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        engineersViewModelObj = EngineersViewModel()
         customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
         customView.backgroundColor = UIColor.lightGray
-        // Do any additional setup after loading the view.
+        engineersViewModelObj = EngineersViewModel()
+        engineersViewModelObj?.protocolEngineersVC = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,7 +60,7 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Ca
         removeGestureRecognizer()
     }
 
-    @IBAction func onButtonClick(_ sender: Any) {
+    @IBAction func onButtonClick(_ sender: UIButton) {
         if(menuShowing){
             slideMenuLeadingConstraint.constant = -250
             //1st case of removing tap gesture(papre) when we click on the icon
@@ -72,23 +75,25 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Ca
             self.view.layoutIfNeeded()
         })
         menuShowing = !menuShowing
-  
     }
-    
-    func reload(){
+
+    func tableviewReload(){
         
         self.tableView.reloadData()//it reloads the tablview so that numberOfRowsInSection and cellForRowAt methods will be called
     }
 
     
         open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return names.count
+            
+            print(engineersViewModelObj?.fetchNumberOfRows())
+                
+        return (engineersViewModelObj?.fetchNumberOfRows())!
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        cell.textLabel?.text = names[indexPath.row]
+        cell.textLabel?.text = engineersViewModelObj?.contentAtEachRow(i: indexPath.row)
         let color = UIColor.init(red: 59/255, green: 83/255, blue: 114/255, alpha: 1)
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -102,7 +107,7 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Ca
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == names.count-1){
+        if(indexPath.row == (engineersViewModelObj?.engineersModelArray.count)!-1){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell

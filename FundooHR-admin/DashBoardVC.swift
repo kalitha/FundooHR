@@ -18,6 +18,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var date: UILabel!
+   // @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let dashBoardViewModelObj = DashBoardViewModel()
     var menuShowing = false
@@ -27,6 +28,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         dashBoardViewModelObj.protocolDashBoardViewController = self
         //token = loginVCObj.token
         self.collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
@@ -75,6 +77,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     }
     
     func reload(){
+    
         self.collectionView.reloadData()
     }
     
@@ -167,16 +170,16 @@ extension DashBoardVC: UITableViewDelegate{
             performSegue(withIdentifier: "segueFromSecondIndex", sender: nil)
         }
         
-        if(indexPath.row == 3){
+        else if(indexPath.row == 3){
             performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
         }
-        if(indexPath.row == 4){
+      else if(indexPath.row == 4){
             performSegue(withIdentifier: "segueFromFourthIndex", sender: nil)
         }
-        if(indexPath.row == 5){
+       else if(indexPath.row == 5){
             performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
         }
-        if(indexPath.row == 6){
+        else if(indexPath.row == 6){
             performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
         }
         slideMenuLeadingConstraint.constant = -250
@@ -334,15 +337,20 @@ extension DashBoardVC: UICollectionViewDataSource{
 //CollectionView Delegate
 extension DashBoardVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+
         if(indexPath.row == 1){
             performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
+            highlightCell2(indexPath, flag: true)
+        }
+        else if(indexPath.row == 2){
+            performSegue(withIdentifier: "segueFromThirdCell", sender: nil)
             highlightCell2(indexPath, flag: true)
         }
         
     }
     
     func highlightCell2(_ indexPath : IndexPath, flag: Bool) {
-        let cell = collectionView.cellForItem(at: indexPath)
+                let cell = collectionView.cellForItem(at: indexPath)
         if flag {
             cell?.contentView.backgroundColor = UIColor.lightGray
             cell?.contentView.backgroundColor?.withAlphaComponent(0.5)

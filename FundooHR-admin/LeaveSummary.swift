@@ -1,14 +1,14 @@
 //
-//  Fallout.swift
+//  LeaveSummary.swift
 //  FundooHR-admin
 //
-//  Created by BridgeLabz on 05/01/17.
+//  Created by BridgeLabz on 20/01/17.
 //  Copyright © 2017 BridgeLabz. All rights reserved.
 //
 
 import UIKit
 
-class Fallout: NSObject {
+class LeaveSummary: NSObject {
     var employeeName : String?
     var employeeStatus :String?
     var company :String?
@@ -31,5 +31,5 @@ class Fallout: NSObject {
         self.companyLeaveDate = companyLeaveDate
         self.leaveTaken = leaveTaken
         self.engineerId  = engineerId
-        }
+    }
 }

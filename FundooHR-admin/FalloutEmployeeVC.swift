@@ -16,10 +16,13 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     @IBOutlet weak var totalEmployees: UILabel!
     @IBOutlet weak var outerLabelOfUnmarkedEmployees: UILabel!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var falloutViewModelObj : FalloutViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         collectionView.delegate = self
         //FIXME:-fix falloutViewModelObj
         //let falloutViewModelObj = FalloutViewModel()
@@ -56,7 +59,8 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     
     func reload(){
         //FIXME:-fix falloutViewModelObj
-        
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
         totalEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.totalEmployee)! as Int)
         let timeStampDate = Date.init(timeIntervalSince1970: Double((falloutViewModelObj?.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
@@ -71,7 +75,8 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         //FIXME:-fix falloutViewModelObj
         //let falloutViewModelObj = FalloutViewModel()
         let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-        
+        let token = tokenDictionary.value(forKey: "token") as! String
+        falloutViewModelObj?.fetchNumberOfCellsFromFalloutController(token)
         return falloutViewModelObj!.arrayOfFalloutEmployees.count
     }
     

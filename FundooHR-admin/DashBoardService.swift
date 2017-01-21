@@ -15,7 +15,7 @@ class DashBoardService: NSObject {
     func fetchData(_ token: String){
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.144:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.9:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
                 

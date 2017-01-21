@@ -28,14 +28,6 @@
                         <color key="textColor" red="0.23137254900000001" green="0.32549019610000002" blue="0.44705882349999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X54-Te-RUm">
-                        <rect key="frame" x="255" y="14" width="30" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="32" id="QKn-Ry-zwW"/>
-                            <constraint firstAttribute="width" constant="30" id="pb3-JG-gFA"/>
-                        </constraints>
-                        <state key="normal" image="summary"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bo3-LD-2p2">
                         <rect key="frame" x="112" y="41" width="76" height="73"/>
                         <constraints>
@@ -66,18 +58,25 @@
                         <color key="textColor" red="0.43529411759999997" green="0.72156862749999995" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="summary" translatesAutoresizingMaskIntoConstraints="NO" id="g9u-4l-rpF">
+                        <rect key="frame" x="253" y="15" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="7UI-cJ-iMW"/>
+                            <constraint firstAttribute="height" constant="30" id="DyN-vk-0hq"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="X54-Te-RUm" secondAttribute="trailing" constant="15" id="2Hz-KW-VB7"/>
                 <constraint firstItem="cJ6-SW-bhr" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Hmp-Zd-ftX"/>
-                <constraint firstItem="X54-Te-RUm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="Mhs-NI-Z9k"/>
                 <constraint firstItem="jcE-rh-rIG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="19" id="SYM-M8-2dM"/>
+                <constraint firstAttribute="trailing" secondItem="g9u-4l-rpF" secondAttribute="trailing" constant="17" id="SbU-UK-JjZ"/>
                 <constraint firstItem="rp4-NO-n28" firstAttribute="top" secondItem="cJ6-SW-bhr" secondAttribute="bottom" constant="15" id="TEV-Fy-gDH"/>
                 <constraint firstItem="jcE-rh-rIG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Vrz-a4-Dw3"/>
                 <constraint firstItem="bo3-LD-2p2" firstAttribute="top" secondItem="jcE-rh-rIG" secondAttribute="bottom" constant="1" id="e12-z9-mYn"/>
                 <constraint firstItem="cJ6-SW-bhr" firstAttribute="top" secondItem="bo3-LD-2p2" secondAttribute="bottom" constant="1" id="egI-KP-Oif"/>
                 <constraint firstItem="rp4-NO-n28" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="epE-SH-56P"/>
+                <constraint firstItem="g9u-4l-rpF" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="odT-5i-qWF"/>
                 <constraint firstItem="bo3-LD-2p2" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="sYb-WY-KaI"/>
             </constraints>
             <size key="customSize" width="249" height="170"/>

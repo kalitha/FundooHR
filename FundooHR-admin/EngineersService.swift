@@ -17,7 +17,7 @@ class EngineersService: NSObject {
     
     func fetchData()  {
           ref = FIRDatabase.database().reference()//responsible to make a call to firebase
-        ref.child("teams").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             //            self.teams = (snapshot.value as? NSArray)!
             //            self.teamsDataControllerObj?.fetchDataFromService(data: self.teams)
@@ -32,6 +32,7 @@ class EngineersService: NSObject {
                 
                 self.arrayOfEngineerNames.append(engineersObj)
             }
+            print("slideMenuContents",self.slideMenuContents)
             print("count=======",self.arrayOfEngineerNames.count)
             self.protocolEngineersController?.dataFetchedFromService(data: self.arrayOfEngineerNames)
            

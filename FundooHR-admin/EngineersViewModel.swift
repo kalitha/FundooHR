@@ -13,7 +13,7 @@ class EngineersViewModel: NSObject,CallBackInEngineersviewModel {
     var engineersControllerObj : EngineersController?
     var count = 0
     var protocolEngineersVC : CallBackInEngineersVC?
-    
+    //var engineersObj : EngineersVC?
     func fetchNumberOfRows()->Int{
         engineersControllerObj = EngineersController()
         engineersControllerObj?.protocolEngineersViewModel = self
@@ -24,11 +24,33 @@ class EngineersViewModel: NSObject,CallBackInEngineersviewModel {
                 count += 1
             }
         }
-        
+        print("engineersModelArray count=-=-=-",engineersModelArray)
         return engineersModelArray.count
     }
     
-    func dataFetchedFromController(data:[EngineersModel]){
+    func contentAtEachRow(i:Int)->String{
+        var contentInIndex : EngineersModel?
         
+        contentInIndex = engineersModelArray[i]
+        
+        print("content in index=",contentInIndex )
+        let name = contentInIndex?.rowName
+        
+        return name!
+    }
+
+    
+    func dataFetchedFromController(data:[EngineersModel]){
+        engineersModelArray = data// here the data is taken from the i/p arg and stors in arrayOfTeams
+        print("engineersModelArray count=--=-",engineersModelArray.count)
+
+//        self.engineersObj = EngineersVC()
+//        self.engineersObj?.reload()
+
+        DispatchQueue.main.async {
+                        self.protocolEngineersVC?.tableviewReload()
+            
+        }
     }
 }
+

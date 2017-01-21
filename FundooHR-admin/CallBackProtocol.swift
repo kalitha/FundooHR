@@ -55,5 +55,18 @@ protocol CallBackInEngineersviewModel {
 }
 
 protocol CallBackInEngineersVC {
+    func tableviewReload()
+    }
+protocol CallBackInLeaveSummaryController{
+    func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
+    func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
+    func imageFetchedFromService(image: UIImage, index: Int)
+}
+protocol CallBackInLeaveSummaryViewModel {
+    func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
+    func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
+    func imageFetchedFromController(image: UIImage, index: Int)
+}
+protocol CallBackInLeaveSummaryVC {
     func reload()
 }

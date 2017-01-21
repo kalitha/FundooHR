@@ -11,6 +11,7 @@ import UIKit
 class EngineersController: NSObject,CallBackInEngineersController {
     var engineersServiceObj : EngineersService?
     var protocolEngineersViewModel : CallBackInEngineersviewModel?
+    
     func fetchNumOfRows(){
         engineersServiceObj = EngineersService()
         engineersServiceObj?.protocolEngineersController = self
@@ -22,6 +23,6 @@ class EngineersController: NSObject,CallBackInEngineersController {
     }
     
     func dataFetchedFromService(data:[EngineersModel]){
-        
+        protocolEngineersViewModel?.dataFetchedFromController(data: data)
     }
 }
