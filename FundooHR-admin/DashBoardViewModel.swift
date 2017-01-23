@@ -14,13 +14,16 @@ class DashBoardViewModel: NSObject,CallBackInDashBoardViewModel {
     var dashBoardContents : DashBoard?
     var responseCount = 0
     var count = 0
+    var dashBoardControllerObj : DashBoardController?
     
+   init(pCallBackInDashBoardVC : CallBackInDashBoardVC) {
+    protocolDashBoardViewController = pCallBackInDashBoardVC
+    }
     
     func fetchDataFromDashBoardController(_ token: String)->Int{
-        let dashBoardControllerObj = DashBoardController()
-        dashBoardControllerObj.protocolDashBoardViewModel = self
+         dashBoardControllerObj = DashBoardController(pCallBackInDashBoardViewModel: self)
         if(count == 0){
-            dashBoardControllerObj.fetchDataFromDashBoardService(token)
+            dashBoardControllerObj?.fetchDataFromDashBoardService(token)
             count+=1
         }
         return responseCount
@@ -30,6 +33,6 @@ class DashBoardViewModel: NSObject,CallBackInDashBoardViewModel {
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard){
         responseCount = 6
         dashBoardContents = dashBoardData
-        protocolDashBoardViewController?.reload()
+        protocolDashBoardViewController?.dashBoardCollectionviewreload()
     }
 }

@@ -18,9 +18,8 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var date: UILabel!
-   // @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    let dashBoardViewModelObj = DashBoardViewModel()
+    var dashBoardViewModelObj : DashBoardViewModel?    
     var menuShowing = false
     var customView = UIView()
     var names: [String] = ["email id", "Dashboard", "Engineers", "Attendance Summary", "Reports" ,"Clients", "Logout"]
@@ -28,9 +27,9 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dashBoardViewModelObj = DashBoardViewModel(pCallBackInDashBoardVC: (self))
         
-        dashBoardViewModelObj.protocolDashBoardViewController = self
-        //token = loginVCObj.token
+        //dashBoardViewModelObj.protocolDashBoardViewController = self
         self.collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
         
         self.collectionView.register(UINib(nibName: "CollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "cell2")
@@ -76,7 +75,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         
     }
     
-    func reload(){
+    func dashBoardCollectionviewreload(){
     
         self.collectionView.reloadData()
     }
@@ -113,7 +112,7 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         print("views width",view.frame.width)
         customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
         customView.backgroundColor = UIColor.lightGray
-
+        
         if(menuShowing){
             slideMenuLeadingConstraint.constant = -250
             //1st case of removing tap gesture(papre) when we click on the icon
@@ -204,12 +203,20 @@ extension DashBoardVC: UITableViewDelegate{
 extension DashBoardVC: UICollectionViewDataSource{
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         
-       let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-       let token = tokenDictionary.value(forKey: "token") as! String
-        dashBoardViewModelObj.fetchDataFromDashBoardController(token)
-        
+        //print("token in Dashboard...",UserDefaults.standard.value(forKey: "dictionaryOfToken") as? NSDictionary!)
+       
+    print("valueOfDictionary=-=-=-=",UserDefaults.standard.value(forKey: "tokenKey")!)
+
+        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
+       let token
+        = UserDefaults.standard.value(forKey: "tokenKey")
+            
+       //let token = tokenDictionary.value(forKey: "token") as! String
+        dashBoardViewModelObj?.fetchDataFromDashBoardController(token as! String)
+        }
+        print("dashBoardViewModelObj.responseCount",dashBoardViewModelObj?.responseCount)
         //dashBoardViewModelObj.fetchDataFromDashBoardController(token:self.token!)
-        return dashBoardViewModelObj.responseCount
+        return dashBoardViewModelObj!.responseCount
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
@@ -237,10 +244,10 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.shadowOpacity = 1.0
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
-            cell.markedEmployees.text = String(describing: (dashBoardViewModelObj.dashBoardContents?.marked)! as Int)
+            cell.markedEmployees.text = String(describing: (dashBoardViewModelObj?.dashBoardContents?.marked)! as Int)
            // cell.unmarkedEmployees.text = String(describing:dashBoardViewModelObj.dashBoardContents?.unmarked! )
-             cell.unmarkedEmployees.text = dashBoardViewModelObj.dashBoardContents?.unmarked! as! String
-           let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj.dashBoardContents?.timeStamp)!)/1000)
+             cell.unmarkedEmployees.text = dashBoardViewModelObj?.dashBoardContents?.unmarked! as! String
+           let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
             formatter.dateFormat = "dd MM yyyy"
             formatter.dateStyle = .long
            let convertedDate = formatter.string(from: date)
@@ -260,12 +267,12 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
             //cell.falloutEmployees.text = String(describing:dashBoardViewModelObj.dashBoardContents?.falloutEmployee!)
-            cell.falloutEmployees.text = String(describing:(dashBoardViewModelObj.dashBoardContents?.falloutEmployee!)! as Int
+            cell.falloutEmployees.text = String(describing:(dashBoardViewModelObj?.dashBoardContents?.falloutEmployee!)! as Int
             )
 
-            cell.totalEmployees.text = String(describing:(dashBoardViewModelObj.dashBoardContents?.totalEmployee!)! as Int)
+            cell.totalEmployees.text = String(describing:(dashBoardViewModelObj?.dashBoardContents?.totalEmployee!)! as Int)
             
-            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj.dashBoardContents?.timeStamp)!)/1000)
+            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
             formatter.dateFormat = "MMMM yyyy"
            let convertedDate = formatter.string(from: date)
             cell.date.text = convertedDate
@@ -282,8 +289,8 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.layer.shadowOpacity = 1.0
             cell.layer.masksToBounds = false
             cell.layer.cornerRadius = 5
-            cell.leave.text = dashBoardViewModelObj.dashBoardContents?.leave! as! String
-            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj.dashBoardContents?.timeStamp)!)/1000)
+            cell.leave.text = dashBoardViewModelObj?.dashBoardContents?.leave! as! String
+            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
             formatter.dateFormat = "dd MM yyyy"
             formatter.dateStyle = .long
             let convertedDate = formatter.string(from: date)

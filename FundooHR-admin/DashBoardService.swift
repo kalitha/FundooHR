@@ -12,10 +12,15 @@ class DashBoardService: NSObject {
     
     var protocolDashBoardController : CallBackInDashBoardController?
     
+    init(pCallBackInDashBoardController : CallBackInDashBoardController) {
+        protocolDashBoardController = pCallBackInDashBoardController
+    }
+
+    
     func fetchData(_ token: String){
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.9:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.36:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
                 
@@ -39,7 +44,7 @@ class DashBoardService: NSObject {
                     let totalEmployee = attendanceFallout.value(forKey: "totalEmployee") as! Int
                     
                     let leaveSummary = dashboardData.value(forKey: "leaveSummary") as! NSDictionary
-                    //FIXME:-fix leave string
+                    
                     let leave = leaveSummary.value(forKey: "leave") as! NSString
                     
                     let dashBoardContent = DashBoard(marked: marked, unmarked: unmarked, falloutEmployee: falloutEmployee, totalEmployee: totalEmployee, leave: leave, timeStamp: timeStamp)

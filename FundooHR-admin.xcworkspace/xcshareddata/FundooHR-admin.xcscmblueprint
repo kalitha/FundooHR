@@ -12,7 +12,7 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "3F0BA527AFC0760AB3F8851AFB55CBFF171432CE" : "FundooHR\/",
     "7C3DA0DD5F662FAA2C3B5C865CB05EEF6C681466" : "FundooHR-admin\/",
-    "085619D25D89FE0167663CDA2A913FB31C7E66CE" : "FundooHR-admin-master\/"
+    "085619D25D89FE0167663CDA2A913FB31C7E66CE" : "FundooHRcloned-2\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "FundooHR-admin",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

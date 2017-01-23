@@ -65,7 +65,7 @@ class LoginVC: UIViewController {
         self.activityIndicator.stopAnimating()
         if(status == 200){
             
-            
+            print("token in login....",token)
             self.performSegue(withIdentifier: "navigateToDashboard", sender: nil)
         }
         else if(status == 401){

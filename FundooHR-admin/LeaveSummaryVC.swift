@@ -29,9 +29,9 @@ class LeaveSummaryVC: UIViewController,CallBackInLeaveSummaryVC,UICollectionView
         outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
         leaveSummaryViewModelObj = LeaveSummaryViewModel()
         leaveSummaryViewModelObj.protocolLeaveSummaryVC = self
-        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-        let token = tokenDictionary.value(forKey: "token") as! String
-        leaveSummaryViewModelObj.fetchDataFromController(token: token)
+//        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
+//        let token = tokenDictionary.value(forKey: "token") as! String
+//        leaveSummaryViewModelObj.fetchDataFromController(token: token)
         let currentDate = Date()
         // initialize the date formatter and set the style
         let formatter = DateFormatter()
@@ -61,9 +61,11 @@ class LeaveSummaryVC: UIViewController,CallBackInLeaveSummaryVC,UICollectionView
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-        let token = tokenDictionary.value(forKey: "token") as! String
-        leaveSummaryViewModelObj.fetchDataFromController(token: token)
+        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
+            let token
+                = UserDefaults.standard.value(forKey: "tokenKey")
+        leaveSummaryViewModelObj.fetchDataFromController(token: token as! String)
+        }
         return leaveSummaryViewModelObj.arrayOfLeaveEmployees.count
     }
     

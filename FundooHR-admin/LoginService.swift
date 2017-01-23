@@ -12,11 +12,11 @@ import  Alamofire
 class LoginService: NSObject {
     
     var protocolLoginController :CallBackInLoginController?
-    //let token : String?
+    //getting a reference to "defaults" that can access UserDefaults
     let defaults = UserDefaults.standard
     
     func fetchToken(_ email:String, password:String){
-        let urlString: String = "http://192.168.0.9:3000/login"
+        let urlString: String = "http://192.168.0.36:3000/login"
         let params = ["emailId":  (email), "password" : (password)]
         Alamofire.request(urlString, method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -29,20 +29,13 @@ class LoginService: NSObject {
                     print("status---",status)
                     if(status == 200){
                         
-                        let fetchedTokenFromRestCall = loginData.value(forKey: "token") as! String
-                        print("---token---",fetchedTokenFromRestCall)
-                        let tokenDictionary : [String:String] = (["token": fetchedTokenFromRestCall] as! NSDictionary) as! [String : String]
+                        let fetchedTokenValue = loginData.value(forKey: "token") as! String
+                        print("---fetchedTokenValue---",fetchedTokenValue)
                         
-                        print("token dictionary===",tokenDictionary)
-                        
-                        //assining the tokenDictionary value to dictionaryOfToken
-                        self.defaults.set(tokenDictionary, forKey: "dictionary")
-                        //fetching the dictionary value from dictionary
-                        let dictionaryOfToken = self.defaults.value(forKey: "dictionary") as! NSDictionary
-                        print("dictionaryOfToken===",dictionaryOfToken)
-                        let tokenValue = dictionaryOfToken.value(forKey: "token") as! String
-                        
-                        self.protocolLoginController?.fetchTokenFromService(status, token: tokenValue)
+                        //assining the "fetchedTokenValue" value to key "dictionary"
+                        self.defaults.set(fetchedTokenValue, forKey: "tokenKey")
+                    
+                        self.protocolLoginController?.fetchTokenFromService(status, token: fetchedTokenValue)
                     }
                     else{
                         let token = String(describing:loginData.value(forKey: "token"))

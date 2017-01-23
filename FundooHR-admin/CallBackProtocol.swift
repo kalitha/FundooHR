@@ -19,7 +19,7 @@ protocol CallBackInDashBoardViewModel{
 }
 
     protocol CallBackInDashBoardVC {
-        func reload()
+        func dashBoardCollectionviewreload()
     }
 
 protocol CallBackInFalloutController {

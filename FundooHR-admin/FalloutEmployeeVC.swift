@@ -30,9 +30,9 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         falloutViewModelObj?.protocolFalloutVC = self
         outerLabelOfUnmarkedEmployees.layer.masksToBounds = true;
         outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
-        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-        let token = tokenDictionary.value(forKey: "token") as! String
-        falloutViewModelObj?.fetchNumberOfCellsFromFalloutController(token)
+      //  let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
+      //  let token = tokenDictionary.value(forKey: "token") as! String
+      //  falloutViewModelObj?.fetchNumberOfCellsFromFalloutController(token)
         
         let currentDate = Date()
         // initialize the date formatter and set the style
@@ -72,15 +72,14 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        //FIXME:-fix falloutViewModelObj
-        //let falloutViewModelObj = FalloutViewModel()
-        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-        let token = tokenDictionary.value(forKey: "token") as! String
-        falloutViewModelObj?.fetchNumberOfCellsFromFalloutController(token)
+        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
+            let token = UserDefaults.standard.value(forKey: "tokenKey")
+        falloutViewModelObj?.fetchNumberOfCellsFromFalloutController(token as! String)
+        }
         return falloutViewModelObj!.arrayOfFalloutEmployees.count
     }
     
-    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
          //FIXME:-fix falloutViewModelObj
         //let falloutViewModelObj = FalloutViewModel()
         let color = UIColor.init(red: 240/255, green: 237/255, blue: 234/255, alpha: 1)

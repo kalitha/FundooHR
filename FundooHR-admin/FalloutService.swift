@@ -27,7 +27,7 @@ class FalloutService: NSObject {
     func fetchData(_ token:String){
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.9:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.36:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary
