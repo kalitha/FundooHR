@@ -16,10 +16,7 @@ class EngineersController: NSObject,CallBackInEngineersController {
         engineersServiceObj = EngineersService()
         engineersServiceObj?.protocolEngineersController = self
         let engineerModelArray = [EngineersModel]()
-        
-        if(engineerModelArray.count == 0){
         engineersServiceObj?.fetchData()
-        }
     }
     
     func dataFetchedFromService(data:[EngineersModel]){

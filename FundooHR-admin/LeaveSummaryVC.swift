@@ -29,9 +29,6 @@ class LeaveSummaryVC: UIViewController,CallBackInLeaveSummaryVC,UICollectionView
         outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
         leaveSummaryViewModelObj = LeaveSummaryViewModel()
         leaveSummaryViewModelObj.protocolLeaveSummaryVC = self
-//        let tokenDictionary = UserDefaults.standard.value(forKey: "dictionaryOfToken") as! NSDictionary
-//        let token = tokenDictionary.value(forKey: "token") as! String
-//        leaveSummaryViewModelObj.fetchDataFromController(token: token)
         let currentDate = Date()
         // initialize the date formatter and set the style
         let formatter = DateFormatter()
@@ -48,8 +45,8 @@ class LeaveSummaryVC: UIViewController,CallBackInLeaveSummaryVC,UICollectionView
     }
     
     func reload() {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
         numberOfUnmarkedEmployees.text = String(describing:(leaveSummaryViewModelObj.leaveSummaryTotalEmployeesContent?.employeeLeave)! as Int)
         totalEmployees.text = String(describing:(leaveSummaryViewModelObj.leaveSummaryTotalEmployeesContent?.totalEmployee)! as Int)
         let timeStampDate = Date.init(timeIntervalSince1970: Double((leaveSummaryViewModelObj.leaveSummaryTotalEmployeesContent?.timeStamp!)!)!/1000)

@@ -16,9 +16,7 @@ class LeaveSummaryController: NSObject ,CallBackInLeaveSummaryController{
        leaveSummaryServiceObj = LeavesummaryService()
         leaveSummaryServiceObj?.protocolLeaveSummaryController = self
         let arrayOfLeaveEmployees = [LeaveSummary]()
-        if(arrayOfLeaveEmployees.count == 0){
             leaveSummaryServiceObj?.fetchData(token: token)
-        }
     }
     func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees){
         self.protocolLeaveSummaryViewModel?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)

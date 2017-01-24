@@ -7,20 +7,50 @@
 //
 
 import UIKit
+import  Firebase
 import Alamofire
 class DashBoardService: NSObject {
-    
+    var slideMenuContents = [NSDictionary]()
+    var arrayOfTableViewContentModel = [TableViewContentModel]()
     var protocolDashBoardController : CallBackInDashBoardController?
     
     init(pCallBackInDashBoardController : CallBackInDashBoardController) {
         protocolDashBoardController = pCallBackInDashBoardController
     }
 
+    func fetchTableViewContents(){
+        var ref: FIRDatabaseReference!
+        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
+        ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
+              self.slideMenuContents = (snapshot.value) as! [NSDictionary]
+            
+            for index in 0..<self.slideMenuContents.count{
+                let valueAtEachIndex = self.slideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
+                
+                let rowName = valueAtEachIndex["row_name"] as! String
+                
+                let tableviewContents = TableViewContentModel(rowName: rowName)
+                
+                self.arrayOfTableViewContentModel.append(tableviewContents)
+            }
+            print("slideMenuContents",self.slideMenuContents)
+            print("count=======",self.arrayOfTableViewContentModel.count)
+            self.protocolDashBoardController?.tableViewContentsFetchedFromService(data: self.arrayOfTableViewContentModel)
+            
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
     
-    func fetchData(_ token: String){
+    func fetchData(){
+        let token = UserDefaults.standard.value(forKey: "tokenKey")!
+        print("tokenKey=-=-=",token)
+        
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.36:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.17:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
                 

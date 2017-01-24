@@ -10,7 +10,7 @@ import UIKit
 
 class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
     
-    //FIXME:-fix FalloutImageModel
+    var mArrayOfTableViewContentModel = [TableViewContentModel]()
     var arrayOfFalloutImageModel = [FalloutImageModel]()
     var arrayOfImages = [UIImage]()
     var countOfFetchedImages = 0
@@ -20,13 +20,42 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
     var arrayOfFalloutEmployees = [Fallout]()
     var falloutControllerObj : FalloutController?
     var falloutTotalEmployeesContents : FalloutTotalEmployees?
+    var mResponseCountForTableView = 0
     
-    func fetchNumberOfCellsFromFalloutController(_ token:String)->Int{
-        falloutControllerObj = FalloutController()
-        falloutControllerObj?.protocolFalloutViewModel = self
+    init(pCallBackInFalloutVC : CallBackInFalloutVC) {
+        protocolFalloutVC = pCallBackInFalloutVC
+    }
+
+    
+    func fetchTableviewContentsFromFalloutController()->Int{
+         falloutControllerObj = FalloutController(pCallBackInFalloutViewModel: self)
+        if(self.count==0){
+            falloutControllerObj?.fetchTableViewContentsFromService()
+            count += 1
+        }
+        return mArrayOfTableViewContentModel.count
+    }
+    
+    func contentAtEachRow(i:Int)->String{
+        var contentInIndex : TableViewContentModel?
+        
+        contentInIndex = mArrayOfTableViewContentModel[i]
+        
+        print("content in index=",contentInIndex! )
+        let name = contentInIndex?.rowName
+        
+        return name!    }
+    func tableViewContentsFetchedFromController(data:[TableViewContentModel]){
+        mResponseCountForTableView = 7
+        mArrayOfTableViewContentModel = data
+        fetchNumberOfCellsFromFalloutController()
+    }
+    
+    func fetchNumberOfCellsFromFalloutController()->Int{
+        falloutControllerObj = FalloutController(pCallBackInFalloutViewModel: self)
         if(arrayOfFalloutEmployees.count == 0){
             if(self.count == 0){
-            falloutControllerObj?.fetchNumberOfCellsFromFalloutService(token)
+            falloutControllerObj?.fetchNumberOfCellsFromFalloutService()
             count += 1
             }
         }
@@ -38,7 +67,6 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
         falloutTotalEmployeesContents = falloutTotalEmployeesObj
         falloutControllerObj?.fetchEmployeeImageUrlFromService()
         }
-    
     
     func employeeImageUrlFetchedFromController(data:[FalloutImageModel]){
         arrayOfFalloutImageModel = data
@@ -70,10 +98,7 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
         if(countOfFetchedImages == arrayOfImages.count){
             //protocolFalloutVC?.reload() //reloading after getting the image
             print("arrayOfFalloutEmployees==-=-=-",arrayOfFalloutEmployees)
-            DispatchQueue.main.async {
-                self.protocolFalloutVC?.reload()
-            }
-
+                self.protocolFalloutVC?.falloutCollectionviewReload()
         }
 }
     func fetchEachImage(i:Int)->UIImage{
@@ -81,4 +106,7 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
         return arrayOfImages[i]
     }
 
+    func makingRestCallToSendEmailInController(){
+        
+    }
 }

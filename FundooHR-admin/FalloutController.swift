@@ -12,13 +12,26 @@ class FalloutController: NSObject,CallBackInFalloutController {
     var protocolFalloutViewModel : CallBackInFalloutViewModel?
     var falloutServiceObj : FalloutService?
     
-    func fetchNumberOfCellsFromFalloutService(_ token:String){
-          falloutServiceObj = FalloutService()
-        falloutServiceObj?.protocolFalloutController = self
+    init(pCallBackInFalloutViewModel : CallBackInFalloutViewModel) {
+        protocolFalloutViewModel = pCallBackInFalloutViewModel
+        }
+    
+    func fetchTableViewContentsFromService(){
+        let arrayOfTableViewContentModel = [TableViewContentModel]()
+    let falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
+        falloutServiceObj.fetchTableViewContents()
+    }
+    func tableViewContentsFetchedFromService(data:[TableViewContentModel]){
+        protocolFalloutViewModel?.tableViewContentsFetchedFromController(data: data)
+    }
+    
+    func fetchNumberOfCellsFromFalloutService(){
+          falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
+       
         let arrayOfFalloutEmployees = [Fallout]()
         
         if(arrayOfFalloutEmployees.count == 0){
-            falloutServiceObj?.fetchData(token)
+            falloutServiceObj?.fetchData()
         }
     }
     
@@ -29,26 +42,25 @@ class FalloutController: NSObject,CallBackInFalloutController {
    // ----====----- FETCHING IMAGE -----=====----
     func fetchEmployeeImageUrlFromService(){
      
-        falloutServiceObj = FalloutService()
-        falloutServiceObj?.protocolFalloutController = self
+        falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
         falloutServiceObj?.fetchEmployeeImageUrlFromFirebase()
     }
     
     func employeeImageUrlFetchedFromService(url:[FalloutImageModel]){
-        //FIXME:-fix leave string
-        
         self.protocolFalloutViewModel?.employeeImageUrlFetchedFromController(data: url)
     }
     
     func fetchImageFromService(_ image:[FalloutImageModel]){
-         falloutServiceObj = FalloutService()
+        falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
         falloutServiceObj?.protocolFalloutController = self
         falloutServiceObj?.fetchEmployeeImage(image)
-        
     }
     
     func imageFetchedFromService(image: UIImage, index: Int){
-        
         self.protocolFalloutViewModel?.imageFetchedFromController(image: image, index: index)
+    }
+    
+    func makingRestCallToSendEmailInService(){
+        
     }
 }

@@ -11,14 +11,25 @@ import UIKit
 class DashBoardController: NSObject,CallBackInDashBoardController{
     
     var protocolDashBoardViewModel : CallBackInDashBoardViewModel?
+    var dashBoardServiceObj : DashBoardService?
     
     init(pCallBackInDashBoardViewModel : CallBackInDashBoardViewModel) {
         protocolDashBoardViewModel = pCallBackInDashBoardViewModel
+        }
+    
+    func fetchTableViewContentsFromService(){
+        let arrayOfTableViewContentModel = [TableViewContentModel]()
+        let dashBoardServiceObj = DashBoardService(pCallBackInDashBoardController: self)
+            dashBoardServiceObj.fetchTableViewContents()
     }
     
-    func fetchDataFromDashBoardService(_ token: String){
+    func tableViewContentsFetchedFromService(data:[TableViewContentModel]){
+        protocolDashBoardViewModel?.tableViewContentsFetchedFromController(data: data)
+    }
+    
+    func fetchDataFromDashBoardService(){
         let dashBoardServiceObj = DashBoardService(pCallBackInDashBoardController: self)
-                dashBoardServiceObj.fetchData(token)
+        dashBoardServiceObj.fetchData()
     }
     
     //sending fetched data to the view model

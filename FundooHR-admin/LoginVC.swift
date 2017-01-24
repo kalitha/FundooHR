@@ -1,3 +1,4 @@
+
 //
 //  LoginVC.swift
 //  FundooHR
@@ -25,7 +26,6 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     
     var offsetCheckBOOL = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

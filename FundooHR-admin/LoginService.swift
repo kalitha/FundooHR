@@ -16,7 +16,7 @@ class LoginService: NSObject {
     let defaults = UserDefaults.standard
     
     func fetchToken(_ email:String, password:String){
-        let urlString: String = "http://192.168.0.36:3000/login"
+        let urlString: String = "http://192.168.0.17:3000/login"
         let params = ["emailId":  (email), "password" : (password)]
         Alamofire.request(urlString, method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in

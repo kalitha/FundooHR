@@ -10,32 +10,38 @@ import Foundation
 import UIKit
 protocol CallBackInDashBoardController {
     func fetchedDataFromDashBoardService(_ dashBoardData: DashBoard)
-    
+    func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     
 }
 
 protocol CallBackInDashBoardViewModel{
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard)
+    func tableViewContentsFetchedFromController(data:[TableViewContentModel])
+    
 }
 
     protocol CallBackInDashBoardVC {
         func dashBoardCollectionviewreload()
+        func tableviewReload()
     }
 
 protocol CallBackInFalloutController {
+    func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     func employeeImageUrlFetchedFromService(url:[FalloutImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
 }
 
 protocol CallBackInFalloutViewModel {
+     func tableViewContentsFetchedFromController(data:[TableViewContentModel])
     func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     func employeeImageUrlFetchedFromController(data:[FalloutImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
-}
+    }
 
 protocol CallBackInFalloutVC {
-    func reload()
+    func falloutTableviewReload()
+    func falloutCollectionviewReload()
 }
 
 protocol CallBackInLoginViewModel {

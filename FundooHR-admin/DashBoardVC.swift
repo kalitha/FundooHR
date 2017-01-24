@@ -9,8 +9,6 @@
 import UIKit
 
 class DashBoardVC: UIViewController,CallBackInDashBoardVC{
-
-    //let loginVCObj = LoginVC()
     
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -18,18 +16,19 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
     
-    var dashBoardViewModelObj : DashBoardViewModel?    
-    var menuShowing = false
-    var customView = UIView()
-    var names: [String] = ["email id", "Dashboard", "Engineers", "Attendance Summary", "Reports" ,"Clients", "Logout"]
-    let formatter = DateFormatter()
+    var mDashBoardViewModelObj : DashBoardViewModel?
+    var mMenuShowing = false
+    var mCustomView = UIView()
+    let mUtilityClassObj = UtilityClass()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dashBoardViewModelObj = DashBoardViewModel(pCallBackInDashBoardVC: (self))
+        mActivityIndicator.isHidden = false
+        mActivityIndicator.startAnimating()
+        mDashBoardViewModelObj = DashBoardViewModel(pCallBackInDashBoardVC: (self))
         
-        //dashBoardViewModelObj.protocolDashBoardViewController = self
         self.collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
         
         self.collectionView.register(UINib(nibName: "CollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "cell2")
@@ -41,54 +40,40 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         self.collectionView.register(UINib(nibName: "CollectionViewCell5", bundle: nil), forCellWithReuseIdentifier: "cell5")
         
         self.collectionView.register(UINib(nibName: "CollectionViewCell6", bundle: nil), forCellWithReuseIdentifier: "cell6")
-       
-        let currentDate = Date()
         
-        // initialize the date formatter and set the style
         
-        formatter.dateFormat = "dd MM yyyy"
-        formatter.dateStyle = .long
-        // get the date time String from the date object
-        let convertedDate = formatter.string(from: currentDate)
+        
+        let convertedDate = mUtilityClassObj.date()
+        
         date.text = convertedDate
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        //        slideMenu.layer.shadowOpacity = 1
-        //        slideMenu.layer.shadowRadius = 6
-    }
-    
+        }
     
     func rotated() {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
             print("views width",view.frame.width)
-            customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-            customView.backgroundColor = UIColor.lightGray
-           
+            mCustomView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
+            mCustomView.backgroundColor = UIColor.lightGray
         }
         
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             print("views width",view.frame.width)
-            customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-            customView.backgroundColor = UIColor.lightGray
+            mCustomView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
+            mCustomView.backgroundColor = UIColor.lightGray
         }
-        
-    }
-    
-    func dashBoardCollectionviewreload(){
-    
-        self.collectionView.reloadData()
     }
     
     func addGestureRecognizer(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
-        self.customView.addGestureRecognizer(tapGesture)
-        
+        self.mCustomView.addGestureRecognizer(tapGesture)
     }
     
     func removeGestureRecognizer(){
         for recognizer in collectionView.gestureRecognizers ?? [] {
-            customView.removeGestureRecognizer(recognizer)
+            mCustomView.removeGestureRecognizer(recognizer)
         }
     }
     
@@ -97,11 +82,10 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        menuShowing = !menuShowing
-        
+        mMenuShowing = !mMenuShowing
         //to remove custom view after removing slidemenu
-        self.customView.removeFromSuperview()
-        menuShowing = !menuShowing
+        self.mCustomView.removeFromSuperview()
+        mMenuShowing = !mMenuShowing
         
         //3rd case of removing  gesture when we click on collectionview
         removeGestureRecognizer()
@@ -110,35 +94,142 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     @IBAction func menuOpen(_ sender: UIButton) {
         //changing the custom view's size while we change to landscape mode
         print("views width",view.frame.width)
-        customView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-        customView.backgroundColor = UIColor.lightGray
+        mCustomView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
+        mCustomView.backgroundColor = UIColor.lightGray
         
-        if(menuShowing){
+        if(mMenuShowing){
             slideMenuLeadingConstraint.constant = -250
             //1st case of removing tap gesture(papre) when we click on the icon
+            
             removeGestureRecognizer()
+            
         }else{
             slideMenuLeadingConstraint.constant = 0
-            self.view.addSubview(customView)
-            customView.alpha = 0.5
+            self.view.addSubview(mCustomView)
+            mCustomView.alpha = 0.5
             addGestureRecognizer()
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        menuShowing = !menuShowing
+        mMenuShowing = !mMenuShowing
+        tableviewReload()
+    }
+    
+    func tableviewReload(){
+        self.tableView.reloadData()
+    }
+    
+    func dashBoardCollectionviewreload(){
+        mActivityIndicator.isHidden = true
+        self.mActivityIndicator.stopAnimating()
+        self.collectionView.reloadData()
+    }
+}
+
+
+//extension of collectionview cell
+extension DashBoardVC: UICollectionViewDataSource{
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+        print("valueOfDictionary=-=-=-=",UserDefaults.standard.value(forKey: "tokenKey")!)
+        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){            mDashBoardViewModelObj?.fetchDataFromDashBoardController()
+        }
+        print("dashBoardViewModelObj.responseCount",mDashBoardViewModelObj!.responseCount)
+        //dashBoardViewModelObj.fetchDataFromDashBoardController(token:self.token!)
+        return mDashBoardViewModelObj!.responseCount
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        
+        
+        let colorOfMarkedEmployees = UIColor.init(red: 24/255, green: 136/255, blue: 13/255, alpha: 1)
+        let colorOfUnmarkedEmployees = UIColor.init(red: 227/255, green: 86/255, blue: 86/255, alpha: 1)
+        let date = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
+        if(indexPath.row == 0){
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! CollectionViewCell
+            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
+            cell.markedEmployees.backgroundColor = colorOfMarkedEmployees
+            cell.markedEmployees.layer.masksToBounds = true
+            cell.markedEmployees.layer.cornerRadius = 15
+            cell.unmarkedEmployees.backgroundColor = colorOfUnmarkedEmployees
+            cell.unmarkedEmployees.layer.masksToBounds = true
+            cell.unmarkedEmployees.layer.cornerRadius = 15
+            cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.dashBoardContents?.marked)! as Int)
+            cell.unmarkedEmployees.text = mDashBoardViewModelObj?.dashBoardContents?.unmarked! as? String
+            cell.date.text = retunedDate
+            return cell
+        }
+        else if(indexPath.row == 1){
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! CollectionViewCell2
+            cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.dashBoardContents?.falloutEmployee!)! as Int)
+            cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.dashBoardContents?.totalEmployee!)! as Int)
+             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
+            cell.date.text = retunedDate
+            return  cell
+        }
+        else if(indexPath.row == 2){
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! CollectionViewCell3
+            cell.leave.text = mDashBoardViewModelObj?.dashBoardContents?.leave! as! String
+            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
+            cell.date.text = retunedDate
+            return cell
+        }
+        else if(indexPath.row == 3) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath)
+            mUtilityClassObj.cellDesign(cell: cell, date: date)
+            return cell
+        }
+        else if(indexPath.row == 4){
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell5", for: indexPath)
+          
+            mUtilityClassObj.cellDesign(cell: cell, date: date)
+            return cell
+        }
+        else{
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell6", for: indexPath)
+             mUtilityClassObj.cellDesign(cell: cell, date: date)
+            return cell
+        }
+    }
+}
+//CollectionView Delegate
+extension DashBoardVC: UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        
+        if(indexPath.row == 1){
+            performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
+            highlightCell2(indexPath, flag: true)
+        }
+        else if(indexPath.row == 2){
+            performSegue(withIdentifier: "segueFromThirdCell", sender: nil)
+            highlightCell2(indexPath, flag: true)
+        }
+        
+    }
+    
+    func highlightCell2(_ indexPath : IndexPath, flag: Bool) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if flag {
+            cell?.contentView.backgroundColor = UIColor.lightGray
+            cell?.contentView.backgroundColor?.withAlphaComponent(0.5)
+        } else {
+            cell?.contentView.backgroundColor = nil
+        }
     }
     
 }
 
 extension DashBoardVC: UITableViewDataSource{
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return names.count
+           return (mDashBoardViewModelObj?.fetchTableViewContentsFromController())!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        cell.textLabel?.text = names[indexPath.row]
+        cell.textLabel?.text = mDashBoardViewModelObj?.contentAtEachRow(i: indexPath.row)
         let color = UIColor.init(red: 59/255, green: 83/255, blue: 114/255, alpha: 1)
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -152,14 +243,13 @@ extension DashBoardVC: UITableViewDataSource{
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == names.count-1){
+        if(indexPath.row == (mDashBoardViewModelObj?.mArrayOfTableViewContentModel.count)!-1){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell
     }
+    
 }
-
-
 
 //extension of tableview cell
 extension DashBoardVC: UITableViewDelegate{
@@ -168,14 +258,14 @@ extension DashBoardVC: UITableViewDelegate{
         if(indexPath.row == 2){
             performSegue(withIdentifier: "segueFromSecondIndex", sender: nil)
         }
-        
+            
         else if(indexPath.row == 3){
             performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
         }
-      else if(indexPath.row == 4){
+        else if(indexPath.row == 4){
             performSegue(withIdentifier: "segueFromFourthIndex", sender: nil)
         }
-       else if(indexPath.row == 5){
+        else if(indexPath.row == 5){
             performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
         }
         else if(indexPath.row == 6){
@@ -185,11 +275,13 @@ extension DashBoardVC: UITableViewDelegate{
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        menuShowing = !menuShowing
+        mMenuShowing = !mMenuShowing
         
         //2nd case of removing the tap gesture(paper) when we click on table view
-        self.customView.removeFromSuperview()
+        self.mCustomView.removeFromSuperview()
+        
         removeGestureRecognizer()
+        
     }
     
     //func to set the height of the cell
@@ -199,184 +291,5 @@ extension DashBoardVC: UITableViewDelegate{
     }
 }
 
-//extension of collectionview cell
-extension DashBoardVC: UICollectionViewDataSource{
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        
-        //print("token in Dashboard...",UserDefaults.standard.value(forKey: "dictionaryOfToken") as? NSDictionary!)
-       
-    print("valueOfDictionary=-=-=-=",UserDefaults.standard.value(forKey: "tokenKey")!)
-
-        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
-       let token
-        = UserDefaults.standard.value(forKey: "tokenKey")
-            
-       //let token = tokenDictionary.value(forKey: "token") as! String
-        dashBoardViewModelObj?.fetchDataFromDashBoardController(token as! String)
-        }
-        print("dashBoardViewModelObj.responseCount",dashBoardViewModelObj?.responseCount)
-        //dashBoardViewModelObj.fetchDataFromDashBoardController(token:self.token!)
-        return dashBoardViewModelObj!.responseCount
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        
-        let color = UIColor.init(red: 111/255, green: 184/255, blue: 217/255, alpha: 1)
-        
-        if(indexPath.row == 0){
-            let colorOfMarkedEmployees = UIColor.init(red: 24/255, green: 136/255, blue: 13/255, alpha: 1)
-            
-            let colorOfUnmarkedEmployees = UIColor.init(red: 227/255, green: 86/255, blue: 86/255, alpha: 1)
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! CollectionViewCell
-            cell.markedEmployees.backgroundColor = colorOfMarkedEmployees
-            cell.markedEmployees.layer.masksToBounds = true
-            cell.markedEmployees.layer.cornerRadius = 15
-            cell.unmarkedEmployees.backgroundColor = colorOfUnmarkedEmployees
-            cell.unmarkedEmployees.layer.masksToBounds = true
-            cell.unmarkedEmployees.layer.cornerRadius = 15
-            cell.contentView.backgroundColor = UIColor.white
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = color.cgColor
-            cell.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 5
-            cell.markedEmployees.text = String(describing: (dashBoardViewModelObj?.dashBoardContents?.marked)! as Int)
-           // cell.unmarkedEmployees.text = String(describing:dashBoardViewModelObj.dashBoardContents?.unmarked! )
-             cell.unmarkedEmployees.text = dashBoardViewModelObj?.dashBoardContents?.unmarked! as! String
-           let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
-            formatter.dateFormat = "dd MM yyyy"
-            formatter.dateStyle = .long
-           let convertedDate = formatter.string(from: date)
-            cell.date.text = convertedDate
-            return cell
-        }
-        else if(indexPath.row == 1){
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! CollectionViewCell2
-            cell.contentView.backgroundColor = UIColor.white
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = color.cgColor
-            cell.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 5
-            //cell.falloutEmployees.text = String(describing:dashBoardViewModelObj.dashBoardContents?.falloutEmployee!)
-            cell.falloutEmployees.text = String(describing:(dashBoardViewModelObj?.dashBoardContents?.falloutEmployee!)! as Int
-            )
-
-            cell.totalEmployees.text = String(describing:(dashBoardViewModelObj?.dashBoardContents?.totalEmployee!)! as Int)
-            
-            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
-            formatter.dateFormat = "MMMM yyyy"
-           let convertedDate = formatter.string(from: date)
-            cell.date.text = convertedDate
-            return  cell
-        }
-        else if(indexPath.row == 2){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! CollectionViewCell3
-            cell.contentView.backgroundColor = UIColor.white
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = color.cgColor
-            cell.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 5
-            cell.leave.text = dashBoardViewModelObj?.dashBoardContents?.leave! as! String
-            let date = Date.init(timeIntervalSince1970: Double((dashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
-            formatter.dateFormat = "dd MM yyyy"
-            formatter.dateStyle = .long
-            let convertedDate = formatter.string(from: date)
-            cell.date.text = convertedDate
-            return cell
-        }
-        else if(indexPath.row == 3) {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath)
-            cell.contentView.backgroundColor = UIColor.white
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = color.cgColor
-            cell.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 5
-            
-            return cell
-        }
-        else if(indexPath.row == 4){
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell5", for: indexPath)
-            cell.contentView.backgroundColor = UIColor.white
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = color.cgColor
-            cell.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 5
-            return cell
-        }
-        else{
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell6", for: indexPath)
-            cell.contentView.backgroundColor = UIColor.white
-            cell.layer.borderWidth = 2.0
-            cell.layer.borderColor = color.cgColor
-            cell.layer.shadowColor = UIColor.lightGray.cgColor
-            cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-            cell.layer.shadowRadius = 3.0
-            cell.layer.shadowOpacity = 1.0
-            cell.layer.masksToBounds = false
-            cell.layer.cornerRadius = 5
-            return cell
-        }
-    }
-}
-//CollectionView Delegate
-extension DashBoardVC: UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
-
-        if(indexPath.row == 1){
-            performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
-            highlightCell2(indexPath, flag: true)
-        }
-        else if(indexPath.row == 2){
-            performSegue(withIdentifier: "segueFromThirdCell", sender: nil)
-            highlightCell2(indexPath, flag: true)
-        }
-        
-    }
-    
-    func highlightCell2(_ indexPath : IndexPath, flag: Bool) {
-                let cell = collectionView.cellForItem(at: indexPath)
-        if flag {
-            cell?.contentView.backgroundColor = UIColor.lightGray
-            cell?.contentView.backgroundColor?.withAlphaComponent(0.5)
-        } else {
-            cell?.contentView.backgroundColor = nil
-        }
-    }
-    
-}
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 

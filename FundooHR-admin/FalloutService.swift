@@ -13,21 +13,54 @@ import FirebaseStorage
 
 class FalloutService: NSObject {
     
-    //FIXME:-fix leave string
     var ref: FIRDatabaseReference!
-    let falloutControllerObj = FalloutController()
+    //let falloutControllerObj = FalloutController()
+    var mSlideMenuContents = [NSDictionary]()
+    var mArrayOfTableViewContentModel = [TableViewContentModel]()
     
-    //dont fix
     //creating the variable of falloutcontroller type
     var protocolFalloutController : CallBackInFalloutController?
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfFalloutEmloyees = [Fallout]() //creating model type array
     var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
     
-    func fetchData(_ token:String){
+    init(pCallBackInFalloutController : CallBackInFalloutController) {
+        protocolFalloutController = pCallBackInFalloutController
+    }
+    
+    func fetchTableViewContents(){
+        var ref: FIRDatabaseReference!
+        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
+        ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.mSlideMenuContents = (snapshot.value) as! [NSDictionary]
+            
+            for index in 0..<self.mSlideMenuContents.count{
+                let valueAtEachIndex = self.mSlideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
+                
+                let rowName = valueAtEachIndex["row_name"] as! String
+                
+                let tableviewContents = TableViewContentModel(rowName: rowName)
+                
+                self.mArrayOfTableViewContentModel.append(tableviewContents)
+            }
+            print("slideMenuContents",self.mSlideMenuContents)
+            print("count=======",self.mArrayOfTableViewContentModel.count)
+            self.protocolFalloutController?.tableViewContentsFetchedFromService(data: self.mArrayOfTableViewContentModel)
+            
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func fetchData(){
+        let token = UserDefaults.standard.value(forKey: "tokenKey")!
+        print("tokenKey=-=-=",token)
+        
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.36:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("http://192.168.0.17:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary
@@ -108,5 +141,9 @@ class FalloutService: NSObject {
                 }
             }
         }
+    }
+    
+    func makingRestCallToSendEmail(){
+        
     }
 }
