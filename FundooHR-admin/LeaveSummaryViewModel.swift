@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeaveSummaryViewModel: NSObject,CallBackInLeaveSummaryViewModel {
+class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     var arrayOfLeaveSummaryEmployeeImageModel = [LeaveSummaryEmployeeImageModel]()
     var leaveSummaryVCObj : LeaveSummaryVC?
     var count = 0
@@ -16,7 +16,7 @@ class LeaveSummaryViewModel: NSObject,CallBackInLeaveSummaryViewModel {
     var arrayOfImages = [UIImage]()
     var arrayOfLeaveEmployees = [LeaveSummary]()
     var leaveSummaryControllerObj : LeaveSummaryController?
-    var protocolLeaveSummaryVC : CallBackInLeaveSummaryVC?
+    var protocolLeaveSummaryVC : LeaveSummaryVCProtocol?
     var leaveSummaryTotalEmployeesContent : LeaveSummaryTotalEmployees?
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     

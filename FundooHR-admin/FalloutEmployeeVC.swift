@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,CallBackInFalloutVC,UITableViewDelegate,UITableViewDataSource {
+class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var numberOfUnmarkedEmployees: UILabel!
@@ -29,10 +29,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         super.viewDidLoad()
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        //collectionView.delegate = self
-        //FIXME:-fix falloutViewModelObj
-        //let falloutViewModelObj = FalloutViewModel()
-        falloutViewModelObj = FalloutViewModel(pCallBackInFalloutVC: self)
+        falloutViewModelObj = FalloutViewModel(pFalloutVCProtocolObj: self)
         outerLabelOfUnmarkedEmployees.layer.masksToBounds = true;
         outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
         // get the date time String from the date object
@@ -159,7 +156,6 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
     func falloutCollectionviewReload(){
-        //FIXME:-fix falloutViewModelObj
         activityIndicator.isHidden = false
         activityIndicator.stopAnimating()
         numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class EngineersController: NSObject,CallBackInEngineersController {
+class EngineersController: NSObject,EngineersControllerProtocol {
     var engineersServiceObj : EngineersService?
-    var protocolEngineersViewModel : CallBackInEngineersviewModel?
+    var protocolEngineersViewModel : EngineersviewModelProtocol?
     
     func fetchNumOfRows(){
         engineersServiceObj = EngineersService()

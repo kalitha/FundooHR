@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A6361561E290B74006B9AD7 /* EngineersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6361551E290B74006B9AD7 /* EngineersVC.swift */; };
-		0A6461971E1B67AC000C417D /* CallBackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6461961E1B67AC000C417D /* CallBackProtocol.swift */; };
+		0A6461971E1B67AC000C417D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6461961E1B67AC000C417D /* Protocols.swift */; };
 		0A664B6F1E209DF5006AE30D /* FalloutTotalEmployees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A664B6E1E209DF5006AE30D /* FalloutTotalEmployees.swift */; };
 		0A664B711E212411006AE30D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A664B701E212411006AE30D /* LoginViewModel.swift */; };
 		0A664ED61E1A32D90065E717 /* DashBoardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A664ED51E1A32D90065E717 /* DashBoardService.swift */; };
@@ -16,6 +16,7 @@
 		0A664EDA1E1A33320065E717 /* DashBoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A664ED91E1A33320065E717 /* DashBoardController.swift */; };
 		0A6713481E2214C7009C0BE3 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6713471E2214C7009C0BE3 /* LoginController.swift */; };
 		0A67134A1E2214D8009C0BE3 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6713491E2214D8009C0BE3 /* LoginService.swift */; };
+		0A67CD4C1E39B8E70028056C /* UrlPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A67CD4B1E39B8E70028056C /* UrlPlist.plist */; };
 		0A695B691E1CB425001CAD60 /* DashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A695B681E1CB425001CAD60 /* DashBoard.swift */; };
 		0A6D991C1E31D673004927B8 /* LeaveSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D991B1E31D673004927B8 /* LeaveSummaryVC.swift */; };
 		0A6D991E1E31D6BD004927B8 /* LeaveSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D991D1E31D6BD004927B8 /* LeaveSummaryViewModel.swift */; };
@@ -64,7 +65,7 @@
 
 /* Begin PBXFileReference section */
 		0A6361551E290B74006B9AD7 /* EngineersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersVC.swift; sourceTree = "<group>"; };
-		0A6461961E1B67AC000C417D /* CallBackProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallBackProtocol.swift; sourceTree = "<group>"; };
+		0A6461961E1B67AC000C417D /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		0A664B6E1E209DF5006AE30D /* FalloutTotalEmployees.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutTotalEmployees.swift; sourceTree = "<group>"; };
 		0A664B701E212411006AE30D /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0A664ED51E1A32D90065E717 /* DashBoardService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardService.swift; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		0A664ED91E1A33320065E717 /* DashBoardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardController.swift; sourceTree = "<group>"; };
 		0A6713471E2214C7009C0BE3 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0A6713491E2214D8009C0BE3 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		0A67CD4B1E39B8E70028056C /* UrlPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UrlPlist.plist; sourceTree = "<group>"; };
 		0A695B681E1CB425001CAD60 /* DashBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoard.swift; sourceTree = "<group>"; };
 		0A6D991B1E31D673004927B8 /* LeaveSummaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaveSummaryVC.swift; sourceTree = "<group>"; };
 		0A6D991D1E31D6BD004927B8 /* LeaveSummaryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaveSummaryViewModel.swift; sourceTree = "<group>"; };
@@ -137,7 +139,7 @@
 		0A6461951E1B6772000C417D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0A6461961E1B67AC000C417D /* CallBackProtocol.swift */,
+				0A6461961E1B67AC000C417D /* Protocols.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -276,6 +278,7 @@
 			children = (
 				0A9484AB1E16495D00B01371 /* Main.storyboard */,
 				0A73F3E71E14C1EA00157449 /* Info.plist */,
+				0A67CD4B1E39B8E70028056C /* UrlPlist.plist */,
 				0A73F3DF1E14C1EA00157449 /* FundooHR_admin.xcdatamodeld */,
 				0A73F3E41E14C1EA00157449 /* LaunchScreen.storyboard */,
 				0A70DA591E2CE01C001267AC /* GoogleService-Info.plist */,
@@ -369,6 +372,7 @@
 				0A9484A31E16493200B01371 /* CollectionViewCell3.xib in Resources */,
 				0A9484A21E16493200B01371 /* CollectionViewCell4.xib in Resources */,
 				0A9484A51E16493200B01371 /* CollectionViewCell2.xib in Resources */,
+				0A67CD4C1E39B8E70028056C /* UrlPlist.plist in Resources */,
 				0A73F3E31E14C1EA00157449 /* Assets.xcassets in Resources */,
 				0A9484AC1E16495D00B01371 /* Main.storyboard in Resources */,
 				0A9484A71E16493200B01371 /* CollectionViewCell.xib in Resources */,
@@ -470,7 +474,7 @@
 				0A664B711E212411006AE30D /* LoginViewModel.swift in Sources */,
 				0A859D3E1E1E5F1200845818 /* FalloutController.swift in Sources */,
 				0A72CA911E35EF9900CBB809 /* TableViewContentModel.swift in Sources */,
-				0A6461971E1B67AC000C417D /* CallBackProtocol.swift in Sources */,
+				0A6461971E1B67AC000C417D /* Protocols.swift in Sources */,
 				0A6D991C1E31D673004927B8 /* LeaveSummaryVC.swift in Sources */,
 				0A9484A11E16493200B01371 /* CollectionViewCell4.swift in Sources */,
 				0A745A2B1E30E3580045AF38 /* EngineersViewModel.swift in Sources */,

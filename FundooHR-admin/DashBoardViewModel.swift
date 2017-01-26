@@ -8,28 +8,29 @@
 
 import UIKit
 
-class DashBoardViewModel: NSObject,CallBackInDashBoardViewModel {
+class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
     
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
-    var protocolDashBoardViewController : CallBackInDashBoardVC?
-    var dashBoardContents : DashBoard?
-    var responseCount = 0
-    var countForCollectionview = 0
-    var responseCountForTableView = 0
-    var count = 0
-    var dashBoardControllerObj : DashBoardController?
+    var mProtocolDashBoardViewController : DashBoardVCProtocol?
+    var mDashBoardContents : DashBoard?
+    var mResponseCount = 0
+    var mCountForCollectionview = 0
+    var mResponseCountForTableView = 0
+    var mCount = 0
+    var mDashBoardControllerObj : DashBoardController?
     
         
-   init(pCallBackInDashBoardVC : CallBackInDashBoardVC) {
-    protocolDashBoardViewController = pCallBackInDashBoardVC
+   init(pCallBackInDashBoardVC : DashBoardVCProtocol) {
+    mProtocolDashBoardViewController = pCallBackInDashBoardVC
     }
     
     
     func fetchTableViewContentsFromController()->Int{
-        dashBoardControllerObj = DashBoardController(pCallBackInDashBoardViewModel: self)
-            if(self.count==0){
-                dashBoardControllerObj?.fetchTableViewContentsFromService()
-                count += 1
+        // init controller object
+        mDashBoardControllerObj = DashBoardController(pDashBoardViewModelProtocolObj: self)
+            if(self.mCount==0){
+                mDashBoardControllerObj?.fetchTableViewContentsFromService()
+                mCount += 1
         }
         return mArrayOfTableViewContentModel.count
         
@@ -48,7 +49,7 @@ class DashBoardViewModel: NSObject,CallBackInDashBoardViewModel {
     }
     
     func tableViewContentsFetchedFromController(data:[TableViewContentModel]){
-        responseCountForTableView = 7
+        mResponseCountForTableView = 7
         mArrayOfTableViewContentModel = data
         
         //self.protocolDashBoardViewController?.tableviewReload()
@@ -57,20 +58,20 @@ class DashBoardViewModel: NSObject,CallBackInDashBoardViewModel {
     }
     
     func fetchDataFromDashBoardController()->Int{
-        dashBoardControllerObj = DashBoardController(pCallBackInDashBoardViewModel: self)
-        print("countForCollectionview=-=-=-=",countForCollectionview)
-        if(countForCollectionview == 0){
-            dashBoardControllerObj?.fetchDataFromDashBoardService()
-            countForCollectionview+=1
+        mDashBoardControllerObj = DashBoardController(pDashBoardViewModelProtocolObj: self)
+        print("countForCollectionview=-=-=-=",mCountForCollectionview)
+        if(mCountForCollectionview == 0){
+            mDashBoardControllerObj?.fetchDataFromDashBoardService()
+            mCountForCollectionview+=1
         }
-        return responseCount
+        return mResponseCount
     }
 
     
     
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard){
-        responseCount = 6
-        dashBoardContents = dashBoardData
-        protocolDashBoardViewController?.dashBoardCollectionviewreload()
+        mResponseCount = 6
+        mDashBoardContents = dashBoardData
+        mProtocolDashBoardViewController?.dashBoardCollectionviewreload()
     }
 }

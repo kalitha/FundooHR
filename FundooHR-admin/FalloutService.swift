@@ -14,18 +14,18 @@ import FirebaseStorage
 class FalloutService: NSObject {
     
     var ref: FIRDatabaseReference!
-    //let falloutControllerObj = FalloutController()
     var mSlideMenuContents = [NSDictionary]()
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
-    
+    let mUtilityClassObj = UtilityClass()
+
     //creating the variable of falloutcontroller type
-    var protocolFalloutController : CallBackInFalloutController?
+    var protocolFalloutController : FalloutControllerProtocol?
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfFalloutEmloyees = [Fallout]() //creating model type array
     var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
     
-    init(pCallBackInFalloutController : CallBackInFalloutController) {
-        protocolFalloutController = pCallBackInFalloutController
+    init(pFalloutControllerProtocolObj : FalloutControllerProtocol) {
+        protocolFalloutController = pFalloutControllerProtocolObj
     }
     
     func fetchTableViewContents(){
@@ -57,10 +57,10 @@ class FalloutService: NSObject {
     func fetchData(){
         let token = UserDefaults.standard.value(forKey: "tokenKey")!
         print("tokenKey=-=-=",token)
-        
+        let url = mUtilityClassObj.fetchUrlFromPlist()
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.17:3000/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("\(url)/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary

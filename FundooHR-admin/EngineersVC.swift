@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,CallBackInEngineersVC {
+class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,EngineersVCProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     var menuShowing = false

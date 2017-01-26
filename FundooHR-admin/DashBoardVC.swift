@@ -1,51 +1,64 @@
 //
 //  DashBoardVC.swift
 //  FundooHR
-//
+// Purpose:-
+// 1)It is a Dashboard UIClass with IBOutlet and IBAction of DashBoard UIViewController
+// In this class we are displaying Number of FalloutEmployees,Employees taken Leave
+// 
 //  Created by BridgeLabz Solutions LLP on 09/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
 
 import UIKit
 
-class DashBoardVC: UIViewController,CallBackInDashBoardVC{
-    
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var slideMenu: UIView!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
+class DashBoardVC: UIViewController,DashBoardVCProtocol{
     
     var mDashBoardViewModelObj : DashBoardViewModel?
     var mMenuShowing = false
     var mCustomView = UIView()
     let mUtilityClassObj = UtilityClass()
     
+    //create outlet of dashboard's header label
+    @IBOutlet weak var mHeaderLabel: UILabel!
+    //create outlet of tableView
+    @IBOutlet weak var mTableView: UITableView!
+    //create outlet of slidemenu of dashboard
+    @IBOutlet weak var mSlideMenu: UIView!
+    //create outlet of collectionview
+    @IBOutlet weak var mCollectionView: UICollectionView!
+    //create outlet of SlideMenuLeadingConstraint
+    @IBOutlet weak var mSlideMenuLeadingConstraint: NSLayoutConstraint!
+    //create outlet of date
+    @IBOutlet weak var mDate: UILabel!
+    //create outlet of activity indicator
+    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
+    
+    // executes when screen gets loaded
     override func viewDidLoad() {
         super.viewDidLoad()
+        //enabling the activity indicator
         mActivityIndicator.isHidden = false
         mActivityIndicator.startAnimating()
         mDashBoardViewModelObj = DashBoardViewModel(pCallBackInDashBoardVC: (self))
         
-        self.collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
+        //registering each xib cell with collectionview cell
+        self.mCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
         
-        self.collectionView.register(UINib(nibName: "CollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "cell2")
+        self.mCollectionView.register(UINib(nibName: "CollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "cell2")
         
-        self.collectionView.register(UINib(nibName: "CollectionViewCell3", bundle: nil), forCellWithReuseIdentifier: "cell3")
+        self.mCollectionView.register(UINib(nibName: "CollectionViewCell3", bundle: nil), forCellWithReuseIdentifier: "cell3")
         
-        self.collectionView.register(UINib(nibName: "CollectionViewCell4", bundle: nil), forCellWithReuseIdentifier: "cell4")
+        self.mCollectionView.register(UINib(nibName: "CollectionViewCell4", bundle: nil), forCellWithReuseIdentifier: "cell4")
         
-        self.collectionView.register(UINib(nibName: "CollectionViewCell5", bundle: nil), forCellWithReuseIdentifier: "cell5")
+        self.mCollectionView.register(UINib(nibName: "CollectionViewCell5", bundle: nil), forCellWithReuseIdentifier: "cell5")
         
-        self.collectionView.register(UINib(nibName: "CollectionViewCell6", bundle: nil), forCellWithReuseIdentifier: "cell6")
+        self.mCollectionView.register(UINib(nibName: "CollectionViewCell6", bundle: nil), forCellWithReuseIdentifier: "cell6")
         
         
         
         let convertedDate = mUtilityClassObj.date()
         
-        date.text = convertedDate
+        mDate.text = convertedDate
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         }
@@ -54,15 +67,15 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
             print("views width",view.frame.width)
-            mCustomView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-            mCustomView.backgroundColor = UIColor.lightGray
+            mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
+            mCustomView.backgroundColor = UIColor.white
         }
         
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             print("views width",view.frame.width)
-            mCustomView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-            mCustomView.backgroundColor = UIColor.lightGray
+            mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
+            mCustomView.backgroundColor = UIColor.white
         }
     }
     
@@ -72,13 +85,13 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     }
     
     func removeGestureRecognizer(){
-        for recognizer in collectionView.gestureRecognizers ?? [] {
+        for recognizer in mCollectionView.gestureRecognizers ?? [] {
             mCustomView.removeGestureRecognizer(recognizer)
         }
     }
     
     func tapBlurButton(_ sender: UIButton) {
-        slideMenuLeadingConstraint.constant = -250
+        mSlideMenuLeadingConstraint.constant = -250
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
@@ -94,19 +107,19 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     @IBAction func menuOpen(_ sender: UIButton) {
         //changing the custom view's size while we change to landscape mode
         print("views width",view.frame.width)
-        mCustomView.frame = CGRect.init(x: slideMenu.frame.width, y: 0, width: view.frame.width-slideMenu.frame.width, height: view.frame.height)
-        mCustomView.backgroundColor = UIColor.lightGray
+        mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
+        mCustomView.backgroundColor = UIColor.white
         
         if(mMenuShowing){
-            slideMenuLeadingConstraint.constant = -250
+            mSlideMenuLeadingConstraint.constant = -250
             //1st case of removing tap gesture(papre) when we click on the icon
             
             removeGestureRecognizer()
             
         }else{
-            slideMenuLeadingConstraint.constant = 0
+            mSlideMenuLeadingConstraint.constant = 0
             self.view.addSubview(mCustomView)
-            mCustomView.alpha = 0.5
+            mCustomView.alpha = 1
             addGestureRecognizer()
         }
         UIView.animate(withDuration: 0.3, animations: {
@@ -117,13 +130,13 @@ class DashBoardVC: UIViewController,CallBackInDashBoardVC{
     }
     
     func tableviewReload(){
-        self.tableView.reloadData()
+        self.mTableView.reloadData()
     }
     
     func dashBoardCollectionviewreload(){
         mActivityIndicator.isHidden = true
         self.mActivityIndicator.stopAnimating()
-        self.collectionView.reloadData()
+        self.mCollectionView.reloadData()
     }
 }
 
@@ -134,9 +147,9 @@ extension DashBoardVC: UICollectionViewDataSource{
         print("valueOfDictionary=-=-=-=",UserDefaults.standard.value(forKey: "tokenKey")!)
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){            mDashBoardViewModelObj?.fetchDataFromDashBoardController()
         }
-        print("dashBoardViewModelObj.responseCount",mDashBoardViewModelObj!.responseCount)
+        print("dashBoardViewModelObj.responseCount",mDashBoardViewModelObj!.mResponseCount)
         //dashBoardViewModelObj.fetchDataFromDashBoardController(token:self.token!)
-        return mDashBoardViewModelObj!.responseCount
+        return mDashBoardViewModelObj!.mResponseCount
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
@@ -144,7 +157,7 @@ extension DashBoardVC: UICollectionViewDataSource{
         
         let colorOfMarkedEmployees = UIColor.init(red: 24/255, green: 136/255, blue: 13/255, alpha: 1)
         let colorOfUnmarkedEmployees = UIColor.init(red: 227/255, green: 86/255, blue: 86/255, alpha: 1)
-        let date = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.dashBoardContents?.timeStamp)!)/1000)
+        let date = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.timeStamp)!)/1000)
         if(indexPath.row == 0){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! CollectionViewCell
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
@@ -154,23 +167,23 @@ extension DashBoardVC: UICollectionViewDataSource{
             cell.unmarkedEmployees.backgroundColor = colorOfUnmarkedEmployees
             cell.unmarkedEmployees.layer.masksToBounds = true
             cell.unmarkedEmployees.layer.cornerRadius = 15
-            cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.dashBoardContents?.marked)! as Int)
-            cell.unmarkedEmployees.text = mDashBoardViewModelObj?.dashBoardContents?.unmarked! as? String
+            cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.mDashBoardContents?.marked)! as Int)
+            cell.unmarkedEmployees.text = mDashBoardViewModelObj?.mDashBoardContents?.unmarked as? String
             cell.date.text = retunedDate
             return cell
         }
         else if(indexPath.row == 1){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! CollectionViewCell2
-            cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.dashBoardContents?.falloutEmployee!)! as Int)
-            cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.dashBoardContents?.totalEmployee!)! as Int)
+            cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.falloutEmployee)! as Int)
+            cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.totalEmployee)! as Int)
              let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
             cell.date.text = retunedDate
             return  cell
         }
         else if(indexPath.row == 2){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! CollectionViewCell3
-            cell.leave.text = mDashBoardViewModelObj?.dashBoardContents?.leave! as! String
+            cell.leave.text = mDashBoardViewModelObj?.mDashBoardContents?.leave as! String
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
             cell.date.text = retunedDate
             return cell
@@ -211,7 +224,7 @@ extension DashBoardVC: UICollectionViewDelegate{
     }
     
     func highlightCell2(_ indexPath : IndexPath, flag: Bool) {
-        let cell = collectionView.cellForItem(at: indexPath)
+        let cell = mCollectionView.cellForItem(at: indexPath)
         if flag {
             cell?.contentView.backgroundColor = UIColor.lightGray
             cell?.contentView.backgroundColor?.withAlphaComponent(0.5)
@@ -271,7 +284,7 @@ extension DashBoardVC: UITableViewDelegate{
         else if(indexPath.row == 6){
             performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
         }
-        slideMenuLeadingConstraint.constant = -250
+        mSlideMenuLeadingConstraint.constant = -250
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })

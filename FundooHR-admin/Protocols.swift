@@ -8,71 +8,71 @@
 
 import Foundation
 import UIKit
-protocol CallBackInDashBoardController {
+protocol DashBoardControllerProtocol {
     func fetchedDataFromDashBoardService(_ dashBoardData: DashBoard)
     func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     
 }
 
-protocol CallBackInDashBoardViewModel{
+protocol DashBoardViewModelProtocol{
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard)
     func tableViewContentsFetchedFromController(data:[TableViewContentModel])
     
 }
 
-    protocol CallBackInDashBoardVC {
+    protocol DashBoardVCProtocol {
         func dashBoardCollectionviewreload()
         func tableviewReload()
     }
 
-protocol CallBackInFalloutController {
+protocol FalloutControllerProtocol {
     func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     func employeeImageUrlFetchedFromService(url:[FalloutImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
 }
 
-protocol CallBackInFalloutViewModel {
+protocol FalloutViewModelProtocol {
      func tableViewContentsFetchedFromController(data:[TableViewContentModel])
     func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     func employeeImageUrlFetchedFromController(data:[FalloutImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
     }
 
-protocol CallBackInFalloutVC {
+protocol FalloutVCProtocol {
     func falloutTableviewReload()
     func falloutCollectionviewReload()
 }
 
-protocol CallBackInLoginViewModel {
-    func fetchTokenFromController(_ status:Int, token:String)
+protocol LoginViewModelProtocol {
+    func fetchTokenFromController(_ status:Int)
 }
 
-protocol CallBackInLoginController {
-    func fetchTokenFromService(_ status:Int, token:String)
+protocol LoginControllerProtocol{
+    func fetchTokenFromService(_ status:Int)
 }
 
-protocol CallBackInEngineersController {
+protocol EngineersControllerProtocol{
     func dataFetchedFromService(data:[EngineersModel])
 }
 
-protocol CallBackInEngineersviewModel {
+protocol EngineersviewModelProtocol{
     func dataFetchedFromController(data:[EngineersModel])
 }
 
-protocol CallBackInEngineersVC {
+protocol EngineersVCProtocol {
     func tableviewReload()
     }
-protocol CallBackInLeaveSummaryController{
+protocol LeaveSummaryControllerProtocol{
     func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
     func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
 }
-protocol CallBackInLeaveSummaryViewModel {
+protocol LeaveSummaryViewModelProtocol {
     func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
     func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
 }
-protocol CallBackInLeaveSummaryVC {
+protocol LeaveSummaryVCProtocol {
     func reload()
 }

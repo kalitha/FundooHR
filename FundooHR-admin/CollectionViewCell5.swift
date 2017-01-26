@@ -12,7 +12,6 @@ class CollectionViewCell5: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
 }

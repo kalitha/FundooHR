@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeaveSummaryVC: UIViewController,CallBackInLeaveSummaryVC,UICollectionViewDataSource,UICollectionViewDelegate{
+class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSource,UICollectionViewDelegate{
 
     var leaveSummaryViewModelObj:LeaveSummaryViewModel = LeaveSummaryViewModel()
     

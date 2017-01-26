@@ -11,12 +11,19 @@ import  Alamofire
 
 class LoginService: NSObject {
     
-    var protocolLoginController :CallBackInLoginController?
+    let mUtilityClassObj = UtilityClass()
+    var loginControllerProtocolObj :LoginControllerProtocol?
     //getting a reference to "defaults" that can access UserDefaults
     let defaults = UserDefaults.standard
     
+    init(pLoginControllerProtocolObj : LoginControllerProtocol) {
+        loginControllerProtocolObj = pLoginControllerProtocolObj
+    }
+    
     func fetchToken(_ email:String, password:String){
-        let urlString: String = "http://192.168.0.17:3000/login"
+        
+        let url = mUtilityClassObj.fetchUrlFromPlist()
+        let urlString: String = "\(url)/login"
         let params = ["emailId":  (email), "password" : (password)]
         Alamofire.request(urlString, method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -35,12 +42,12 @@ class LoginService: NSObject {
                         //assining the "fetchedTokenValue" value to key "dictionary"
                         self.defaults.set(fetchedTokenValue, forKey: "tokenKey")
                     
-                        self.protocolLoginController?.fetchTokenFromService(status, token: fetchedTokenValue)
+                        self.loginControllerProtocolObj?.fetchTokenFromService(status)
                     }
                     else{
                         let token = String(describing:loginData.value(forKey: "token"))
                         print("---token---",token)
-                        self.protocolLoginController?.fetchTokenFromService(status, token: token)
+                        self.loginControllerProtocolObj?.fetchTokenFromService(status)
                     }
                     
                 }

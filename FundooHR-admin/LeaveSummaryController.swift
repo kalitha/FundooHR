@@ -8,9 +8,9 @@
 
 import UIKit
 
-class LeaveSummaryController: NSObject ,CallBackInLeaveSummaryController{
+class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     var leaveSummaryServiceObj : LeavesummaryService?
-    var protocolLeaveSummaryViewModel : CallBackInLeaveSummaryViewModel?
+    var protocolLeaveSummaryViewModel : LeaveSummaryViewModelProtocol?
     
     func fetchNumberOFCellsFromService(token:String){
        leaveSummaryServiceObj = LeavesummaryService()

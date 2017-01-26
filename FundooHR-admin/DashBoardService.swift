@@ -12,10 +12,11 @@ import Alamofire
 class DashBoardService: NSObject {
     var slideMenuContents = [NSDictionary]()
     var arrayOfTableViewContentModel = [TableViewContentModel]()
-    var protocolDashBoardController : CallBackInDashBoardController?
-    
-    init(pCallBackInDashBoardController : CallBackInDashBoardController) {
-        protocolDashBoardController = pCallBackInDashBoardController
+    var protocolDashBoardController : DashBoardControllerProtocol?
+    let mUtilityClassObj = UtilityClass()
+
+    init(pDashBoardControllerProtocolObj : DashBoardControllerProtocol) {
+        protocolDashBoardController = pDashBoardControllerProtocolObj
     }
 
     func fetchTableViewContents(){
@@ -47,10 +48,11 @@ class DashBoardService: NSObject {
     func fetchData(){
         let token = UserDefaults.standard.value(forKey: "tokenKey")!
         print("tokenKey=-=-=",token)
+        let url = mUtilityClassObj.fetchUrlFromPlist()
         
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.17:3000/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        Alamofire.request("\(url)/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
                 

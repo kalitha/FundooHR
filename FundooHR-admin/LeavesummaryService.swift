@@ -13,7 +13,7 @@ import FirebaseStorage
 
 class LeavesummaryService: NSObject {
     var ref: FIRDatabaseReference!
-    var protocolLeaveSummaryController : CallBackInLeaveSummaryController?
+    var protocolLeaveSummaryController : LeaveSummaryControllerProtocol?
     var arrayOfLeaveSummaryEmloyees = [LeaveSummary]()
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
+class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
     var arrayOfFalloutImageModel = [FalloutImageModel]()
@@ -16,19 +16,20 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
     var countOfFetchedImages = 0
     var count = 0
     //dont fix
-    var protocolFalloutVC : CallBackInFalloutVC?
+    var protocolFalloutVC : FalloutVCProtocol?
     var arrayOfFalloutEmployees = [Fallout]()
     var falloutControllerObj : FalloutController?
     var falloutTotalEmployeesContents : FalloutTotalEmployees?
     var mResponseCountForTableView = 0
-    
-    init(pCallBackInFalloutVC : CallBackInFalloutVC) {
-        protocolFalloutVC = pCallBackInFalloutVC
+    var mResponseCount = 0
+    var mCountForCollectionview = 0
+    init(pFalloutVCProtocolObj : FalloutVCProtocol) {
+        protocolFalloutVC = pFalloutVCProtocolObj
     }
 
     
     func fetchTableviewContentsFromFalloutController()->Int{
-         falloutControllerObj = FalloutController(pCallBackInFalloutViewModel: self)
+         falloutControllerObj = FalloutController(pFalloutViewModelProtocolObj: self)
         if(self.count==0){
             falloutControllerObj?.fetchTableViewContentsFromService()
             count += 1
@@ -44,7 +45,9 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
         print("content in index=",contentInIndex! )
         let name = contentInIndex?.rowName
         
-        return name!    }
+        return name!
+        
+    }
     func tableViewContentsFetchedFromController(data:[TableViewContentModel]){
         mResponseCountForTableView = 7
         mArrayOfTableViewContentModel = data
@@ -52,13 +55,11 @@ class FalloutViewModel: NSObject,CallBackInFalloutViewModel{
     }
     
     func fetchNumberOfCellsFromFalloutController()->Int{
-        falloutControllerObj = FalloutController(pCallBackInFalloutViewModel: self)
-        if(arrayOfFalloutEmployees.count == 0){
-            if(self.count == 0){
+        falloutControllerObj = FalloutController(pFalloutViewModelProtocolObj: self)
+            if(mCountForCollectionview == 0){
             falloutControllerObj?.fetchNumberOfCellsFromFalloutService()
-            count += 1
+            mCountForCollectionview += 1
             }
-        }
         return arrayOfFalloutEmployees.count
     }
     

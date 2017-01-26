@@ -48,6 +48,17 @@ class UtilityClass: UIViewController {
         return convertedDate
 
     }
+    func fetchUrlFromPlist()->String{
+        var url :String?
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+             url = urlDictionary["url"] as! String
+        }
+        return url!
+        
+    }
+    
 
 
 }

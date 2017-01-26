@@ -8,17 +8,17 @@
 
 import UIKit
 
-class FalloutController: NSObject,CallBackInFalloutController {
-    var protocolFalloutViewModel : CallBackInFalloutViewModel?
+class FalloutController: NSObject,FalloutControllerProtocol {
+    var protocolFalloutViewModel : FalloutViewModelProtocol?
     var falloutServiceObj : FalloutService?
     
-    init(pCallBackInFalloutViewModel : CallBackInFalloutViewModel) {
-        protocolFalloutViewModel = pCallBackInFalloutViewModel
+    init(pFalloutViewModelProtocolObj : FalloutViewModelProtocol) {
+        protocolFalloutViewModel = pFalloutViewModelProtocolObj
         }
     
     func fetchTableViewContentsFromService(){
         let arrayOfTableViewContentModel = [TableViewContentModel]()
-    let falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
+    let falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
         falloutServiceObj.fetchTableViewContents()
     }
     func tableViewContentsFetchedFromService(data:[TableViewContentModel]){
@@ -26,7 +26,7 @@ class FalloutController: NSObject,CallBackInFalloutController {
     }
     
     func fetchNumberOfCellsFromFalloutService(){
-          falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
+          falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
        
         let arrayOfFalloutEmployees = [Fallout]()
         
@@ -42,7 +42,7 @@ class FalloutController: NSObject,CallBackInFalloutController {
    // ----====----- FETCHING IMAGE -----=====----
     func fetchEmployeeImageUrlFromService(){
      
-        falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
+        falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
         falloutServiceObj?.fetchEmployeeImageUrlFromFirebase()
     }
     
@@ -51,7 +51,7 @@ class FalloutController: NSObject,CallBackInFalloutController {
     }
     
     func fetchImageFromService(_ image:[FalloutImageModel]){
-        falloutServiceObj = FalloutService(pCallBackInFalloutController: self)
+        falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
         falloutServiceObj?.protocolFalloutController = self
         falloutServiceObj?.fetchEmployeeImage(image)
     }

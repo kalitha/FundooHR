@@ -115,12 +115,12 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="EV2-JL-RQt" id="8QP-y3-JuT"/>
-                        <outlet property="email" destination="joi-Cr-L8a" id="QHB-rM-ytF"/>
-                        <outlet property="loginButton" destination="AnO-0v-u9H" id="2iN-FH-iHS"/>
-                        <outlet property="loginView" destination="pIK-xc-Tvu" id="r0A-Nn-55x"/>
-                        <outlet property="logo" destination="UkH-gT-MhK" id="UCv-c8-5Zr"/>
-                        <outlet property="password" destination="5n6-eu-7te" id="32b-vE-FK7"/>
+                        <outlet property="mActivityIndicator" destination="EV2-JL-RQt" id="BOV-7U-ZAv"/>
+                        <outlet property="mEmail" destination="joi-Cr-L8a" id="aGj-mf-TNP"/>
+                        <outlet property="mLoginButton" destination="AnO-0v-u9H" id="axG-ew-70U"/>
+                        <outlet property="mLoginView" destination="pIK-xc-Tvu" id="RF7-n0-v5c"/>
+                        <outlet property="mLogo" destination="UkH-gT-MhK" id="I5a-HN-cKn"/>
+                        <outlet property="mPassword" destination="5n6-eu-7te" id="5ef-Sx-x9y"/>
                         <segue destination="lc4-6l-uzw" kind="show" identifier="navigateToDashboard" id="VYq-ad-NMN"/>
                     </connections>
                 </viewController>
@@ -240,64 +240,60 @@
                                     <outlet property="delegate" destination="lc4-6l-uzw" id="oYk-NC-IEs"/>
                                 </connections>
                             </collectionView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W49-93-1AJ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulu-Gn-AFk">
                                 <rect key="frame" x="-250" y="0.0" width="250" height="736"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DxA-Q8-h6c">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DtN-GE-RYf">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="736"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reuseIdentifier" id="2zX-jH-k4W">
-                                                <rect key="frame" x="0.0" y="28" width="250" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="67" id="9Ds-cU-Kc2">
+                                                <rect key="frame" x="0.0" y="28" width="250" height="67"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2zX-jH-k4W" id="bVJ-nD-xQy">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="44"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Ds-cU-Kc2" id="cMb-JK-l88">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="66"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
-                                        <sections/>
                                         <connections>
-                                            <outlet property="dataSource" destination="lc4-6l-uzw" id="tZa-UG-U5a"/>
-                                            <outlet property="delegate" destination="lc4-6l-uzw" id="uTJ-or-rEC"/>
+                                            <outlet property="dataSource" destination="lc4-6l-uzw" id="AMx-4g-fvq"/>
+                                            <outlet property="delegate" destination="lc4-6l-uzw" id="fU1-9h-yAM"/>
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.71595923100000003" blue="0.56471622610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="DxA-Q8-h6c" firstAttribute="leading" secondItem="W49-93-1AJ" secondAttribute="leading" id="EMf-Kh-AnZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="DxA-Q8-h6c" secondAttribute="trailing" id="Fsc-Qh-hx0"/>
-                                    <constraint firstItem="DxA-Q8-h6c" firstAttribute="top" secondItem="W49-93-1AJ" secondAttribute="top" id="Nz7-JP-vbv"/>
-                                    <constraint firstItem="DxA-Q8-h6c" firstAttribute="leading" secondItem="W49-93-1AJ" secondAttribute="leading" id="Tk6-4l-w2t"/>
-                                    <constraint firstAttribute="bottom" secondItem="DxA-Q8-h6c" secondAttribute="bottom" id="VCx-f8-uR1"/>
-                                    <constraint firstAttribute="trailing" secondItem="DxA-Q8-h6c" secondAttribute="trailing" id="Y2I-5E-uKm"/>
-                                    <constraint firstItem="DxA-Q8-h6c" firstAttribute="top" secondItem="W49-93-1AJ" secondAttribute="top" id="aDi-Bh-GOw"/>
-                                    <constraint firstAttribute="width" constant="250" id="cFS-GD-n9v"/>
+                                    <constraint firstItem="DtN-GE-RYf" firstAttribute="leading" secondItem="Ulu-Gn-AFk" secondAttribute="leading" id="9Ug-Qs-JjD"/>
+                                    <constraint firstAttribute="width" constant="250" id="CPj-I2-p6F"/>
+                                    <constraint firstItem="DtN-GE-RYf" firstAttribute="width" secondItem="Ulu-Gn-AFk" secondAttribute="width" id="b0P-bw-tPl"/>
+                                    <constraint firstItem="DtN-GE-RYf" firstAttribute="height" secondItem="Ulu-Gn-AFk" secondAttribute="height" id="hsS-9e-NMo"/>
+                                    <constraint firstAttribute="bottom" secondItem="DtN-GE-RYf" secondAttribute="bottom" id="y0h-bM-Cgk"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Ulu-Gn-AFk" firstAttribute="height" secondItem="GPT-PN-E5V" secondAttribute="height" id="2UI-02-UaV"/>
+                            <constraint firstItem="Ulu-Gn-AFk" firstAttribute="top" secondItem="zuh-0n-tc3" secondAttribute="top" id="FUo-4U-9aR"/>
                             <constraint firstAttribute="trailing" secondItem="oSC-pd-wBC" secondAttribute="trailing" id="GtA-ky-pNN"/>
                             <constraint firstItem="oSC-pd-wBC" firstAttribute="leading" secondItem="GPT-PN-E5V" secondAttribute="leading" id="L0D-so-pnC"/>
                             <constraint firstItem="zuh-0n-tc3" firstAttribute="leading" secondItem="GPT-PN-E5V" secondAttribute="leading" id="LAU-am-ajQ"/>
-                            <constraint firstItem="ezK-KU-CQS" firstAttribute="top" secondItem="W49-93-1AJ" secondAttribute="bottom" id="TiN-KW-aiG"/>
-                            <constraint firstItem="W49-93-1AJ" firstAttribute="leading" secondItem="GPT-PN-E5V" secondAttribute="leading" constant="-250" id="dvV-5M-Vvn"/>
-                            <constraint firstItem="W49-93-1AJ" firstAttribute="height" secondItem="GPT-PN-E5V" secondAttribute="height" id="edU-jy-pD0"/>
                             <constraint firstItem="oSC-pd-wBC" firstAttribute="top" secondItem="zuh-0n-tc3" secondAttribute="bottom" constant="15" id="hpX-qL-42b"/>
                             <constraint firstItem="ezK-KU-CQS" firstAttribute="top" secondItem="oSC-pd-wBC" secondAttribute="bottom" id="iqH-w2-T24"/>
+                            <constraint firstItem="Ulu-Gn-AFk" firstAttribute="leading" secondItem="GPT-PN-E5V" secondAttribute="leading" constant="-250" id="k29-MJ-NCe"/>
                             <constraint firstAttribute="trailing" secondItem="zuh-0n-tc3" secondAttribute="trailing" id="uFI-q6-ic2"/>
                             <constraint firstItem="zuh-0n-tc3" firstAttribute="top" secondItem="GPT-PN-E5V" secondAttribute="top" id="xOS-em-5cs"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="oSC-pd-wBC" id="kIy-Rg-YuJ"/>
-                        <outlet property="date" destination="cMf-aP-cbZ" id="aPh-hC-haL"/>
-                        <outlet property="headerLabel" destination="0Bt-vn-Zk2" id="hsF-6Z-VaU"/>
-                        <outlet property="mActivityIndicator" destination="6dx-qH-6eV" id="fRh-aD-XqR"/>
-                        <outlet property="slideMenu" destination="W49-93-1AJ" id="BG5-Mm-GxI"/>
-                        <outlet property="slideMenuLeadingConstraint" destination="dvV-5M-Vvn" id="zrH-uj-1Em"/>
-                        <outlet property="tableView" destination="DxA-Q8-h6c" id="ug3-jg-oKV"/>
+                        <outlet property="mActivityIndicator" destination="6dx-qH-6eV" id="Reg-sj-vQh"/>
+                        <outlet property="mCollectionView" destination="oSC-pd-wBC" id="hsa-O8-BT3"/>
+                        <outlet property="mDate" destination="cMf-aP-cbZ" id="0kd-fz-tAu"/>
+                        <outlet property="mHeaderLabel" destination="0Bt-vn-Zk2" id="tu1-1n-xCY"/>
+                        <outlet property="mSlideMenu" destination="Ulu-Gn-AFk" id="lGe-EO-0vE"/>
+                        <outlet property="mSlideMenuLeadingConstraint" destination="k29-MJ-NCe" id="GA6-JH-JQM"/>
+                        <outlet property="mTableView" destination="DtN-GE-RYf" id="SuE-UM-qT8"/>
                         <segue destination="q0e-PF-6XP" kind="show" identifier="segueFromSecondCell" id="zAn-Rv-bxi"/>
                         <segue destination="eii-0s-ihY" kind="show" identifier="segueFromSecondIndex" id="ity-IR-kCm"/>
                         <segue destination="p6Y-DW-VNk" kind="show" identifier="segueFromFourthIndex" id="Gdr-Eu-Sa6"/>
@@ -308,7 +304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jto-8J-C8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693" y="-762"/>
+            <point key="canvasLocation" x="692.75362318840587" y="-762.22826086956525"/>
         </scene>
         <!--Fallout EmployeeVC-->
         <scene sceneID="uVd-KY-ANF">
@@ -618,12 +614,13 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fS4-Lc-wg4">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="736"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" red="1" green="0.71595923100000003" blue="0.56471622610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="80" id="8xM-NC-aEf">
                                                 <rect key="frame" x="0.0" y="28" width="250" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8xM-NC-aEf" id="F6B-hH-r5f">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="80"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -954,7 +951,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="250" height="68"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NrS-3H-ot6" id="TKK-1E-vbI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="68"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="67"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -1403,7 +1400,7 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xPT-V1-B2b" id="uCT-rH-U6I">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1458,9 +1455,9 @@
         <image name="previous " width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JCu-FU-IjG"/>
+        <segue reference="VYq-ad-NMN"/>
+        <segue reference="MfU-S9-3t9"/>
         <segue reference="zAn-Rv-bxi"/>
         <segue reference="Gdr-Eu-Sa6"/>
-        <segue reference="MfU-S9-3t9"/>
     </inferredMetricsTieBreakers>
 </document>

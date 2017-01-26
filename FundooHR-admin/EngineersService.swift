@@ -13,7 +13,7 @@ class EngineersService: NSObject {
     var slideMenuContents = [NSDictionary]()
     var arrayOfEngineerNames = [EngineersModel]()
     let engineersControllerObj = EngineersController()
-    var protocolEngineersController : CallBackInEngineersController?
+    var protocolEngineersController : EngineersControllerProtocol?
     
     func fetchData()  {
           ref = FIRDatabase.database().reference()//responsible to make a call to firebase
