@@ -17,6 +17,8 @@ class LeavesummaryService: NSObject {
     var arrayOfLeaveSummaryEmloyees = [LeaveSummary]()
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
+    let mUtilityClassObj = UtilityClass()
+    
     func fetchData(token:String){
         
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
@@ -100,6 +102,27 @@ class LeavesummaryService: NSObject {
                     self.protocolLeaveSummaryController?.imageFetchedFromService(image: image!, index: i)
                     
                 }
+            }
+        }
+    }
+    
+    func sendEmailToEmployeesTakenLeave(){
+        let lUrl = mUtilityClassObj.fetchUrlFromPlist()
+        let lUrlString: String = "\(lUrl)/sendEmailToLeaveEmployee"
+        let lCalculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
+        print("timestamp@#@#$",lCalculatedTimeStamp)
+        let token = UserDefaults.standard.value(forKey: "tokenKey")!
+        print("tokenKey=-=-=",token)
+        let params = ["timeStamp":  (lCalculatedTimeStamp), "token" : (token)]
+        Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON{
+            response in
+            if let json = response.result.value{
+                let emailData = json as! NSDictionary
+                print("emailData",emailData)
+                let status = emailData.value(forKey: "status") as! Int
+                print("status---",status)
+                self.protocolLeaveSummaryController?.fetchedDataFromSendEmailFunctionInService(status: status)
             }
         }
     }

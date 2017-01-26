@@ -119,7 +119,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         }else{
             mSlideMenuLeadingConstraint.constant = 0
             self.view.addSubview(mCustomView)
-            mCustomView.alpha = 1
+            mCustomView.alpha = 0.5
             addGestureRecognizer()
         }
         UIView.animate(withDuration: 0.3, animations: {

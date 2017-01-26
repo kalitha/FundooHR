@@ -67,12 +67,16 @@ protocol LeaveSummaryControllerProtocol{
     func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
     func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
+    func fetchedDataFromSendEmailFunctionInService(status:Int)
 }
 protocol LeaveSummaryViewModelProtocol {
     func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
     func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
+    func fetchedDataFromSendEmailFunctionInController(status:Int)
 }
 protocol LeaveSummaryVCProtocol {
     func reload()
+    func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
+
 }

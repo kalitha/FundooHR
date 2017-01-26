@@ -40,4 +40,10 @@ class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     func imageFetchedFromService(image: UIImage, index: Int){
         self.protocolLeaveSummaryViewModel?.imageFetchedFromController(image: image, index: index)
     }
+    func callSendEmailFunctionInService(){
+    leaveSummaryServiceObj?.sendEmailToEmployeesTakenLeave()
+    }
+    func fetchedDataFromSendEmailFunctionInService(status:Int){
+        protocolLeaveSummaryViewModel?.fetchedDataFromSendEmailFunctionInController(status: status)
+    }
 }

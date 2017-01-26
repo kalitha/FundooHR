@@ -75,4 +75,11 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     func fetchEachImage(i:Int)->UIImage{
       return arrayOfImages[i]
     }
+    func callSendEmailInController(){
+    leaveSummaryControllerObj?.callSendEmailFunctionInService()
+    }
+    func fetchedDataFromSendEmailFunctionInController(status:Int){
+    protocolLeaveSummaryVC?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
+    }
+
 }

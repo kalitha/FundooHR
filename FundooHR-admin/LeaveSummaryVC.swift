@@ -93,5 +93,26 @@ class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDa
         print("cells width====",cell.bounds.width)
         return cell
     }
+    @IBAction func showAlertOnButtonTapping(_ sender: UIButton) {
+        // create the alert
+        let alert = UIAlertController(title: "Alert", message: "Would you like to send the email?", preferredStyle: UIAlertControllerStyle.alert)
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler: nil))
+        //alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+        leaveSummaryViewModelObj.callSendEmailInController()
+
+    }
+    
+    func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
+        if(status == 200){
+            let alert = UIAlertController(title: "Alert", message: "Successfully sent mail to users", preferredStyle: UIAlertControllerStyle.alert)
+        }
+        else{
+            let alert = UIAlertController(title: "Alert", message: "email not sent", preferredStyle: UIAlertControllerStyle.alert)
+        }
+    }
 
 }
