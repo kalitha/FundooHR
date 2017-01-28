@@ -123,12 +123,16 @@ class LeavesummaryService: NSObject {
         let lUrlString: String = "\(lUrl)/sendEmailToLeaveEmployee"
         let lCalculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",lCalculatedTimeStamp)
-        let token = UserDefaults.standard.value(forKey: "tokenKey")!
+        let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
-        let params = ["timeStamp":  (lCalculatedTimeStamp), "token" : (token)]
-        Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default)
+        let headers: HTTPHeaders = [
+            "x-token" : token
+        ]
+        let params = ["timeStamp":  (lCalculatedTimeStamp), "token" : (token)] as [String : Any]
+        Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .responseJSON{
             response in
+                print("value----",response.result.value)
             if let json = response.result.value{
                 let emailData = json as! NSDictionary
                 print("emailData",emailData)
