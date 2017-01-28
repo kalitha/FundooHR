@@ -125,7 +125,10 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
         return arrayOfImages[i]
     }
 
-    func makingRestCallToSendEmailInController(){
-        
+    func callSendEmailInController(){
+        falloutControllerObj?.callSendEmailFunctionInService()
+    }
+    func fetchedDataFromSendEmailFunctionInController(status:Int){
+        protocolFalloutVC?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
     }
 }

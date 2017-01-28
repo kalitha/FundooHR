@@ -146,7 +146,27 @@ class FalloutService: NSObject {
         }
     }
     
-    func makingRestCallToSendEmail(){
-        
-    }
-}
+    func sendEmailToEmployeesTakenLeave(){
+        let lUrl = mUtilityClassObj.fetchUrlFromPlist()
+        let lUrlString: String = "\(lUrl)/sendEmailToFalloutEmployee"
+        let lCalculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
+        print("timestamp@#@#$",lCalculatedTimeStamp)
+        let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
+        print("tokenKey=-=-=",token)
+        let headers: HTTPHeaders = [
+            "x-token" : token
+        ]
+        let params = ["timeStamp":  (lCalculatedTimeStamp), "token" : (token)] as [String : Any]
+        Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON{
+                response in
+                print("value----",response.result.value)
+                if let json = response.result.value{
+                    let emailData = json as! NSDictionary
+                    print("emailData",emailData)
+                    let status = emailData.value(forKey: "status") as! Int
+                    print("status---",status)
+                    self.protocolFalloutController?.fetchedDataFromSendEmailFunctionInService(status: status)
+                }
+        }
+    }}

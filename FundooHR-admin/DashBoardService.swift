@@ -1,7 +1,11 @@
 //
 //  DashBoardService.swift
 //  FundooHR-admin
-//
+
+//  Purpose:-
+//  1)Making Rest call to fetch tableview contents
+//  2)Making rest call to fetch collectionview contents
+
 //  Created by BridgeLabz on 02/01/17.
 //  Copyright © 2017 BridgeLabz. All rights reserved.
 //
@@ -10,34 +14,41 @@ import UIKit
 import  Firebase
 import Alamofire
 class DashBoardService: NSObject {
-    //
-    var slideMenuContents = [NSDictionary]()
-    var arrayOfTableViewContentModel = [TableViewContentModel]()
-    var protocolDashBoardController : DashBoardControllerProtocol?
+    //create variable of type nsdictionary
+    var mSlideMenuContents = [NSDictionary]()
+    
+    //create  model type variable
+    var mArrayOfTableViewContentModel = [TableViewContentModel]()
+    
+    //create variable of type DashBoardControllerProtocol
+    var mProtocolDashBoardController : DashBoardControllerProtocol?
+    
+    //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
 
     init(pDashBoardControllerProtocolObj : DashBoardControllerProtocol) {
-        protocolDashBoardController = pDashBoardControllerProtocolObj
+        mProtocolDashBoardController = pDashBoardControllerProtocolObj
     }
 
+    //rest call to fetch tableview contents
     func fetchTableViewContents(){
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference()//responsible to make a call to firebase
         ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
-              self.slideMenuContents = (snapshot.value) as! [NSDictionary]
+              self.mSlideMenuContents = (snapshot.value) as! [NSDictionary]
             
-            for index in 0..<self.slideMenuContents.count{
-                let valueAtEachIndex = self.slideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
+            for index in 0..<self.mSlideMenuContents.count{
+                let valueAtEachIndex = self.mSlideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
                 
                 let rowName = valueAtEachIndex["row_name"] as! String
                 
                 let tableviewContents = TableViewContentModel(rowName: rowName)
                 
-                self.arrayOfTableViewContentModel.append(tableviewContents)
+                self.mArrayOfTableViewContentModel.append(tableviewContents)
             }
-            print("slideMenuContents",self.slideMenuContents)
-            print("count=======",self.arrayOfTableViewContentModel.count)
-            self.protocolDashBoardController?.tableViewContentsFetchedFromService(data: self.arrayOfTableViewContentModel)
+            print("slideMenuContents",self.mSlideMenuContents)
+            print("count=======",self.mArrayOfTableViewContentModel.count)
+            self.mProtocolDashBoardController?.tableViewContentsFetchedFromService(data: self.mArrayOfTableViewContentModel)
             
             
             
@@ -46,6 +57,7 @@ class DashBoardService: NSObject {
         }
     }
     
+    //rest call to fetch collectionview data
     func fetchData(){
         let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
@@ -59,8 +71,6 @@ class DashBoardService: NSObject {
         ]
     
         Alamofire.request("\(url)/readDashboardData?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
-        
-       // Alamofire.request("\(url)/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
                 
@@ -90,7 +100,7 @@ class DashBoardService: NSObject {
                     let dashBoardContent = DashBoard(marked: marked, unmarked: unmarked, falloutEmployee: falloutEmployee, totalEmployee: totalEmployee, leave: leave, timeStamp: timeStamp)
                     
                     //sending fetched data to controller
-                    self.protocolDashBoardController?.fetchedDataFromDashBoardService(dashBoardContent)
+                    self.mProtocolDashBoardController?.fetchedDataFromDashBoardService(dashBoardContent)
                     
                 }
         }

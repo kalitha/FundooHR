@@ -9,6 +9,20 @@
 import Foundation
 import UIKit
 
+//protocol of LoginViewController
+protocol LoginVCProtocol {
+    func performingNavigationToDashboard(status:Int)
+}
+//protocol of LoginViewModel
+protocol LoginViewModelProtocol {
+    func fetchStatusFromController(_ status:Int)
+}
+
+////protocol of LoginController
+protocol LoginControllerProtocol{
+    func fetchStatusFromService(_ status:Int)
+}
+
 //protocol of dashboard controller
 protocol DashBoardControllerProtocol {
     func fetchedDataFromDashBoardService(_ dashBoardData: DashBoard)
@@ -32,6 +46,7 @@ protocol FalloutControllerProtocol {
     func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     func employeeImageUrlFetchedFromService(url:[FalloutImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
+    func fetchedDataFromSendEmailFunctionInService(status:Int)
 }
 
 //protocol of FalloutViewModel
@@ -40,49 +55,49 @@ protocol FalloutViewModelProtocol {
     func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
     func employeeImageUrlFetchedFromController(data:[FalloutImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
+    func fetchedDataFromSendEmailFunctionInController(status:Int)
     }
 
+//protocol of FalloutViewController
 protocol FalloutVCProtocol {
     func falloutTableviewReload()
     func falloutCollectionviewReload()
-}
-protocol LoginVCProtocol {
-    func performingNavigationToDashboard(status:Int)
+    func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
 }
 
-protocol LoginViewModelProtocol {
-    func fetchStatusFromController(_ status:Int)
-}
-
-protocol LoginControllerProtocol{
-    func fetchStatusFromService(_ status:Int)
-}
-
-protocol EngineersControllerProtocol{
-    func dataFetchedFromService(data:[EngineersModel])
-}
-
-protocol EngineersviewModelProtocol{
-    func dataFetchedFromController(data:[EngineersModel])
-}
-
-protocol EngineersVCProtocol {
-    func tableviewReload()
-    }
+//protocol of LeaveSummaryController
 protocol LeaveSummaryControllerProtocol{
     func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
     func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInService(status:Int)
 }
+
+//protocol of LeaveSummaryViewModel
 protocol LeaveSummaryViewModelProtocol {
     func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
     func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInController(status:Int)
 }
+
+//protocol of LeaveSummaryVC
 protocol LeaveSummaryVCProtocol {
     func reload()
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
 
+}
+
+//protocol of EngineersController
+protocol EngineersControllerProtocol{
+    func dataFetchedFromService(data:[EngineersModel])
+}
+
+protocol EngineersviewModelProtocol{
+    func dataFetchedFromController(data:[EngineersModel])
+    
+}
+
+protocol EngineersVCProtocol {
+    func tableviewReload()
 }

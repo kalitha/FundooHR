@@ -120,7 +120,7 @@ class LeavesummaryService: NSObject {
     
     func sendEmailToEmployeesTakenLeave(){
         let lUrl = mUtilityClassObj.fetchUrlFromPlist()
-        let lUrlString: String = "\(lUrl)/sendEmailToLeaveEmployee"
+        let lUrlString: String = "\(lUrl)/sendEmailToFalloutEmployee"
         let lCalculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",lCalculatedTimeStamp)
         let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String

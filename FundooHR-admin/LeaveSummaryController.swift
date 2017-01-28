@@ -46,6 +46,7 @@ class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     func imageFetchedFromService(image: UIImage, index: Int){
         self.protocolLeaveSummaryViewModelObj?.imageFetchedFromController(image: image, index: index)
     }
+    
     func callSendEmailFunctionInService(){
         leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
         //leaveSummaryServiceObj?.protocolLeaveSummaryController = self

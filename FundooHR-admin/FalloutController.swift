@@ -60,7 +60,12 @@ class FalloutController: NSObject,FalloutControllerProtocol {
         self.protocolFalloutViewModel?.imageFetchedFromController(image: image, index: index)
     }
     
-    func makingRestCallToSendEmailInService(){
-        
+    func callSendEmailFunctionInService(){
+       falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
+        //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
+        falloutServiceObj?.sendEmailToEmployeesTakenLeave()
+    }
+    func fetchedDataFromSendEmailFunctionInService(status:Int){
+        protocolFalloutViewModel?.fetchedDataFromSendEmailFunctionInController(status: status)
     }
 }

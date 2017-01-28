@@ -1,17 +1,17 @@
 
 //  LoginVC.swift
 //  FundooHR
-// Purpose :
+//
+//  Purpose :
 //  1)It is Login UIClass & holds IBOutlet & IBActions of Login UIViewController
 //  2)In this class we validate user credentials
 //  3)From this ViewController we navigate to DashBoardViewController
-
+//
 //  Created by Kalitha H N on 07/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
 
 import UIKit
-//import FirebaseAuth
 import Alamofire
 
 class LoginVC: UIViewController,LoginVCProtocol{
@@ -32,12 +32,13 @@ class LoginVC: UIViewController,LoginVCProtocol{
     // outlet of login buttton
     @IBOutlet weak var mLoginButton: UIButton!
     
+    //used to specify the keyboard state
     var mOffsetCheckBOOL = false
     
     // executes when screen gets loaded
     override func viewDidLoad() {
         super.viewDidLoad()
-        //enabling the activity indicator
+        //disabling the activity indicator
         mActivityIndicator.isHidden = true
         mLoginViewModelObj = LoginViewModel(pLoginVCProtocolObj: self)
         mLoginView.layer.shadowColor = UIColor.black.cgColor
@@ -75,27 +76,25 @@ class LoginVC: UIViewController,LoginVCProtocol{
         //checking whether emailId or password is nil
         if(lEmailId == "" || lPassword == ""){
             //pop up of alert box if nil
-            let lAlert = UIAlertController(title: "Alert", message: "Please enter the credentials", preferredStyle: UIAlertControllerStyle.alert)
-            lAlert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-            self.present(lAlert, animated: true, completion: nil)
+            self.alertMessage(title: "Alert", message: "Please enter the credentials", buttnTitle: "OK")
         }
         else{
          lValueOfClientSideValidation = self.clientSideValidationOfUserCredentials(emailId:lEmailId!, password:lPassword!)
-            print(lValueOfClientSideValidation)
-        //disabling the activity indictor
-        mActivityIndicator.isHidden = false
-        mActivityIndicator.startAnimating()
+            print(lValueOfClientSideValidation!)
+        
             
         if(lValueOfClientSideValidation == true){
-        //making call to LoginViewModels method for valid user credentials
-        mLoginViewModelObj?.passingEmailAndPasswordToController(lEmailId!, password: lPassword!)
+            //enabling the activity indictor
+            mActivityIndicator.isHidden = false
+            mActivityIndicator.startAnimating()
+            
+           //making call to LoginViewModels method for valid user credentials
+            mLoginViewModelObj?.passingEmailAndPasswordToController(lEmailId!, password: lPassword!)
         }
             //pop up of alert box for invalid user credentials
         else{
-            let alert = UIAlertController(title: "Alert", message: "Please enter the valid credentials", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+             self.alertMessage(title: "Alert", message: "Please enter the valid credentials", buttnTitle: "OK")
+            }
     }
 }
     func performingNavigationToDashboard(status:Int){
@@ -109,12 +108,12 @@ class LoginVC: UIViewController,LoginVCProtocol{
             //alert for unautherized user
         else if(status == 401){
             let lAlert = UIAlertController(title: "Alert", message: "Unautherized user", preferredStyle: UIAlertControllerStyle.alert)
-            lAlert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+            lAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(lAlert, animated: true, completion: nil)
         }
         else if(status == 304){
             let alert = UIAlertController(title: "Alert", message: "not modified", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             }
         
@@ -125,13 +124,6 @@ class LoginVC: UIViewController,LoginVCProtocol{
         if let lKeyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             
             let kBHeight = lKeyboardSize.size.height;
-            print("kbHeight",kBHeight)
-            print("email.frame.origin.y",mEmail.frame.origin.y)
-            print("email.frame.size.height",mEmail.frame.size.height)
-            print("self.view.frame.origin.y",self.view.frame.origin.y)
-            print("password",mPassword.frame.origin.y)
-            print("password",mPassword.frame.size.height)
-            print("self.view.frame.origin.y",self.view.frame.origin.y)
             
             if (mEmail.frame.origin.y+mEmail.frame.size.height+self.view.frame.origin.y > kBHeight )
             {
@@ -178,6 +170,15 @@ class LoginVC: UIViewController,LoginVCProtocol{
                 self.view.frame.origin.y = 0
             }
         }
+    }
+    
+    func alertMessage(title:String, message:String , buttnTitle : String){
+        
+        let lAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        lAlert.addAction(UIAlertAction(title: buttnTitle , style: UIAlertActionStyle.default, handler: nil))
+        self.present(lAlert, animated: true, completion: nil)
+
+
     }
     
 }

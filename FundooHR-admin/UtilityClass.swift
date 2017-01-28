@@ -35,14 +35,6 @@ class UtilityClass: UIViewController {
         cell.contentView.backgroundColor = UIColor.white
         cell.layer.borderColor = color.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
-        
-       // cell.layer.borderWidth = 2.0
-        // cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-      //  cell.layer.shadowRadius = 3.0
-      //  cell.layer.shadowOpacity = 1.0
-       // cell.layer.masksToBounds = false
-       // cell.layer.cornerRadius = 5
-        
         mFormatter.dateFormat = "dd MM yyyy"
         mFormatter.dateStyle = .long
         let convertedDate = mFormatter.string(from: date)

@@ -26,7 +26,6 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         leaveSummaryViewModelObj = LeaveSummaryViewModel(pLeaveSummaryVCProtocolObj: self)
-        //leaveSummaryViewModelObj.protocolLeaveSummaryVC = self
         let currentDate = Date()
         // initialize the date formatter and set the style
         let formatter = DateFormatter()
@@ -120,10 +119,13 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
         if(status == 200){
             let alert = UIAlertController(title: "Alert", message: "Successfully sent mail to users", preferredStyle: UIAlertControllerStyle.alert)
+            self.present(alert, animated: true, completion: nil)
         }
         else{
             let alert = UIAlertController(title: "Alert", message: "email not sent", preferredStyle: UIAlertControllerStyle.alert)
+            self.present(alert, animated: true, completion: nil)
         }
+        
     }
     
     // collection view delegate

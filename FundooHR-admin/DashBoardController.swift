@@ -10,23 +10,28 @@ import UIKit
 
 class DashBoardController: NSObject,DashBoardControllerProtocol{
     
-    var protocolDashBoardViewModel : DashBoardViewModelProtocol?
-    var dashBoardServiceObj : DashBoardService?
+    //create variable of type DashBoardViewModelProtocol
+    var mProtocolDashBoardViewModel : DashBoardViewModelProtocol?
+    //create variable of type DashBoardService
+    var mDashBoardServiceObj : DashBoardService?
     
     init(pDashBoardViewModelProtocolObj : DashBoardViewModelProtocol) {
-        protocolDashBoardViewModel = pDashBoardViewModelProtocolObj
+        mProtocolDashBoardViewModel = pDashBoardViewModelProtocolObj
         }
     
+    //making the rest call to fetch tableview contents from api
     func fetchTableViewContentsFromService(){
         let arrayOfTableViewContentModel = [TableViewContentModel]()
         let dashBoardServiceObj = DashBoardService(pDashBoardControllerProtocolObj: self)
             dashBoardServiceObj.fetchTableViewContents()
     }
     
+    //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
     func tableViewContentsFetchedFromService(data:[TableViewContentModel]){
-        protocolDashBoardViewModel?.tableViewContentsFetchedFromController(data: data)
+        mProtocolDashBoardViewModel?.tableViewContentsFetchedFromController(data: data)
     }
     
+    //making rest call to fetch data of collectionview cells from api
     func fetchDataFromDashBoardService(){
         let dashBoardServiceObj = DashBoardService(pDashBoardControllerProtocolObj: self)
         dashBoardServiceObj.fetchData()
@@ -34,6 +39,6 @@ class DashBoardController: NSObject,DashBoardControllerProtocol{
     
     //sending fetched data to the view model
     func fetchedDataFromDashBoardService(_ dashBoardData: DashBoard){
-        protocolDashBoardViewModel?.dataFetchedFromDashBoardController(dashBoardData)
+        mProtocolDashBoardViewModel?.dataFetchedFromDashBoardController(dashBoardData)
     }
 }

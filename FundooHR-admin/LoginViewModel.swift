@@ -9,8 +9,10 @@
 import UIKit
 
 class LoginViewModel: NSObject,LoginViewModelProtocol {
+    
     //variable of type login viewcontroller
     var mLoginvcObj : LoginVC?
+    
     //variable of type Login ViewControllerProtocol
     var mLoginVCProtocolObj : LoginVCProtocol?
     
