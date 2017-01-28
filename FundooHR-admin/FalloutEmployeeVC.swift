@@ -62,12 +62,13 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         self.mCollectionView!.collectionViewLayout = self.getLayout()
     }
     
-    //
+    //changing the size of collectionview cells when the orientation changes
     func changeOrientationFunc()
     {
         self.mCollectionView!.collectionViewLayout = self.getLayout()
     }
     
+    //function to rotate the screen
     func rotated() {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
@@ -83,17 +84,21 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             mCustomView.backgroundColor = UIColor.clear
         }
     }
+    
+    //add the gesture recognizer when the menu button is tapped
     func addGestureRecognizer(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
         self.mCustomView.addGestureRecognizer(tapGesture)
     }
     
+    //remove gesture recognizer after opening the slidemenu
     func removeGestureRecognizer(){
         for recognizer in mCollectionView.gestureRecognizers ?? [] {
             mCustomView.removeGestureRecognizer(recognizer)
         }
     }
     
+    //called by addGestureRecognizer method
     func tapBlurButton(_ sender: UIButton) {
         mSlideMenuLeadingConstraint.constant = -250
         UIView.animate(withDuration: 0.3, animations: {
@@ -108,6 +113,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         removeGestureRecognizer()
     }
     
+    //collectionview datasource
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
             //let token = UserDefaults.standard.value(forKey: "tokenKey")
@@ -262,7 +268,22 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
         }
         else if(indexPath.row == 6){
-            performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+            let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
+            // add the actions (buttons)
+            let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+                self.performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+                NSLog("Continue Pressed")
+            }
+            
+            let lCancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
+                UIAlertAction in
+                NSLog("Cancel Pressed")
+            }
+            alert.addAction(lContinueAction)
+            alert.addAction(lCancelAction)
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
         }
         mSlideMenuLeadingConstraint.constant = -250
         UIView.animate(withDuration: 0.3, animations: {

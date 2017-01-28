@@ -59,8 +59,6 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         
         self.mCollectionView.register(UINib(nibName: "CollectionViewCell6", bundle: nil), forCellWithReuseIdentifier: "cell6")
         
-        
-        
         let lConvertedDate = mUtilityClassObj.date()
         
         mDate.text = lConvertedDate
@@ -69,7 +67,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         }
     
-    //code to rotate the screen
+    //function to rotate the screen
     func rotated() {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
@@ -284,7 +282,23 @@ extension DashBoardVC: UITableViewDelegate{
             performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
         }
         else if(indexPath.row == 6){
-            performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+            let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
+            // add the actions (buttons)
+            let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+               self.performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+                NSLog("Continue Pressed")
+            }
+            
+            let lCancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
+                UIAlertAction in
+                NSLog("Cancel Pressed")
+            }
+            alert.addAction(lContinueAction)
+            alert.addAction(lCancelAction)
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+            
         }
         mSlideMenuLeadingConstraint.constant = -250
         UIView.animate(withDuration: 0.3, animations: {

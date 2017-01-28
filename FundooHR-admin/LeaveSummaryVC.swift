@@ -116,7 +116,7 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         self.present(alert, animated: true, completion: nil)
     }
     
-    //
+    //notifying whether the mail is sent or not
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
         if(status == 200){
             let alert = UIAlertController(title: "Alert", message: "Successfully sent mail to users", preferredStyle: UIAlertControllerStyle.alert)
