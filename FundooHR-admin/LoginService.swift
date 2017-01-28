@@ -20,15 +20,17 @@ class LoginService: NSObject {
         loginControllerProtocolObj = pLoginControllerProtocolObj
     }
     
+    //making rest api call
     func fetchToken(_ email:String, password:String){
         
+        //getting url from plist
         let url = mUtilityClassObj.fetchUrlFromPlist()
         let urlString: String = "\(url)/login"
         let params = ["emailId":  (email), "password" : (password)]
         Alamofire.request(urlString, method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON { response in
-                // print("--response--",response)
-                // print("result----",response.result)
+                print("--response--",response)
+                print("result----",response.result)
                 if let JSON = response.result.value{
                     let loginData = JSON as! NSDictionary
                     print("---Login Data----",loginData)
@@ -42,12 +44,12 @@ class LoginService: NSObject {
                         //assining the "fetchedTokenValue" value to key "dictionary"
                         self.defaults.set(fetchedTokenValue, forKey: "tokenKey")
                     
-                        self.loginControllerProtocolObj?.fetchTokenFromService(status)
+                        self.loginControllerProtocolObj?.fetchStatusFromService(status)
                     }
                     else{
                         let token = String(describing:loginData.value(forKey: "token"))
                         print("---token---",token)
-                        self.loginControllerProtocolObj?.fetchTokenFromService(status)
+                        self.loginControllerProtocolObj?.fetchStatusFromService(status)
                     }
                     
                 }

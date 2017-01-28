@@ -9,41 +9,49 @@
 import UIKit
 
 class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
+    //create variable of type LeavesummaryService
     var leaveSummaryServiceObj : LeavesummaryService?
-    var protocolLeaveSummaryViewModel : LeaveSummaryViewModelProtocol?
+    //create variable of type LeaveSummaryViewModelProtocol
+    var protocolLeaveSummaryViewModelObj : LeaveSummaryViewModelProtocol?
+    
+    init(pLeaveSummaryViewModelProtocolObj : LeaveSummaryViewModelProtocol) {
+        protocolLeaveSummaryViewModelObj = pLeaveSummaryViewModelProtocolObj
+    }
     
     func fetchNumberOFCellsFromService(token:String){
-       leaveSummaryServiceObj = LeavesummaryService()
-        leaveSummaryServiceObj?.protocolLeaveSummaryController = self
+       leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+       // leaveSummaryServiceObj?.protocolLeaveSummaryControllerObj = self
         let arrayOfLeaveEmployees = [LeaveSummary]()
             leaveSummaryServiceObj?.fetchData(token: token)
     }
     func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees){
-        self.protocolLeaveSummaryViewModel?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)
+        self.protocolLeaveSummaryViewModelObj?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)
     }
     // ----====----- FETCHING IMAGE -----=====----
     func fetchEmployeeImageUrlFromService(){
-        leaveSummaryServiceObj = LeavesummaryService()
-        leaveSummaryServiceObj?.protocolLeaveSummaryController = self
+        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
         leaveSummaryServiceObj?.fetchEmployeeImageUrlFromFirebase()
     }
     
     func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel]){
-        self.protocolLeaveSummaryViewModel?.employeeImageUrlFetchedFromController(data: url)
+        self.protocolLeaveSummaryViewModelObj?.employeeImageUrlFetchedFromController(data: url)
     }
     
     func fetchImageFromService(_ image:[LeaveSummaryEmployeeImageModel]){
-        leaveSummaryServiceObj = LeavesummaryService()
-        leaveSummaryServiceObj?.protocolLeaveSummaryController = self
+        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
         leaveSummaryServiceObj?.fetchEmployeeImage(image)
     }
     func imageFetchedFromService(image: UIImage, index: Int){
-        self.protocolLeaveSummaryViewModel?.imageFetchedFromController(image: image, index: index)
+        self.protocolLeaveSummaryViewModelObj?.imageFetchedFromController(image: image, index: index)
     }
     func callSendEmailFunctionInService(){
-    leaveSummaryServiceObj?.sendEmailToEmployeesTakenLeave()
+        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
+        leaveSummaryServiceObj?.sendEmailToEmployeesTakenLeave()
     }
     func fetchedDataFromSendEmailFunctionInService(status:Int){
-        protocolLeaveSummaryViewModel?.fetchedDataFromSendEmailFunctionInController(status: status)
+        protocolLeaveSummaryViewModelObj?.fetchedDataFromSendEmailFunctionInController(status: status)
     }
 }

@@ -1,7 +1,10 @@
 //
 //  FalloutEmployeeVC.swift
 //  FundooHR
-//
+//  Purpose:-
+//  1)It is a Fallout UIClass with IBOutlet and IBAction of Fallout UIViewController
+//  2)In this class we display the information of fallout employees
+//  3)From this class we send mail to fallout employees
 //  Created by BridgeLabz on 26/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
@@ -10,56 +13,74 @@ import UIKit
 
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var numberOfUnmarkedEmployees: UILabel!
-    @IBOutlet weak var unmarkedDate: UILabel!
-    @IBOutlet weak var totalEmployees: UILabel!
-    @IBOutlet weak var outerLabelOfUnmarkedEmployees: UILabel!
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    // create outlet of collectionview
+    @IBOutlet weak var mCollectionView: UICollectionView!
+    //create outlet to store number of fallout employees
+    @IBOutlet weak var mNumberOfUnmarkedEmployees: UILabel!
+    //create outlet to display the month of fallout employees
+    @IBOutlet weak var mUnmarkedDate: UILabel!
+    //create the outlet of total employees
+    @IBOutlet weak var mTotalEmployees: UILabel!
+    //create the outlet of outer lable surrounding the number of fallout employees
+    @IBOutlet weak var mOuterLabelOfUnmarkedEmployees: UILabel!
+    //create outlet for date
+    @IBOutlet weak var mDate: UILabel!
+    //create outlet for activity indicator
+    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
+    //create outlet for slidemenu that contains tableview
     @IBOutlet weak var mSlideMenu: UIView!
+    //create outlet for tableview
     @IBOutlet weak var mTableview: UITableView!
+    //create outlet for slidemenu leading constraint
     @IBOutlet weak var mSlideMenuLeadingConstraint: NSLayoutConstraint!
-    
+    //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
     var mMenuShowing = false
+    //create a variable of type uiview
     var mCustomView = UIView()
-    var falloutViewModelObj : FalloutViewModel?
+    //create variable of type FalloutViewModel
+    var mFalloutViewModelObj : FalloutViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        falloutViewModelObj = FalloutViewModel(pFalloutVCProtocolObj: self)
-        outerLabelOfUnmarkedEmployees.layer.masksToBounds = true;
-        outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
+        //enabling activity indicator
+        mActivityIndicator.isHidden = false
+        mActivityIndicator.startAnimating()
+        mFalloutViewModelObj = FalloutViewModel(pFalloutVCProtocolObj: self)
+        
         // get the date time String from the date object
         let convertedDate = mUtilityClassObj.date()
-        date.text = convertedDate
+        mDate.text = convertedDate
         
+        //notifies when screen is rotated
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
+        //notifies when collectionview's orientation is changed
+         NotificationCenter.default.addObserver(self, selector: #selector(self.changeOrientationFunc), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         //-----========----------==========-------
-        self.collectionView!.collectionViewLayout = self.getLayout()
+        self.mCollectionView!.collectionViewLayout = self.getLayout()
     }
     
+    //
     func changeOrientationFunc()
     {
-        self.collectionView!.collectionViewLayout = self.getLayout()
+        self.mCollectionView!.collectionViewLayout = self.getLayout()
     }
+    
     func rotated() {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
             print("views width",view.frame.width)
             mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
-            mCustomView.backgroundColor = UIColor.lightGray
+            mCustomView.backgroundColor = UIColor.clear
         }
         
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             print("views width",view.frame.width)
             mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
-            mCustomView.backgroundColor = UIColor.lightGray
+            mCustomView.backgroundColor = UIColor.clear
         }
     }
     func addGestureRecognizer(){
@@ -68,7 +89,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
     func removeGestureRecognizer(){
-        for recognizer in collectionView.gestureRecognizers ?? [] {
+        for recognizer in mCollectionView.gestureRecognizers ?? [] {
             mCustomView.removeGestureRecognizer(recognizer)
         }
     }
@@ -90,46 +111,38 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
             //let token = UserDefaults.standard.value(forKey: "tokenKey")
-        falloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
+        mFalloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
         }
-        return falloutViewModelObj!.arrayOfFalloutEmployees.count
+        return mFalloutViewModelObj!.arrayOfFalloutEmployees.count
     }
     
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let color = UIColor.init(red: 240/255, green: 237/255, blue: 234/255, alpha: 1)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FalloutEmployeeCollectionViewCell
-        cell.name.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeName
-        cell.fellowShip.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeStatus
-        cell.company.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].company
-        cell.email.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].emailId
-        cell.mobileNum.text = falloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mobile
-       let employeeImage = falloutViewModelObj?.fetchEachImage(i: indexPath.row)
+        cell.name.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeName
+        cell.fellowShip.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeStatus
+        cell.company.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].company
+        cell.email.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].emailId
+        cell.mobileNum.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mobile
+       let employeeImage = mFalloutViewModelObj?.fetchEachImage(i: indexPath.row)
         print("employee image...",employeeImage)
         cell.employeeImage.image = employeeImage
         
-        cell.layer.borderWidth = 1.0
-        // cell.layer.cornerRadius = 5
         cell.layer.borderColor = color.cgColor
         cell.layer.backgroundColor = color.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-        cell.layer.shadowRadius = 3.0
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.masksToBounds = false;
-        cell.layer.cornerRadius = 5
-        cell.employeeImage.layer.masksToBounds = false;
         print("cells heigth====",cell.bounds.height)
         print("cells width====",cell.bounds.width)
         return cell
     }
 
-    
+    //open slidemenu when clicked on menu button
     @IBAction func openMenuOnButtonclick(_ sender: UIButton) {
         //changing the custom view's size while we change to landscape mode
         print("views width",view.frame.width)
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
-        mCustomView.backgroundColor = UIColor.lightGray
+        mCustomView.backgroundColor = UIColor.clear
         
         if(mMenuShowing){
             mSlideMenuLeadingConstraint.constant = -250
@@ -150,24 +163,27 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         falloutTableviewReload()
 
     }
-    
+    //reload tableview data when the data is loaded into it
     func falloutTableviewReload(){
         self.mTableview.reloadData()
     }
     
+    //reload collectionview data when the data is loaded into it
     func falloutCollectionviewReload(){
-        activityIndicator.isHidden = false
-        activityIndicator.stopAnimating()
-        numberOfUnmarkedEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
-        totalEmployees.text = String(describing:(falloutViewModelObj?.falloutTotalEmployeesContents?.totalEmployee)! as Int)
-        let timeStampDate = Date.init(timeIntervalSince1970: Double((falloutViewModelObj?.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
+        //disabling the activity indicator
+        mActivityIndicator.isHidden = true
+        mActivityIndicator.stopAnimating()
+        mNumberOfUnmarkedEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
+        mTotalEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.totalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((mFalloutViewModelObj?.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         let convertedtimeStampDate = formatter.string(from: timeStampDate)
-        unmarkedDate.text = convertedtimeStampDate
-        self.collectionView.reloadData()
+        mUnmarkedDate.text = convertedtimeStampDate
+        self.mCollectionView.reloadData()
     }
     
+    //used to show alert on the tapping of button
     @IBAction func showAlertOnButtonTapping(_ sender: UIButton) {
         // create the alert
         let alert = UIAlertController(title: "Alert", message: "Would you like to send the email?", preferredStyle: UIAlertControllerStyle.alert)
@@ -190,14 +206,14 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         return CGSize(width: collectionView.frame.size.width - 20, height: collectionView.frame.size.width - 20)
         }
 
-    //--------===========------------==========------------
+    //decides the size of collectionview cell
     func getLayout() -> UICollectionViewLayout
     {
         let layout:UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
         
-        print(self.view.frame.size.width - 30)
+        print(self.view.frame.size.width - 20)
         
-        layout.itemSize = CGSize(width: self.view.frame.size.width - 30, height: 112)
+        layout.itemSize = CGSize(width: self.view.frame.size.width - 20, height: 112)
         layout.sectionInset = UIEdgeInsets(top: 25, left: 50, bottom: 25, right: 50)
         
         return layout as UICollectionViewLayout
@@ -205,12 +221,12 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     
     //tableview datasource
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return (falloutViewModelObj?.fetchTableviewContentsFromFalloutController())!
+        return (mFalloutViewModelObj?.fetchTableviewContentsFromFalloutController())!
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        cell.textLabel?.text = falloutViewModelObj?.contentAtEachRow(i: indexPath.row)
+        cell.textLabel?.text = mFalloutViewModelObj?.contentAtEachRow(i: indexPath.row)
         let color = UIColor.init(red: 59/255, green: 83/255, blue: 114/255, alpha: 1)
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
@@ -224,10 +240,39 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == (falloutViewModelObj?.mArrayOfTableViewContentModel.count)!-1){
+        if(indexPath.row == (mFalloutViewModelObj?.mArrayOfTableViewContentModel.count)!-1){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell
 
+    }
+    
+     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        if(indexPath.row == 2){
+            performSegue(withIdentifier: "segueFromSecondIndex", sender: nil)
+        }
+            
+        else if(indexPath.row == 3){
+            performSegue(withIdentifier: "segueFromThirdIndex", sender: nil)
+        }
+        else if(indexPath.row == 4){
+            performSegue(withIdentifier: "segueFromFourthIndex", sender: nil)
+        }
+        else if(indexPath.row == 5){
+            performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
+        }
+        else if(indexPath.row == 6){
+            performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+        }
+        mSlideMenuLeadingConstraint.constant = -250
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        mMenuShowing = !mMenuShowing
+        
+        //2nd case of removing the tap gesture(paper) when we click on table view
+        self.mCustomView.removeFromSuperview()
+        
+        removeGestureRecognizer()
     }
 }

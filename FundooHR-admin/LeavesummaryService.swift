@@ -13,17 +13,28 @@ import FirebaseStorage
 
 class LeavesummaryService: NSObject {
     var ref: FIRDatabaseReference!
-    var protocolLeaveSummaryController : LeaveSummaryControllerProtocol?
+    var protocolLeaveSummaryControllerObj : LeaveSummaryControllerProtocol?
     var arrayOfLeaveSummaryEmloyees = [LeaveSummary]()
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     let mUtilityClassObj = UtilityClass()
     
+    init(pLeaveSummaryProtocolObj : LeaveSummaryControllerProtocol) {
+        protocolLeaveSummaryControllerObj = pLeaveSummaryProtocolObj
+    }
     func fetchData(token:String){
+        let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
+        print("tokenKey=-=-=",token)
+        let url = mUtilityClassObj.fetchUrlFromPlist()
         
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
-        print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("http://192.168.0.17:3000/readLeaveEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        print("timestamp@#@#$",calculatedTimeStamp)
+        
+        let headers: HTTPHeaders = [
+            "x-token" : token
+        ]
+        
+        Alamofire.request("\(url)/readLeaveEmployee?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
             {response in
                 if let JSON = response.result.value{
                     let completeleaveOutEmployeeData = JSON as! NSDictionary
@@ -53,7 +64,7 @@ class LeavesummaryService: NSObject {
                         
                     }
                     print("---count of employees---",self.arrayOfLeaveSummaryEmloyees.count)
-                    self.protocolLeaveSummaryController?.dataFetchedFromService(data: self.arrayOfLeaveSummaryEmloyees, leaveSummaryTotalEmployees: leaveSummaryTotalEmployeesObj)
+                    self.protocolLeaveSummaryControllerObj?.dataFetchedFromService(data: self.arrayOfLeaveSummaryEmloyees, leaveSummaryTotalEmployees: leaveSummaryTotalEmployeesObj)
                 }
         }
     }
@@ -75,7 +86,7 @@ class LeavesummaryService: NSObject {
             print("count of arrayOfFalloutEmloyees ",self.arrayOfLeaveSummaryEmloyees.count)
             print("count=======",self.arrayOfLeaveSummaryEmployeeImages.count)
             print("arrayOfFalloutEmployeeImages",self.arrayOfLeaveSummaryEmployeeImages)
-            self.protocolLeaveSummaryController?.employeeImageUrlFetchedFromService(url: self.arrayOfLeaveSummaryEmployeeImages)
+            self.protocolLeaveSummaryControllerObj?.employeeImageUrlFetchedFromService(url: self.arrayOfLeaveSummaryEmployeeImages)
         })
         { (error) in
             print(error.localizedDescription)
@@ -93,13 +104,14 @@ class LeavesummaryService: NSObject {
             path.data(withMaxSize: 1*1024*1024) {(data,error) -> Void in//we r making rest call here
                 print("count of arrayOfFalloutEmloyees ",self.arrayOfLeaveSummaryEmloyees.count)
                 print("i value",i)
-                print("data",data)
+                print("data",
+                      data)
                 print("image",UIImage(data: data!))
                 if(error != nil){
                     print("error occured")
                 }else{
                     let image = UIImage(data: data!)
-                    self.protocolLeaveSummaryController?.imageFetchedFromService(image: image!, index: i)
+                    self.protocolLeaveSummaryControllerObj?.imageFetchedFromService(image: image!, index: i)
                     
                 }
             }
@@ -122,7 +134,7 @@ class LeavesummaryService: NSObject {
                 print("emailData",emailData)
                 let status = emailData.value(forKey: "status") as! Int
                 print("status---",status)
-                self.protocolLeaveSummaryController?.fetchedDataFromSendEmailFunctionInService(status: status)
+                self.protocolLeaveSummaryControllerObj?.fetchedDataFromSendEmailFunctionInService(status: status)
             }
         }
     }

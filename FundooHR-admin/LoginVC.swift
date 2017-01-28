@@ -14,10 +14,10 @@ import UIKit
 //import FirebaseAuth
 import Alamofire
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController,LoginVCProtocol{
     
     //creating object of LoginViewModel
-    let loginViewModelObj:LoginViewModel = LoginViewModel()
+    var mLoginViewModelObj:LoginViewModel?
     
     //outlet of email id
     @IBOutlet weak var mEmail: UITextField!
@@ -32,25 +32,17 @@ class LoginVC: UIViewController {
     // outlet of login buttton
     @IBOutlet weak var mLoginButton: UIButton!
     
-    var offsetCheckBOOL = false
+    var mOffsetCheckBOOL = false
     
     // executes when screen gets loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         //enabling the activity indicator
         mActivityIndicator.isHidden = true
-        loginViewModelObj.loginvcObj = self
-        mLoginButton.layer.cornerRadius = 5
-        mLoginView.layer.cornerRadius = 10
+        mLoginViewModelObj = LoginViewModel(pLoginVCProtocolObj: self)
         mLoginView.layer.shadowColor = UIColor.black.cgColor
-        mLoginView.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-        mLoginView.layer.shadowOpacity = 0.4
-        mLoginView.layer.shadowRadius = 1.3
         mLogo.layer.shadowColor = UIColor.black.cgColor
-        mLogo.layer.shadowOffset = CGSize(width:0,height: 2.0)
-        mLogo.layer.shadowOpacity = 0.5
-        mLogo.layer.shadowRadius = 2.0
-        
+      
         //adding observer for notification when keyboard appears
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -61,12 +53,12 @@ class LoginVC: UIViewController {
     }
     //performing client side validation for emailid and password
     func clientSideValidationOfUserCredentials(emailId:String, password: String)->Bool{
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}"
-        let passwordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
+        let lEmailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,20}"
+        let lPasswordRegEx = "^([a-zA-Z0-9@*#]{8,15})$"
         
-        let emailChecked = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        let passwordChecked = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
-        if emailChecked.evaluate(with: emailId) && passwordChecked.evaluate(with: password){
+        let lEmailChecked = NSPredicate(format:"SELF MATCHES %@", lEmailRegEx)
+        let lPasswordChecked = NSPredicate(format:"SELF MATCHES %@", lPasswordRegEx)
+        if lEmailChecked.evaluate(with: emailId) && lPasswordChecked.evaluate(with: password){
         return true
     }
         else{
@@ -77,26 +69,26 @@ class LoginVC: UIViewController {
     //creating action for login button
     @IBAction func loginAction(_ sender: Any) {
         //enabling the activity idicator
-        let emailId = mEmail.text
-        let password = mPassword.text
-        var valueOfClientSideValidation : Bool?
+        let lEmailId = mEmail.text
+        let lPassword = mPassword.text
+        var lValueOfClientSideValidation : Bool?
         //checking whether emailId or password is nil
-        if(emailId == "" || password == ""){
+        if(lEmailId == "" || lPassword == ""){
             //pop up of alert box if nil
-            let alert = UIAlertController(title: "Alert", message: "Please enter the credentials", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let lAlert = UIAlertController(title: "Alert", message: "Please enter the credentials", preferredStyle: UIAlertControllerStyle.alert)
+            lAlert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+            self.present(lAlert, animated: true, completion: nil)
         }
         else{
-         valueOfClientSideValidation = self.clientSideValidationOfUserCredentials(emailId:emailId!, password:password!)
-            print(valueOfClientSideValidation)
+         lValueOfClientSideValidation = self.clientSideValidationOfUserCredentials(emailId:lEmailId!, password:lPassword!)
+            print(lValueOfClientSideValidation)
         //disabling the activity indictor
         mActivityIndicator.isHidden = false
         mActivityIndicator.startAnimating()
             
-        if(valueOfClientSideValidation == true){
+        if(lValueOfClientSideValidation == true){
         //making call to LoginViewModels method for valid user credentials
-        loginViewModelObj.passingEmailAndPasswordToController(emailId!, password: password!)
+        mLoginViewModelObj?.passingEmailAndPasswordToController(lEmailId!, password: lPassword!)
         }
             //pop up of alert box for invalid user credentials
         else{
@@ -116,9 +108,9 @@ class LoginVC: UIViewController {
         }
             //alert for unautherized user
         else if(status == 401){
-            let alert = UIAlertController(title: "Alert", message: "Unautherized user", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            let lAlert = UIAlertController(title: "Alert", message: "Unautherized user", preferredStyle: UIAlertControllerStyle.alert)
+            lAlert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+            self.present(lAlert, animated: true, completion: nil)
         }
         else if(status == 304){
             let alert = UIAlertController(title: "Alert", message: "not modified", preferredStyle: UIAlertControllerStyle.alert)
@@ -130,10 +122,10 @@ class LoginVC: UIViewController {
     
     //Keyboard popup and Hide Notifications
     func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let lKeyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             
-            let kbHeight = keyboardSize.size.height;
-            print("kbHeight",kbHeight)
+            let kBHeight = lKeyboardSize.size.height;
+            print("kbHeight",kBHeight)
             print("email.frame.origin.y",mEmail.frame.origin.y)
             print("email.frame.size.height",mEmail.frame.size.height)
             print("self.view.frame.origin.y",self.view.frame.origin.y)
@@ -141,11 +133,12 @@ class LoginVC: UIViewController {
             print("password",mPassword.frame.size.height)
             print("self.view.frame.origin.y",self.view.frame.origin.y)
             
-            if (mEmail.frame.origin.y+mEmail.frame.size.height+self.view.frame.origin.y > kbHeight )
+            if (mEmail.frame.origin.y+mEmail.frame.size.height+self.view.frame.origin.y > kBHeight )
             {
-                if(offsetCheckBOOL == false)
+                if(mOffsetCheckBOOL
+                    == false)
                 {
-                    offsetCheckBOOL = true
+                    mOffsetCheckBOOL = true
                     print(self.view.frame.origin.y);
                     self.view.frame.origin.y -= 80
                     print(self.view.frame.origin.y);
@@ -153,15 +146,15 @@ class LoginVC: UIViewController {
                 else
                 {
                     self.view.frame.origin.y += 80
-                    offsetCheckBOOL = false
+                    mOffsetCheckBOOL = false
                     keyboardWillShow(notification: notification)
                 }
             }
-            else if(mPassword.frame.origin.y+mPassword.frame.size.height+self.view.frame.origin.y < kbHeight )
+            else if(mPassword.frame.origin.y+mPassword.frame.size.height+self.view.frame.origin.y < kBHeight )
             {
-                if(offsetCheckBOOL == false)
+                if(mOffsetCheckBOOL == false)
                 {
-                    offsetCheckBOOL = true
+                    mOffsetCheckBOOL = true
                     print(self.view.frame.origin.y);
                     self.view.frame.origin.y -= 80
                     print(self.view.frame.origin.y);
@@ -169,7 +162,7 @@ class LoginVC: UIViewController {
                 else
                 {
                     self.view.frame.origin.y += 80
-                    offsetCheckBOOL = false
+                    mOffsetCheckBOOL = false
                     keyboardWillShow(notification: notification)
                 }
             }
@@ -178,10 +171,10 @@ class LoginVC: UIViewController {
     
     func keyboardWillHide(notification: NSNotification) {
         
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if(offsetCheckBOOL == true)
+        if let lKeyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if(mOffsetCheckBOOL == true)
             {
-                offsetCheckBOOL = false
+                mOffsetCheckBOOL = false
                 self.view.frame.origin.y = 0
             }
         }

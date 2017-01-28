@@ -8,9 +8,10 @@
 
 import UIKit
 
-class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSource,UICollectionViewDelegate{
-
-    var leaveSummaryViewModelObj:LeaveSummaryViewModel = LeaveSummaryViewModel()
+class
+LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSource,UICollectionViewDelegate{
+    
+    var leaveSummaryViewModelObj : LeaveSummaryViewModel?
     
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var unmarkedDate: UILabel!
@@ -20,15 +21,12 @@ class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDa
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        outerLabelOfUnmarkedEmployees.layer.masksToBounds = true;
-        outerLabelOfUnmarkedEmployees.layer.cornerRadius = 10
-        leaveSummaryViewModelObj = LeaveSummaryViewModel()
-        leaveSummaryViewModelObj.protocolLeaveSummaryVC = self
+        leaveSummaryViewModelObj = LeaveSummaryViewModel(pLeaveSummaryVCProtocolObj: self)
+        //leaveSummaryViewModelObj.protocolLeaveSummaryVC = self
         let currentDate = Date()
         // initialize the date formatter and set the style
         let formatter = DateFormatter()
@@ -37,19 +35,30 @@ class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDa
         // get the date time String from the date object
         let convertedDate = formatter.string(from: currentDate)
         date.text = convertedDate
+        
+        //notifies when screen is rotated
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        //notifies when collectionview's orientation is changed
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeOrientationFunc), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        //-----========----------==========-------
+        self.collectionView!.collectionViewLayout = self.getLayout()
+    }
+    
+    //
+    func changeOrientationFunc()
+    {
+        self.collectionView!.collectionViewLayout = self.getLayout()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func reload() {
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
-        numberOfUnmarkedEmployees.text = String(describing:(leaveSummaryViewModelObj.leaveSummaryTotalEmployeesContent?.employeeLeave)! as Int)
-        totalEmployees.text = String(describing:(leaveSummaryViewModelObj.leaveSummaryTotalEmployeesContent?.totalEmployee)! as Int)
-        let timeStampDate = Date.init(timeIntervalSince1970: Double((leaveSummaryViewModelObj.leaveSummaryTotalEmployeesContent?.timeStamp!)!)!/1000)
+        numberOfUnmarkedEmployees.text = String(describing:(leaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.employeeLeave)! as Int)
+        totalEmployees.text = String(describing:(leaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.totalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((leaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.timeStamp!)!)!/1000)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         let convertedtimeStampDate = formatter.string(from: timeStampDate)
@@ -61,34 +70,26 @@ class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDa
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
             let token
                 = UserDefaults.standard.value(forKey: "tokenKey")
-        leaveSummaryViewModelObj.fetchDataFromController(token: token as! String)
+            leaveSummaryViewModelObj?.fetchDataFromController(token: token as! String)
         }
-        return leaveSummaryViewModelObj.arrayOfLeaveEmployees.count
+        print("arrayOfLeaveEmployees.count",leaveSummaryViewModelObj?.arrayOfLeaveEmployees.count)
+        return leaveSummaryViewModelObj!.arrayOfLeaveEmployees.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let color = UIColor.init(red: 240/255, green: 237/255, blue: 234/255, alpha: 1)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! LeaveSummaryCollectionViewCell
-        cell.employeeName.text = leaveSummaryViewModelObj.arrayOfLeaveEmployees[indexPath.row].employeeName
-        cell.fellowship.text = leaveSummaryViewModelObj.arrayOfLeaveEmployees[indexPath.row].employeeStatus
-        cell.company.text = leaveSummaryViewModelObj.arrayOfLeaveEmployees[indexPath.row].company
-        cell.email.text = leaveSummaryViewModelObj.arrayOfLeaveEmployees[indexPath.row].emailId
-        cell.mobile.text = leaveSummaryViewModelObj.arrayOfLeaveEmployees[indexPath.row].mobile
-        let employeeImage = leaveSummaryViewModelObj.fetchEachImage(i: indexPath.row)
+        cell.employeeName.text = leaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].employeeName
+        cell.fellowship.text = leaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].employeeStatus
+        cell.company.text = leaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].company
+        cell.email.text = leaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].emailId
+        cell.mobile.text = leaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].mobile
+        let employeeImage = leaveSummaryViewModelObj?.fetchEachImage(i: indexPath.row)
         print("employee image...",employeeImage)
         cell.employeeImage.image = employeeImage
-        
-        cell.layer.borderWidth = 1.0
-        //        cell.layer.cornerRadius = 5
         cell.layer.borderColor = color.cgColor
         cell.layer.backgroundColor = color.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-        cell.layer.shadowRadius = 3.0
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.masksToBounds = false;
-        cell.layer.cornerRadius = 5
-        cell.employeeImage.layer.masksToBounds = false;
         print("cells heigth====",cell.bounds.height)
         print("cells width====",cell.bounds.width)
         return cell
@@ -98,12 +99,12 @@ class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDa
         let alert = UIAlertController(title: "Alert", message: "Would you like to send the email?", preferredStyle: UIAlertControllerStyle.alert)
         // add the actions (buttons)
         alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler: nil))
-        //alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+       // alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
         // show the alert
         self.present(alert, animated: true, completion: nil)
         
-        leaveSummaryViewModelObj.callSendEmailInController()
-
+        leaveSummaryViewModelObj?.callSendEmailInController()
+        
     }
     
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
@@ -114,5 +115,26 @@ class LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDa
             let alert = UIAlertController(title: "Alert", message: "email not sent", preferredStyle: UIAlertControllerStyle.alert)
         }
     }
-
+    
+    // collection view delegate
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.size.width - 20, height: collectionView.frame.size.width - 20)
+    }
+    
+    //decides the size of collectionview cell
+    func getLayout() -> UICollectionViewLayout
+    {
+        let layout:UICollectionViewFlowLayout =  UICollectionViewFlowLayout()
+        
+        print(self.view.frame.size.width - 20)
+        
+        layout.itemSize = CGSize(width: self.view.frame.size.width - 20, height: 112)
+        layout.sectionInset = UIEdgeInsets(top: 25, left: 50, bottom: 25, right: 50)
+        
+        return layout as UICollectionViewLayout
+    }
+    
 }

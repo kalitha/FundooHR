@@ -33,14 +33,15 @@ class UtilityClass: UIViewController {
     func cellDesign(cell:UICollectionViewCell, date:Date)->String{
         let color = UIColor.init(red: 111/255, green: 184/255, blue: 217/255, alpha: 1)
         cell.contentView.backgroundColor = UIColor.white
-        cell.layer.borderWidth = 2.0
         cell.layer.borderColor = color.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
-        cell.layer.shadowRadius = 3.0
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.masksToBounds = false
-        cell.layer.cornerRadius = 5
+        
+       // cell.layer.borderWidth = 2.0
+        // cell.layer.shadowOffset = CGSize(width:2.0,height: 2.0)
+      //  cell.layer.shadowRadius = 3.0
+      //  cell.layer.shadowOpacity = 1.0
+       // cell.layer.masksToBounds = false
+       // cell.layer.cornerRadius = 5
         
         mFormatter.dateFormat = "dd MM yyyy"
         mFormatter.dateStyle = .long

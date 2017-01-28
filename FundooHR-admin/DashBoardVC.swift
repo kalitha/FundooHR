@@ -1,10 +1,10 @@
 //
 //  DashBoardVC.swift
 //  FundooHR
-// Purpose:-
-// 1)It is a Dashboard UIClass with IBOutlet and IBAction of DashBoard UIViewController
-// In this class we are displaying Number of FalloutEmployees,Employees taken Leave
-// 
+//  Purpose:-
+//  1)It is a Dashboard UIClass with IBOutlet and IBAction of DashBoard UIViewController
+//  2)In this class we are displaying Number of Unmarked and Marked Employees,FalloutEmployees and Leave summary of Employees
+//  
 //  Created by BridgeLabz Solutions LLP on 09/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
@@ -12,10 +12,15 @@
 import UIKit
 
 class DashBoardVC: UIViewController,DashBoardVCProtocol{
-    
+   
+    //create the variable of type DashBoardViewModel
     var mDashBoardViewModelObj : DashBoardViewModel?
     var mMenuShowing = false
+    
+    //creating uiview type varible
     var mCustomView = UIView()
+    
+    //creating UtilityClass object
     let mUtilityClassObj = UtilityClass()
     
     //create outlet of dashboard's header label
@@ -39,7 +44,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         //enabling the activity indicator
         mActivityIndicator.isHidden = false
         mActivityIndicator.startAnimating()
-        mDashBoardViewModelObj = DashBoardViewModel(pCallBackInDashBoardVC: (self))
+        mDashBoardViewModelObj = DashBoardViewModel(pDashBoardVCProtocolObj: self)
         
         //registering each xib cell with collectionview cell
         self.mCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
@@ -56,40 +61,44 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         
         
         
-        let convertedDate = mUtilityClassObj.date()
+        let lConvertedDate = mUtilityClassObj.date()
         
-        mDate.text = convertedDate
+        mDate.text = lConvertedDate
         
+        //notifies when screen rotated
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         }
     
+    //code to rotate the screen
     func rotated() {
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("Landscape")
             print("views width",view.frame.width)
             mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
-            mCustomView.backgroundColor = UIColor.white
+            mCustomView.backgroundColor = UIColor.clear
         }
-        
         if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
             print("Portrait")
             print("views width",view.frame.width)
             mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
-            mCustomView.backgroundColor = UIColor.white
+            mCustomView.backgroundColor = UIColor.clear
         }
     }
     
+    //add the gesture recognizer when the menu button is tapped
     func addGestureRecognizer(){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
-        self.mCustomView.addGestureRecognizer(tapGesture)
+        let lTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
+        self.mCustomView.addGestureRecognizer(lTapGesture)
     }
     
+    //remove gesture recognizer after opening the slidemenu
     func removeGestureRecognizer(){
         for recognizer in mCollectionView.gestureRecognizers ?? [] {
             mCustomView.removeGestureRecognizer(recognizer)
         }
     }
     
+    //called by addGestureRecognizer method
     func tapBlurButton(_ sender: UIButton) {
         mSlideMenuLeadingConstraint.constant = -250
         UIView.animate(withDuration: 0.3, animations: {
@@ -104,11 +113,12 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         removeGestureRecognizer()
     }
     
+    //called when menu button is clicked
     @IBAction func menuOpen(_ sender: UIButton) {
         //changing the custom view's size while we change to landscape mode
         print("views width",view.frame.width)
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
-        mCustomView.backgroundColor = UIColor.white
+        mCustomView.backgroundColor = UIColor.clear
         
         if(mMenuShowing){
             mSlideMenuLeadingConstraint.constant = -250
@@ -129,10 +139,12 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         tableviewReload()
     }
     
+    //reload tableview data when the data is loaded into it
     func tableviewReload(){
         self.mTableView.reloadData()
     }
     
+    //reload collectionview data when the data is loaded into it
     func dashBoardCollectionviewreload(){
         mActivityIndicator.isHidden = true
         self.mActivityIndicator.stopAnimating()
@@ -148,25 +160,14 @@ extension DashBoardVC: UICollectionViewDataSource{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){            mDashBoardViewModelObj?.fetchDataFromDashBoardController()
         }
         print("dashBoardViewModelObj.responseCount",mDashBoardViewModelObj!.mResponseCount)
-        //dashBoardViewModelObj.fetchDataFromDashBoardController(token:self.token!)
         return mDashBoardViewModelObj!.mResponseCount
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        
-        
-        let colorOfMarkedEmployees = UIColor.init(red: 24/255, green: 136/255, blue: 13/255, alpha: 1)
-        let colorOfUnmarkedEmployees = UIColor.init(red: 227/255, green: 86/255, blue: 86/255, alpha: 1)
-        let date = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.timeStamp)!)/1000)
+        let lDate = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.timeStamp)!)/1000)
         if(indexPath.row == 0){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! CollectionViewCell
-            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
-            cell.markedEmployees.backgroundColor = colorOfMarkedEmployees
-            cell.markedEmployees.layer.masksToBounds = true
-            cell.markedEmployees.layer.cornerRadius = 15
-            cell.unmarkedEmployees.backgroundColor = colorOfUnmarkedEmployees
-            cell.unmarkedEmployees.layer.masksToBounds = true
-            cell.unmarkedEmployees.layer.cornerRadius = 15
+            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.mDashBoardContents?.marked)! as Int)
             cell.unmarkedEmployees.text = mDashBoardViewModelObj?.mDashBoardContents?.unmarked as? String
             cell.date.text = retunedDate
@@ -177,33 +178,33 @@ extension DashBoardVC: UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! CollectionViewCell2
             cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.falloutEmployee)! as Int)
             cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.totalEmployee)! as Int)
-             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
+             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.date.text = retunedDate
             return  cell
         }
         else if(indexPath.row == 2){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! CollectionViewCell3
             cell.leave.text = mDashBoardViewModelObj?.mDashBoardContents?.leave as! String
-            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: date)
+            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.date.text = retunedDate
             return cell
         }
         else if(indexPath.row == 3) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath)
-            mUtilityClassObj.cellDesign(cell: cell, date: date)
+            mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
         else if(indexPath.row == 4){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell5", for: indexPath)
           
-            mUtilityClassObj.cellDesign(cell: cell, date: date)
+            mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
         else{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell6", for: indexPath)
-             mUtilityClassObj.cellDesign(cell: cell, date: date)
+             mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
     }
@@ -235,6 +236,7 @@ extension DashBoardVC: UICollectionViewDelegate{
     
 }
 
+//MARK:-TableView Datasource
 extension DashBoardVC: UITableViewDataSource{
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
            return (mDashBoardViewModelObj?.fetchTableViewContentsFromController())!

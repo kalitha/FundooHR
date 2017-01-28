@@ -55,12 +55,15 @@ class FalloutService: NSObject {
     }
     
     func fetchData(){
-        let token = UserDefaults.standard.value(forKey: "tokenKey")!
+        let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
         let url = mUtilityClassObj.fetchUrlFromPlist()
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("==calculatedTimeStamp===>",calculatedTimeStamp)
-        Alamofire.request("\(url)/readFalloutAttendanceEmployee?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+        let headers: HTTPHeaders = [
+            "x-token" : token
+        ]
+        Alamofire.request("\(url)/readFalloutAttendanceEmployee?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
             {response in
             if let JSON = response.result.value{
                 let completeFalloutData = JSON as! NSDictionary

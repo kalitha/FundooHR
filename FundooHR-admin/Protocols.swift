@@ -8,23 +8,25 @@
 
 import Foundation
 import UIKit
+
+//protocol of dashboard controller
 protocol DashBoardControllerProtocol {
     func fetchedDataFromDashBoardService(_ dashBoardData: DashBoard)
     func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     
 }
-
+//protocol of dashboard viewmodel
 protocol DashBoardViewModelProtocol{
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard)
     func tableViewContentsFetchedFromController(data:[TableViewContentModel])
     
 }
-
+//protocol of DashDoard ViewController
     protocol DashBoardVCProtocol {
         func dashBoardCollectionviewreload()
         func tableviewReload()
     }
-
+//protocol of FalloutController
 protocol FalloutControllerProtocol {
     func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
@@ -32,6 +34,7 @@ protocol FalloutControllerProtocol {
     func imageFetchedFromService(image: UIImage, index: Int)
 }
 
+//protocol of FalloutViewModel
 protocol FalloutViewModelProtocol {
      func tableViewContentsFetchedFromController(data:[TableViewContentModel])
     func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
@@ -43,13 +46,16 @@ protocol FalloutVCProtocol {
     func falloutTableviewReload()
     func falloutCollectionviewReload()
 }
+protocol LoginVCProtocol {
+    func performingNavigationToDashboard(status:Int)
+}
 
 protocol LoginViewModelProtocol {
-    func fetchTokenFromController(_ status:Int)
+    func fetchStatusFromController(_ status:Int)
 }
 
 protocol LoginControllerProtocol{
-    func fetchTokenFromService(_ status:Int)
+    func fetchStatusFromService(_ status:Int)
 }
 
 protocol EngineersControllerProtocol{

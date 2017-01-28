@@ -13,7 +13,6 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,En
     @IBOutlet weak var tableView: UITableView!
     var menuShowing = false
     var customView = UIView()
-//    var names: [String] = ["email id", "Dashboard", "Engineers", "Attendance Summary", "Reports" ,"Clients", "Logout"]
     @IBOutlet weak var slideMenu: UIView!
     @IBOutlet weak var slideMenuLeadingConstraint: NSLayoutConstraint!
     

@@ -39,7 +39,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="uptill" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJ6-SW-bhr">
-                        <rect key="frame" x="127.5" y="115" width="45" height="21"/>
+                        <rect key="frame" x="128" y="115" width="45" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="Jqo-OO-ic1"/>
                             <constraint firstAttribute="height" constant="21" id="mMN-xl-vXC"/>
@@ -80,6 +80,24 @@
                 <constraint firstItem="bo3-LD-2p2" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="sYb-WY-KaI"/>
             </constraints>
             <size key="customSize" width="249" height="170"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                    <integer key="value" value="2"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                    <size key="value" width="2" height="2"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                    <integer key="value" value="3"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                    <integer key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="date" destination="rp4-NO-n28" id="j8w-E7-OUa"/>
                 <outlet property="leave" destination="bo3-LD-2p2" id="2fF-2H-cQ9"/>

@@ -11,30 +11,32 @@ import UIKit
 class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     var arrayOfLeaveSummaryEmployeeImageModel = [LeaveSummaryEmployeeImageModel]()
     var leaveSummaryVCObj : LeaveSummaryVC?
-    var count = 0
+    var mCountForCollectionview = 0
     var countOfFetchedImages = 0
     var arrayOfImages = [UIImage]()
     var arrayOfLeaveEmployees = [LeaveSummary]()
     var leaveSummaryControllerObj : LeaveSummaryController?
-    var protocolLeaveSummaryVC : LeaveSummaryVCProtocol?
+    var mProtocolDashBoardViewControllerObj : LeaveSummaryVCProtocol?
     var leaveSummaryTotalEmployeesContent : LeaveSummaryTotalEmployees?
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     
+    init(pLeaveSummaryVCProtocolObj : LeaveSummaryVCProtocol) {
+        mProtocolDashBoardViewControllerObj = pLeaveSummaryVCProtocolObj
+    }
     func fetchDataFromController(token:String)->Int{
-        leaveSummaryControllerObj = LeaveSummaryController()
-        leaveSummaryControllerObj?.protocolLeaveSummaryViewModel = self
-        if(arrayOfLeaveEmployees.count == 0){
-            if(self.count == 0){
+        leaveSummaryControllerObj = LeaveSummaryController(pLeaveSummaryViewModelProtocolObj: self)
+        //leaveSummaryControllerObj?.protocolLeaveSummaryViewModel = self
+            if(mCountForCollectionview == 0){
                 leaveSummaryControllerObj?.fetchNumberOFCellsFromService(token: token)
-                count += 1
+                mCountForCollectionview += 1
             }
-        }
+            print("arrayOfLeaveEmployees.count",arrayOfLeaveEmployees.count)
         return arrayOfLeaveEmployees.count
     }
+    
     func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees){
         arrayOfLeaveEmployees = data
         leaveSummaryTotalEmployeesContent = leaveSummaryTotalEmployees
-        //self.protocolLeaveSummaryVC?.reload()
         leaveSummaryControllerObj?.fetchEmployeeImageUrlFromService()
     }
     
@@ -66,7 +68,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
             //protocolFalloutVC?.reload() //reloading after getting the image
             print("arrayOfFalloutEmployees==-=-=-",arrayOfLeaveEmployees)
             DispatchQueue.main.async {
-                self.protocolLeaveSummaryVC?.reload()
+                self.mProtocolDashBoardViewControllerObj?.reload()
             }
             
         }
@@ -79,7 +81,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     leaveSummaryControllerObj?.callSendEmailFunctionInService()
     }
     func fetchedDataFromSendEmailFunctionInController(status:Int){
-    protocolLeaveSummaryVC?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
+    mProtocolDashBoardViewControllerObj?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
     }
 
 }

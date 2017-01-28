@@ -34,7 +34,7 @@
                             <constraint firstAttribute="height" constant="60" id="IYT-UM-Pqe"/>
                             <constraint firstAttribute="width" constant="100" id="nOv-ZU-zvZ"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="56"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="47"/>
                         <color key="textColor" red="0.8901960784313725" green="0.33725490196078434" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -104,6 +104,24 @@
                 <constraint firstItem="6JT-v4-x0S" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zsf-FD-4Lx"/>
             </constraints>
             <size key="customSize" width="289" height="197"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                    <integer key="value" value="2"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="size" keyPath="layer.shadowOffset">
+                    <size key="value" width="2" height="2"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                    <integer key="value" value="3"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                    <integer key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="date" destination="BT4-01-r5Z" id="PMo-KK-Ptv"/>
                 <outlet property="falloutEmployees" destination="ESi-XZ-qXk" id="7OK-RS-tyi"/>

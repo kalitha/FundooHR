@@ -10,8 +10,11 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
 
+    //outlet for date in the first cell of dashboard
     @IBOutlet weak var date: UILabel!
+    //outlet for unmarkedEmployees in the first cell of dashboard
     @IBOutlet weak var unmarkedEmployees: UILabel!
+    //outlet for markedEmployees in the first cell of dashboard
     @IBOutlet weak var markedEmployees: UILabel!
     
     override func awakeFromNib() {

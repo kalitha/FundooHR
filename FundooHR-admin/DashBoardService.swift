@@ -10,6 +10,7 @@ import UIKit
 import  Firebase
 import Alamofire
 class DashBoardService: NSObject {
+    //
     var slideMenuContents = [NSDictionary]()
     var arrayOfTableViewContentModel = [TableViewContentModel]()
     var protocolDashBoardController : DashBoardControllerProtocol?
@@ -46,13 +47,20 @@ class DashBoardService: NSObject {
     }
     
     func fetchData(){
-        let token = UserDefaults.standard.value(forKey: "tokenKey")!
+        let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
         let url = mUtilityClassObj.fetchUrlFromPlist()
         
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",calculatedTimeStamp)
-        Alamofire.request("\(url)/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
+    
+        let headers: HTTPHeaders = [
+            "x-token" : token
+        ]
+    
+        Alamofire.request("\(url)/readDashboardData?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
+        
+       // Alamofire.request("\(url)/readDashboardData?token=\(token)&timeStamp=\(calculatedTimeStamp)").responseJSON
             { response in
                 print("value----",response.result.value)
                 
