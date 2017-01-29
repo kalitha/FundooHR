@@ -44,9 +44,6 @@ class EngineersViewModel: NSObject,EngineersviewModelProtocol {
         engineersModelArray = data// here the data is taken from the i/p arg and stors in arrayOfTeams
         print("engineersModelArray count=--=-",engineersModelArray.count)
 
-//        self.engineersObj = EngineersVC()
-//        self.engineersObj?.reload()
-
         DispatchQueue.main.async {
                         self.protocolEngineersVC?.tableviewReload()
             

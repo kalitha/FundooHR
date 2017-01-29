@@ -13,7 +13,9 @@
 import UIKit
 import  Firebase
 import Alamofire
+
 class DashBoardService: NSObject {
+    
     //create variable of type nsdictionary
     var mSlideMenuContents = [NSDictionary]()
     
@@ -25,17 +27,17 @@ class DashBoardService: NSObject {
     
     //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
-
+    
     init(pDashBoardControllerProtocolObj : DashBoardControllerProtocol) {
         mProtocolDashBoardController = pDashBoardControllerProtocolObj
     }
-
+    
     //rest call to fetch tableview contents
     func fetchTableViewContents(){
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference()//responsible to make a call to firebase
         ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
-              self.mSlideMenuContents = (snapshot.value) as! [NSDictionary]
+            self.mSlideMenuContents = (snapshot.value) as! [NSDictionary]
             
             for index in 0..<self.mSlideMenuContents.count{
                 let valueAtEachIndex = self.mSlideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
@@ -65,11 +67,11 @@ class DashBoardService: NSObject {
         
         let calculatedTimeStamp = Double(Date().timeIntervalSince1970 * 1000)
         print("timestamp@#@#$",calculatedTimeStamp)
-    
+        
         let headers: HTTPHeaders = [
             "x-token" : token
         ]
-    
+        
         Alamofire.request("\(url)/readDashboardData?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
             { response in
                 print("value----",response.result.value)
@@ -81,7 +83,7 @@ class DashBoardService: NSObject {
                     let timeStamp = dashboardData.value(forKey: "timeStamp") as! Double
                     
                     print("==timeStamp==",timeStamp)
-                
+                    
                     let attendanceSummary = dashboardData.value(forKey: "attendanceSummary") as! NSDictionary
                     print("---attendanceSummary---",attendanceSummary)
                     

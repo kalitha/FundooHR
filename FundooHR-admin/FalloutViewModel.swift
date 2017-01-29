@@ -23,23 +23,28 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     
     //variable of type falloutViewcontroller protocol
     var protocolFalloutVC : FalloutVCProtocol?
+    
     //model type array of falloutemployees
     var arrayOfFalloutEmployees = [Fallout]()
+    
     //variable of type FalloutController
     var falloutControllerObj : FalloutController?
+    
     //variable of type FalloutTotalEmployees class
     var falloutTotalEmployeesContents : FalloutTotalEmployees?
+    //initialy setting response count of tableview to 0
     var mResponseCountForTableView = 0
-    var mResponseCount = 0
+    
+    //initially setting the collection count to 0
     var mCountForCollectionview = 0
     
     init(pFalloutVCProtocolObj : FalloutVCProtocol) {
         protocolFalloutVC = pFalloutVCProtocolObj
     }
-
+    
     //making the rest call to fetch tableview contents from api
     func fetchTableviewContentsFromFalloutController()->Int{
-         falloutControllerObj = FalloutController(pFalloutViewModelProtocolObj: self)
+        falloutControllerObj = FalloutController(pFalloutViewModelProtocolObj: self)
         if(self.count==0){
             falloutControllerObj?.fetchTableViewContentsFromService()
             count += 1
@@ -61,7 +66,11 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
     func tableViewContentsFetchedFromController(data:[TableViewContentModel]){
-        mResponseCountForTableView = 7
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
+        }
+        
         mArrayOfTableViewContentModel = data
         fetchNumberOfCellsFromFalloutController()
     }
@@ -69,10 +78,10 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     //making rest call to fetch data of collectionview cells from api
     func fetchNumberOfCellsFromFalloutController()->Int{
         falloutControllerObj = FalloutController(pFalloutViewModelProtocolObj: self)
-            if(mCountForCollectionview == 0){
+        if(mCountForCollectionview == 0){
             falloutControllerObj?.fetchNumberOfCellsFromFalloutService()
             mCountForCollectionview += 1
-            }
+        }
         return arrayOfFalloutEmployees.count
     }
     
@@ -81,21 +90,19 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
         arrayOfFalloutEmployees = data
         falloutTotalEmployeesContents = falloutTotalEmployeesObj
         falloutControllerObj?.fetchEmployeeImageUrlFromService()
-        }
+    }
     
     //storing the employee url fetched from rest call made to firebase
     func employeeImageUrlFetchedFromController(data:[FalloutImageModel]){
         arrayOfFalloutImageModel = data
         print("arrayOfFalloutImageModel count===--==",arrayOfFalloutImageModel.count)
         for i in 0..<self.arrayOfFalloutImageModel.count{
-//        print("employeeImageUrl",arrayOfFalloutImageModel[i].employeeImageUrl)
-//        print("employeeName",arrayOfFalloutImageModel[i].employeeName)
             let image = #imageLiteral(resourceName: "dummyImage")
             arrayOfImages.append(image)
         }
         print("arrayOfImages count=-=-==",arrayOfImages.count)
-       fetchImageFromController(arrayOfFalloutImageModel)
-        }
+        fetchImageFromController(arrayOfFalloutImageModel)
+    }
     
     
     //making rest call to fetch images of employees
@@ -103,7 +110,7 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
         //falloutControllerObj = FalloutController()
         falloutControllerObj?.fetchImageFromService(image)
     }
-
+    
     //storing image fetched from rest call
     func imageFetchedFromController(image: UIImage, index: Int){
         countOfFetchedImages+=1
@@ -113,21 +120,23 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
         print("arrayOfFalloutEmployees=-=-=-",arrayOfFalloutEmployees.count)
         arrayOfImages[index] = image
         if(countOfFetchedImages == arrayOfImages.count){
-            //protocolFalloutVC?.reload() //reloading after getting the image
             print("arrayOfFalloutEmployees==-=-=-",arrayOfFalloutEmployees)
-                self.protocolFalloutVC?.falloutCollectionviewReload()
+            self.protocolFalloutVC?.falloutCollectionviewReload()
         }
-}
+    }
     
-    //fetching each image 
+    //fetching each image
     func fetchEachImage(i:Int)->UIImage{
         print("i....",i)
         return arrayOfImages[i]
     }
-
+    
+    //rest call to send mail
     func callSendEmailInController(){
         falloutControllerObj?.callSendEmailFunctionInService()
     }
+    
+    //fetching the status after sending mail
     func fetchedDataFromSendEmailFunctionInController(status:Int){
         protocolFalloutVC?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
     }

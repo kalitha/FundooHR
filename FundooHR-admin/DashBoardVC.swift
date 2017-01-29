@@ -19,8 +19,18 @@ enum DashBoardControls:Int{
     case CLIENTS
 }
 
+enum DashBoardTableview:Int{
+    case EMAILID = 0
+    case DASHBOARD
+    case ENGINEERS
+    case FALLOUT
+    case REPORTS
+    case CLIENTS
+    case LOGOUT
+}
+
 class DashBoardVC: UIViewController,DashBoardVCProtocol{
-   
+    
     //create the variable of type DashBoardViewModel
     var mDashBoardViewModelObj : DashBoardViewModel?
     var mMenuShowing = false
@@ -31,6 +41,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     //creating UtilityClass object
     let mUtilityClassObj = UtilityClass()
     
+    @IBOutlet weak var mTableViewActivityIndicator: UIActivityIndicatorView!
     //create outlet of dashboard's header label
     @IBOutlet weak var mHeaderLabel: UILabel!
     //create outlet of tableView
@@ -73,7 +84,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         
         //notifies when screen rotated
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        }
+    }
     
     //function to rotate the screen
     func rotated() {
@@ -133,6 +144,9 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
             removeGestureRecognizer()
             
         }else{
+            //enabling the activity indictor
+            mTableViewActivityIndicator.isHidden = false
+            mTableViewActivityIndicator.startAnimating()
             mSlideMenuLeadingConstraint.constant = 0
             self.view.addSubview(mCustomView)
             mCustomView.alpha = 0.5
@@ -147,6 +161,9 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     
     //reload tableview data when the data is loaded into it
     func tableviewReload(){
+        //disabling the activity indictor
+        mTableViewActivityIndicator.isHidden = true
+        mTableViewActivityIndicator.startAnimating()
         self.mTableView.reloadData()
     }
     
@@ -172,7 +189,7 @@ extension DashBoardVC: UICollectionViewDataSource{
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let lDate = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.timeStamp)!)/1000)
         let temp = DashBoardControls.ATTENDANCESUMMARY
-
+        
         if(indexPath.row == temp.rawValue){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "attendanceSummaryCell", for: indexPath) as! AttendanceSummary
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
@@ -186,7 +203,7 @@ extension DashBoardVC: UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "attendanceFalloutCell", for: indexPath) as! AttendanceFallout
             cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.falloutEmployee)! as Int)
             cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.totalEmployee)! as Int)
-             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
+            let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.date.text = retunedDate
             return  cell
         }
@@ -205,28 +222,29 @@ extension DashBoardVC: UICollectionViewDataSource{
         else if(indexPath.row == DashBoardControls.CLIENTS.rawValue){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clientDetailsCell", for: indexPath)
-          
+            
             mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
         else{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reportDetailsCell", for: indexPath)
-             mUtilityClassObj.cellDesign(cell: cell, date: lDate)
+            mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
     }
 }
+
 //CollectionView Delegate
 extension DashBoardVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
-        if(indexPath.row == 1){
-            performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
+        if(indexPath.row == DashBoardControls.ATTENDANCEFALLOUT.rawValue){
+            performSegue(withIdentifier: "segueFromAttendanceSummaryCell", sender: nil)
             highlightCell2(indexPath, flag: true)
         }
-        else if(indexPath.row == 2){
-            performSegue(withIdentifier: "segueFromThirdCell", sender: nil)
+        else if(indexPath.row == DashBoardControls.LEAVESUMMARY.rawValue){
+            performSegue(withIdentifier: "segueFromLeaveSummaryCell", sender: nil)
             highlightCell2(indexPath, flag: true)
         }
         
@@ -247,7 +265,7 @@ extension DashBoardVC: UICollectionViewDelegate{
 //MARK:-TableView Datasource
 extension DashBoardVC: UITableViewDataSource{
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-           return (mDashBoardViewModelObj?.fetchTableViewContentsFromController())!
+        return (mDashBoardViewModelObj?.fetchTableViewContentsFromController())!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -257,7 +275,7 @@ extension DashBoardVC: UITableViewDataSource{
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
-        if (indexPath.row == 0) {
+        if (indexPath.row == DashBoardTableview.EMAILID.rawValue) {
             let color = UIColor.init(red: 157/255, green: 212/255, blue: 237/255, alpha: 1)
             cell.backgroundColor = color
             cell.imageView?.frame = CGRect(x: (cell.imageView?.frame.origin.x)!, y: (cell.imageView?.frame.origin.y)!, width: 60, height: 60)
@@ -266,7 +284,7 @@ extension DashBoardVC: UITableViewDataSource{
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == (mDashBoardViewModelObj?.mArrayOfTableViewContentModel.count)!-1){
+        if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell
@@ -278,25 +296,25 @@ extension DashBoardVC: UITableViewDataSource{
 extension DashBoardVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
-        if(indexPath.row == 2){
-            performSegue(withIdentifier: "segueFromSecondIndex", sender: nil)
+        if(indexPath.row == DashBoardTableview.ENGINEERS.rawValue){
+            performSegue(withIdentifier: "segueFromEngineersCell", sender: nil)
         }
             
-        else if(indexPath.row == 3){
-            performSegue(withIdentifier: "segueFromSecondCell", sender: nil)
+        else if(indexPath.row == DashBoardTableview.FALLOUT.rawValue){
+            performSegue(withIdentifier: "segueFromAttendanceSummaryCell", sender: nil)
         }
-        else if(indexPath.row == 4){
-            performSegue(withIdentifier: "segueFromFourthIndex", sender: nil)
+        else if(indexPath.row == DashBoardTableview.REPORTS.rawValue){
+            performSegue(withIdentifier: "segueFromReportsCell", sender: nil)
         }
-        else if(indexPath.row == 5){
-            performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
+        else if(indexPath.row == DashBoardTableview.CLIENTS.rawValue){
+            performSegue(withIdentifier: "segueFromClientsCell", sender: nil)
         }
-        else if(indexPath.row == 6){
+        else if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
             let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
             // add the actions (buttons)
             let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
                 UIAlertAction in
-               self.performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+                self.performSegue(withIdentifier: "segueFromLogoutCell", sender: nil)
                 NSLog("Continue Pressed")
             }
             

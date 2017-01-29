@@ -2,7 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>tableviewCellHeight</key>
+	<integer>70</integer>
+	<key>dashBoardCollectionViewCellCount</key>
+	<integer>6</integer>
+	<key>tableViewCellCount</key>
+	<integer>7</integer>
 	<key>url</key>
-	<string>http://192.168.0.62:3000</string>
+	<string>http://192.168.0.2:3000</string>
 </dict>
 </plist>

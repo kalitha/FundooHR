@@ -17,13 +17,13 @@ class DashBoardController: NSObject,DashBoardControllerProtocol{
     
     init(pDashBoardViewModelProtocolObj : DashBoardViewModelProtocol) {
         mProtocolDashBoardViewModel = pDashBoardViewModelProtocolObj
-        }
+    }
     
     //making the rest call to fetch tableview contents from api
     func fetchTableViewContentsFromService(){
         let arrayOfTableViewContentModel = [TableViewContentModel]()
         let dashBoardServiceObj = DashBoardService(pDashBoardControllerProtocolObj: self)
-            dashBoardServiceObj.fetchTableViewContents()
+        dashBoardServiceObj.fetchTableViewContents()
     }
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView

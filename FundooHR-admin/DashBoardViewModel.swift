@@ -33,17 +33,17 @@ class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
     var mDashBoardControllerObj : DashBoardController?
     
     //constructor with aurgument of type dashboardviewcontroller protocol
-   init(pDashBoardVCProtocolObj : DashBoardVCProtocol) {
-    mProtocolDashBoardViewController = pDashBoardVCProtocolObj
+    init(pDashBoardVCProtocolObj : DashBoardVCProtocol) {
+        mProtocolDashBoardViewController = pDashBoardVCProtocolObj
     }
     
     //making the rest call to fetch tableview contents from api
     func fetchTableViewContentsFromController()->Int{
         // init controller object
         mDashBoardControllerObj = DashBoardController(pDashBoardViewModelProtocolObj: self)
-            if(self.mCount==0){
-                mDashBoardControllerObj?.fetchTableViewContentsFromService()
-                mCount += 1
+        if(self.mCount==0){
+            mDashBoardControllerObj?.fetchTableViewContentsFromService()
+            mCount += 1
         }
         return mArrayOfTableViewContentModel.count
         
@@ -59,12 +59,16 @@ class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
         let name = contentInIndex?.rowName
         
         return name!
-
+        
     }
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
     func tableViewContentsFetchedFromController(data:[TableViewContentModel]){
-        mResponseCountForTableView = 7
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
+        }
+        
         mArrayOfTableViewContentModel = data
         fetchDataFromDashBoardController()
     }
@@ -79,11 +83,14 @@ class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
         }
         return mResponseCount
     }
-
+    
     
     //storing the fetched data of collectionview cells in variable of type dashboard model
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard){
-        mResponseCount = 6
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mResponseCount = urlDictionary["dashBoardCollectionViewCellCount"] as! Int
+        }
         mDashBoardContents = dashBoardData
         mProtocolDashBoardViewController?.dashBoardCollectionviewreload()
     }

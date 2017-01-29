@@ -13,6 +13,9 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     
     var leaveSummaryViewModelObj : LeaveSummaryViewModel?
     
+    @IBOutlet weak var mSlideMenu: UIView!
+    @IBOutlet weak var mTableView: UITableView!
+    @IBOutlet weak var mTableViewActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var unmarkedDate: UILabel!
     @IBOutlet weak var numberOfUnmarkedEmployees: UILabel!
@@ -20,6 +23,10 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     @IBOutlet weak var outerLabelOfUnmarkedEmployees: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var mSlideMenuLeadingConstraint: NSLayoutConstraint!
+    //create a variable of type uiview
+    var mCustomView = UIView()
+    var mMenuShowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +43,7 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         date.text = convertedDate
         
         //notifies when screen is rotated
-        //        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         //notifies when collectionview's orientation is changed
         NotificationCenter.default.addObserver(self, selector: #selector(self.changeOrientationFunc), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -45,12 +52,84 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         self.collectionView!.collectionViewLayout = self.getLayout()
     }
     
+    //function to rotate the screen
+    func rotated() {
+        if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
+            print("Landscape")
+            print("views width",view.frame.width)
+            mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
+            mCustomView.backgroundColor = UIColor.clear
+        }
+        
+        if UIDeviceOrientationIsPortrait(UIDevice.current.orientation) {
+            print("Portrait")
+            print("views width",view.frame.width)
+            mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
+            mCustomView.backgroundColor = UIColor.clear
+        }
+    }
+    
+    //add the gesture recognizer when the menu button is tapped
+    func addGestureRecognizer(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlurButton(_:)))
+        self.mCustomView.addGestureRecognizer(tapGesture)
+    }
+    
+    //remove gesture recognizer after opening the slidemenu
+    func removeGestureRecognizer(){
+        for recognizer in collectionView.gestureRecognizers ?? [] {
+            mCustomView.removeGestureRecognizer(recognizer)
+        }
+    }
+    
+    //called by addGestureRecognizer method
+    func tapBlurButton(_ sender: UIButton) {
+        mSlideMenuLeadingConstraint.constant = -250
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        mMenuShowing = !mMenuShowing
+        //to remove custom view after removing slidemenu
+        self.mCustomView.removeFromSuperview()
+        mMenuShowing = !mMenuShowing
+        
+        //3rd case of removing  gesture when we click on collectionview
+        removeGestureRecognizer()
+    }
+    
     //
     func changeOrientationFunc()
     {
         self.collectionView!.collectionViewLayout = self.getLayout()
     }
 
+    @IBAction func onClickOfMenuButton(_ sender: UIButton) {
+        //changing the custom view's size while we change to landscape mode
+        print("views width",view.frame.width)
+        mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
+        mCustomView.backgroundColor = UIColor.clear
+        
+        if(mMenuShowing){
+            mSlideMenuLeadingConstraint.constant = -250
+            //1st case of removing tap gesture(papre) when we click on the icon
+            
+            removeGestureRecognizer()
+            
+        }else{
+            //enabling the activity indictor
+            mTableViewActivityIndicator.isHidden = false
+            mTableViewActivityIndicator.startAnimating()
+            mSlideMenuLeadingConstraint.constant = 0
+            self.view.addSubview(mCustomView)
+            mCustomView.alpha = 0.5
+            addGestureRecognizer()
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        mMenuShowing = !mMenuShowing
+        //falloutTableviewReload()
+    }
     
     func reload() {
         activityIndicator.isHidden = true

@@ -12,16 +12,27 @@ import Firebase
 import FirebaseStorage
 
 class LeavesummaryService: NSObject {
+    
+    // create firebase reference
     var ref: FIRDatabaseReference!
+    
+    //creating the variable of LeaveSummaryControllerProtocol type
     var protocolLeaveSummaryControllerObj : LeaveSummaryControllerProtocol?
+    
+    //model type array of LeaveSummary
     var arrayOfLeaveSummaryEmloyees = [LeaveSummary]()
+    
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
+    
+    
     let mUtilityClassObj = UtilityClass()
     
     init(pLeaveSummaryProtocolObj : LeaveSummaryControllerProtocol) {
         protocolLeaveSummaryControllerObj = pLeaveSummaryProtocolObj
     }
+    
+    //making rest call to fetch collectionview contents
     func fetchData(token:String){
         let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
@@ -69,6 +80,7 @@ class LeavesummaryService: NSObject {
         }
     }
     
+    //making rest call to fetch employee url
     func fetchEmployeeImageUrlFromFirebase(){
         ref = FIRDatabase.database().reference()//responsible to make a call to firebase
         ref.child("leaveOutEmployee").observeSingleEvent(of: .value, with: { snapshot in
@@ -94,6 +106,7 @@ class LeavesummaryService: NSObject {
         
     }
     
+    //making rest call to fetch employee images
     func fetchEmployeeImage(_ image:[LeaveSummaryEmployeeImageModel]){
         let storage = FIRStorage.storage()
         let storageRef = storage.reference(forURL: "gs://fundoohr16-3d816.appspot.com")
@@ -118,6 +131,7 @@ class LeavesummaryService: NSObject {
         }
     }
     
+    //making rest call to send email
     func sendEmailToEmployeesTakenLeave(){
         let lUrl = mUtilityClassObj.fetchUrlFromPlist()
         let lUrlString: String = "\(lUrl)/sendEmailToFalloutEmployee"

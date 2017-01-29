@@ -11,33 +11,59 @@
 
 import UIKit
 
+enum FalloutTableview:Int{
+    case EMAILID = 0
+    case DASHBOARD
+    case ENGINEERS
+    case FALLOUT
+    case REPORTS
+    case CLIENTS
+    case LOGOUT
+}
+
+
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var mTableviewActivityIndicator: UIActivityIndicatorView!
     // create outlet of collectionview
+    
     @IBOutlet weak var mCollectionView: UICollectionView!
     //create outlet to store number of fallout employees
+    
     @IBOutlet weak var mNumberOfUnmarkedEmployees: UILabel!
     //create outlet to display the month of fallout employees
+    
     @IBOutlet weak var mUnmarkedDate: UILabel!
     //create the outlet of total employees
+    
     @IBOutlet weak var mTotalEmployees: UILabel!
     //create the outlet of outer lable surrounding the number of fallout employees
+    
     @IBOutlet weak var mOuterLabelOfUnmarkedEmployees: UILabel!
+    
     //create outlet for date
     @IBOutlet weak var mDate: UILabel!
+    
     //create outlet for activity indicator
     @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
+    
     //create outlet for slidemenu that contains tableview
     @IBOutlet weak var mSlideMenu: UIView!
+    
     //create outlet for tableview
     @IBOutlet weak var mTableview: UITableView!
+    
     //create outlet for slidemenu leading constraint
     @IBOutlet weak var mSlideMenuLeadingConstraint: NSLayoutConstraint!
+    
     //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
+    
     var mMenuShowing = false
     //create a variable of type uiview
+    
     var mCustomView = UIView()
+    
     //create variable of type FalloutViewModel
     var mFalloutViewModelObj : FalloutViewModel?
     
@@ -157,6 +183,9 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             removeGestureRecognizer()
             
         }else{
+            //enabling the activity indictor
+            mTableviewActivityIndicator.isHidden = false
+            mTableviewActivityIndicator.startAnimating()
             mSlideMenuLeadingConstraint.constant = 0
             self.view.addSubview(mCustomView)
             mCustomView.alpha = 0.5
@@ -171,6 +200,9 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     //reload tableview data when the data is loaded into it
     func falloutTableviewReload(){
+        //disabling the activity indictor
+        mTableviewActivityIndicator.isHidden = true
+        mTableviewActivityIndicator.startAnimating()
         self.mTableview.reloadData()
     }
     
@@ -179,6 +211,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         //disabling the activity indicator
         mActivityIndicator.isHidden = true
         mActivityIndicator.stopAnimating()
+        
         mNumberOfUnmarkedEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
         mTotalEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.totalEmployee)! as Int)
         let timeStampDate = Date.init(timeIntervalSince1970: Double((mFalloutViewModelObj?.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
@@ -239,25 +272,25 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
      public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        if(indexPath.row == 2){
-            performSegue(withIdentifier: "segueFromSecondIndex", sender: nil)
+        if(indexPath.row == FalloutTableview.DASHBOARD.rawValue){
+            performSegue(withIdentifier: "segueFromDashboardCell", sender: nil)
         }
             
-        else if(indexPath.row == 3){
-            performSegue(withIdentifier: "segueFromThirdIndex", sender: nil)
+        else if(indexPath.row == FalloutTableview.ENGINEERS.rawValue){
+            performSegue(withIdentifier: "segueFromEngineersCell", sender: nil)
         }
-        else if(indexPath.row == 4){
-            performSegue(withIdentifier: "segueFromFourthIndex", sender: nil)
+        else if(indexPath.row == FalloutTableview.REPORTS.rawValue){
+            performSegue(withIdentifier: "segueFromReportsCell", sender: nil)
         }
-        else if(indexPath.row == 5){
-            performSegue(withIdentifier: "segueFromFifthIndex", sender: nil)
+        else if(indexPath.row == FalloutTableview.CLIENTS.rawValue){
+            performSegue(withIdentifier: "segueFromClientsCell", sender: nil)
         }
-        else if(indexPath.row == 6){
+        else if(indexPath.row == FalloutTableview.LOGOUT.rawValue){
             let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
             // add the actions (buttons)
             let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
                 UIAlertAction in
-                self.performSegue(withIdentifier: "segueFromSixthIndex", sender: nil)
+                self.performSegue(withIdentifier: "segueFromLogoutCell", sender: nil)
                 NSLog("Continue Pressed")
             }
             

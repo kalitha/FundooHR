@@ -12,6 +12,7 @@ import  Alamofire
 class LoginService: NSObject {
     
     let mUtilityClassObj = UtilityClass()
+    
     var loginControllerProtocolObj :LoginControllerProtocol?
     //getting a reference to "defaults" that can access UserDefaults
     let defaults = UserDefaults.standard

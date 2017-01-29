@@ -69,7 +69,6 @@ class LoginVC: UIViewController,LoginVCProtocol{
     
     //creating action for login button
     @IBAction func loginAction(_ sender: Any) {
-        //enabling the activity idicator
         let lEmailId = mEmail.text
         let lPassword = mPassword.text
         var lValueOfClientSideValidation : Bool?

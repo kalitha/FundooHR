@@ -11,23 +11,32 @@ import Alamofire
 import Firebase
 import FirebaseStorage
 
-class FalloutService: NSObject {
+ class FalloutService: NSObject {
     
+    // create firebase reference
     var ref: FIRDatabaseReference!
+    
+    //create variable of type NSDictionary
     var mSlideMenuContents = [NSDictionary]()
+    
+    //create object of type
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
     let mUtilityClassObj = UtilityClass()
-
-    //creating the variable of falloutcontroller type
+    
+    //creating the variable of FalloutControllerProtocol type
     var protocolFalloutController : FalloutControllerProtocol?
+    
     //var falloutEmployeeData = [NSDictionary]()
-    var arrayOfFalloutEmloyees = [Fallout]() //creating model type array
+    var arrayOfFalloutEmloyees = [Fallout]()
+    
+    //model type array of FalloutImageModel
     var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
     
     init(pFalloutControllerProtocolObj : FalloutControllerProtocol) {
         protocolFalloutController = pFalloutControllerProtocolObj
     }
     
+    //making rest call to firebase to fetch tableview contents
     func fetchTableViewContents(){
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference()//responsible to make a call to firebase
@@ -54,6 +63,7 @@ class FalloutService: NSObject {
         }
     }
     
+    //making rest call to fetch collectionview contents
     func fetchData(){
         let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
@@ -65,39 +75,40 @@ class FalloutService: NSObject {
         ]
         Alamofire.request("\(url)/readFalloutAttendanceEmployee?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
             {response in
-            if let JSON = response.result.value{
-                let completeFalloutData = JSON as! NSDictionary
-                print("---falloutData----",completeFalloutData)
-                
-                let falloutNumberValue = completeFalloutData.value(forKey: "falloutNumber") as! Int
-                let totalEmployeeValue = completeFalloutData.value(forKey: "totalEmployee") as! Int
-                let timeStamp = completeFalloutData.value(forKey: "timeStamp") as! String
-                let falloutTotalEmployeesObj = FalloutTotalEmployees(unmarkedEmployee: falloutNumberValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
-                let falloutEmployeeData =  completeFalloutData.value(forKey: "falloutEmployee") as! [NSDictionary]
-                print("--falloutEmployeeData--",falloutEmployeeData)
-
-                for index in 0..<falloutEmployeeData.count{
-                    let valueAtEachIndex = falloutEmployeeData[index] as NSDictionary
-                    let employeeNameValue = valueAtEachIndex["employeeName"] as! String
-                    let employeeStatusValue = valueAtEachIndex["employeeStatus"] as! String
-                    let companyValue = valueAtEachIndex["company"] as! String
-                    let mobileValue = valueAtEachIndex["mobile"] as! String
-                    let emailIdValue = valueAtEachIndex["emailId"] as! String
-                    let blStartDateValue = valueAtEachIndex["blStartDate"] as! String
-                    let companyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
-                    let companyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
-                    let leaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
-                    let engineerIdValue = valueAtEachIndex["engineerId"] as! String 
-                    let eachFalloutEmployeeObj = Fallout(employeeName: employeeNameValue, employeeStatus: employeeStatusValue, company: companyValue, emailId: emailIdValue, mobile: mobileValue, blStartDate: blStartDateValue, companyJoinDate: companyJoinDateValue, companyLeaveDate: companyLeaveDateValue, leaveTaken: leaveTakenValue, engineerId: engineerIdValue)
-                    self.arrayOfFalloutEmloyees.append(eachFalloutEmployeeObj)
+                if let JSON = response.result.value{
+                    let completeFalloutData = JSON as! NSDictionary
+                    print("---falloutData----",completeFalloutData)
                     
+                    let falloutNumberValue = completeFalloutData.value(forKey: "falloutNumber") as! Int
+                    let totalEmployeeValue = completeFalloutData.value(forKey: "totalEmployee") as! Int
+                    let timeStamp = completeFalloutData.value(forKey: "timeStamp") as! String
+                    let falloutTotalEmployeesObj = FalloutTotalEmployees(unmarkedEmployee: falloutNumberValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
+                    let falloutEmployeeData =  completeFalloutData.value(forKey: "falloutEmployee") as! [NSDictionary]
+                    print("--falloutEmployeeData--",falloutEmployeeData)
+                    
+                    for index in 0..<falloutEmployeeData.count{
+                        let valueAtEachIndex = falloutEmployeeData[index] as NSDictionary
+                        let employeeNameValue = valueAtEachIndex["employeeName"] as! String
+                        let employeeStatusValue = valueAtEachIndex["employeeStatus"] as! String
+                        let companyValue = valueAtEachIndex["company"] as! String
+                        let mobileValue = valueAtEachIndex["mobile"] as! String
+                        let emailIdValue = valueAtEachIndex["emailId"] as! String
+                        let blStartDateValue = valueAtEachIndex["blStartDate"] as! String
+                        let companyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
+                        let companyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
+                        let leaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
+                        let engineerIdValue = valueAtEachIndex["engineerId"] as! String
+                        let eachFalloutEmployeeObj = Fallout(employeeName: employeeNameValue, employeeStatus: employeeStatusValue, company: companyValue, emailId: emailIdValue, mobile: mobileValue, blStartDate: blStartDateValue, companyJoinDate: companyJoinDateValue, companyLeaveDate: companyLeaveDateValue, leaveTaken: leaveTakenValue, engineerId: engineerIdValue)
+                        self.arrayOfFalloutEmloyees.append(eachFalloutEmployeeObj)
+                        
+                    }
+                    print("---count of employees---",self.arrayOfFalloutEmloyees.count)
+                    self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [Fallout],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
                 }
-                print("---count of employees---",self.arrayOfFalloutEmloyees.count)
-                self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [Fallout],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
-            }
         }
     }
     
+    //making rest call to fetch employee url
     func fetchEmployeeImageUrlFromFirebase(){
         ref = FIRDatabase.database().reference()//responsible to make a call to firebase
         ref.child("falloutEmployee").observeSingleEvent(of: .value, with: { snapshot in
@@ -111,18 +122,19 @@ class FalloutService: NSObject {
                 let employeeNameValue = valueAtEachIndex["employee_name"] as! String
                 let employeeObj = FalloutImageModel(employeeImage: employeeImageValue, employeeName: employeeNameValue)
                 self.arrayOfFalloutEmployeeImages.append(employeeObj)
-                }
+            }
             print("count of arrayOfFalloutEmloyees ",self.arrayOfFalloutEmloyees.count)
             print("count=======",self.arrayOfFalloutEmployeeImages.count)
             print("arrayOfFalloutEmployeeImages",self.arrayOfFalloutEmployeeImages)
             self.protocolFalloutController?.employeeImageUrlFetchedFromService(url: self.arrayOfFalloutEmployeeImages)
-            })
+        })
         { (error) in
             print(error.localizedDescription)
         }
-
+        
     }
     
+    //making rest call to fetch employee images
     func fetchEmployeeImage(_ image:[FalloutImageModel]){
         let storage = FIRStorage.storage()
         let storageRef = storage.reference(forURL: "gs://fundoohr16-3d816.appspot.com")
@@ -140,12 +152,13 @@ class FalloutService: NSObject {
                 }else{
                     let image = UIImage(data: data!)
                     self.protocolFalloutController?.imageFetchedFromService(image: image!, index: i)
-                   
+                    
                 }
             }
         }
     }
     
+    //making rest call to send email
     func sendEmailToEmployeesTakenLeave(){
         let lUrl = mUtilityClassObj.fetchUrlFromPlist()
         let lUrlString: String = "\(lUrl)/sendEmailToFalloutEmployee"
@@ -169,4 +182,5 @@ class FalloutService: NSObject {
                     self.protocolFalloutController?.fetchedDataFromSendEmailFunctionInService(status: status)
                 }
         }
-    }}
+    }
+ }
