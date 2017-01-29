@@ -8,10 +8,10 @@
 
 import UIKit
 
-class CollectionViewCell3: UICollectionViewCell {
+class LeaveDetails: UICollectionViewCell {
 
-    @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var leave: UILabel!
+    @IBOutlet weak var mDate: UILabel!
+    @IBOutlet weak var mLeave: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

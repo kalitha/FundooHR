@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class AttendanceSummary: UICollectionViewCell {
 
     //outlet for date in the first cell of dashboard
     @IBOutlet weak var date: UILabel!

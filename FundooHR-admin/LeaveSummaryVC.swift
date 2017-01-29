@@ -119,10 +119,12 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
         if(status == 200){
             let alert = UIAlertController(title: "Alert", message: "Successfully sent mail to users", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         else{
             let alert = UIAlertController(title: "Alert", message: "email not sent", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
         

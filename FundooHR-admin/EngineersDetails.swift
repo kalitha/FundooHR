@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewCell4: UICollectionViewCell {
+class EngineersDetails: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

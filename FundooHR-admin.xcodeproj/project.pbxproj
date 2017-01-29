@@ -41,18 +41,18 @@
 		0A859D401E1E5FBF00845818 /* FalloutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A859D3F1E1E5FBF00845818 /* FalloutViewModel.swift */; };
 		0A859D421E1E5FEE00845818 /* Fallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A859D411E1E5FEE00845818 /* Fallout.swift */; };
 		0A94849A1E16493200B01371 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484891E16493200B01371 /* LoginVC.swift */; };
-		0A94849C1E16493200B01371 /* CollectionViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848B1E16493200B01371 /* CollectionViewCell3.swift */; };
-		0A94849D1E16493200B01371 /* CollectionViewCell5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848C1E16493200B01371 /* CollectionViewCell5.swift */; };
-		0A94849E1E16493200B01371 /* CollectionViewCell6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848D1E16493200B01371 /* CollectionViewCell6.swift */; };
-		0A94849F1E16493200B01371 /* CollectionViewCell6.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A94848E1E16493200B01371 /* CollectionViewCell6.xib */; };
-		0A9484A01E16493200B01371 /* CollectionViewCell5.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A94848F1E16493200B01371 /* CollectionViewCell5.xib */; };
-		0A9484A11E16493200B01371 /* CollectionViewCell4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484901E16493200B01371 /* CollectionViewCell4.swift */; };
-		0A9484A21E16493200B01371 /* CollectionViewCell4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484911E16493200B01371 /* CollectionViewCell4.xib */; };
-		0A9484A31E16493200B01371 /* CollectionViewCell3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484921E16493200B01371 /* CollectionViewCell3.xib */; };
-		0A9484A41E16493200B01371 /* CollectionViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484931E16493200B01371 /* CollectionViewCell2.swift */; };
-		0A9484A51E16493200B01371 /* CollectionViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484941E16493200B01371 /* CollectionViewCell2.xib */; };
-		0A9484A61E16493200B01371 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484951E16493200B01371 /* CollectionViewCell.swift */; };
-		0A9484A71E16493200B01371 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484961E16493200B01371 /* CollectionViewCell.xib */; };
+		0A94849C1E16493200B01371 /* LeaveDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848B1E16493200B01371 /* LeaveDetails.swift */; };
+		0A94849D1E16493200B01371 /* ClientDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848C1E16493200B01371 /* ClientDetails.swift */; };
+		0A94849E1E16493200B01371 /* ReportDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A94848D1E16493200B01371 /* ReportDetails.swift */; };
+		0A94849F1E16493200B01371 /* ReportDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A94848E1E16493200B01371 /* ReportDetails.xib */; };
+		0A9484A01E16493200B01371 /* ClientDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A94848F1E16493200B01371 /* ClientDetails.xib */; };
+		0A9484A11E16493200B01371 /* EngineersDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484901E16493200B01371 /* EngineersDetails.swift */; };
+		0A9484A21E16493200B01371 /* EngineersDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484911E16493200B01371 /* EngineersDetails.xib */; };
+		0A9484A31E16493200B01371 /* LeaveDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484921E16493200B01371 /* LeaveDetails.xib */; };
+		0A9484A41E16493200B01371 /* AttendanceFallout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484931E16493200B01371 /* AttendanceFallout.swift */; };
+		0A9484A51E16493200B01371 /* AttendanceFallout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484941E16493200B01371 /* AttendanceFallout.xib */; };
+		0A9484A61E16493200B01371 /* AttendanceSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484951E16493200B01371 /* AttendanceSummary.swift */; };
+		0A9484A71E16493200B01371 /* AttendanceSummary.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A9484961E16493200B01371 /* AttendanceSummary.xib */; };
 		0A9484A81E16493200B01371 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484971E16493200B01371 /* DashBoardVC.swift */; };
 		0A9484A91E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484981E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift */; };
 		0A9484AA1E16493200B01371 /* FalloutEmployeeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9484991E16493200B01371 /* FalloutEmployeeVC.swift */; };
@@ -100,18 +100,18 @@
 		0A859D3F1E1E5FBF00845818 /* FalloutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutViewModel.swift; sourceTree = "<group>"; };
 		0A859D411E1E5FEE00845818 /* Fallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fallout.swift; sourceTree = "<group>"; };
 		0A9484891E16493200B01371 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		0A94848B1E16493200B01371 /* CollectionViewCell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell3.swift; sourceTree = "<group>"; };
-		0A94848C1E16493200B01371 /* CollectionViewCell5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell5.swift; sourceTree = "<group>"; };
-		0A94848D1E16493200B01371 /* CollectionViewCell6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell6.swift; sourceTree = "<group>"; };
-		0A94848E1E16493200B01371 /* CollectionViewCell6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell6.xib; sourceTree = "<group>"; };
-		0A94848F1E16493200B01371 /* CollectionViewCell5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell5.xib; sourceTree = "<group>"; };
-		0A9484901E16493200B01371 /* CollectionViewCell4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell4.swift; sourceTree = "<group>"; };
-		0A9484911E16493200B01371 /* CollectionViewCell4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell4.xib; sourceTree = "<group>"; };
-		0A9484921E16493200B01371 /* CollectionViewCell3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell3.xib; sourceTree = "<group>"; };
-		0A9484931E16493200B01371 /* CollectionViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell2.swift; sourceTree = "<group>"; };
-		0A9484941E16493200B01371 /* CollectionViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell2.xib; sourceTree = "<group>"; };
-		0A9484951E16493200B01371 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		0A9484961E16493200B01371 /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		0A94848B1E16493200B01371 /* LeaveDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaveDetails.swift; sourceTree = "<group>"; };
+		0A94848C1E16493200B01371 /* ClientDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDetails.swift; sourceTree = "<group>"; };
+		0A94848D1E16493200B01371 /* ReportDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportDetails.swift; sourceTree = "<group>"; };
+		0A94848E1E16493200B01371 /* ReportDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportDetails.xib; sourceTree = "<group>"; };
+		0A94848F1E16493200B01371 /* ClientDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientDetails.xib; sourceTree = "<group>"; };
+		0A9484901E16493200B01371 /* EngineersDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineersDetails.swift; sourceTree = "<group>"; };
+		0A9484911E16493200B01371 /* EngineersDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EngineersDetails.xib; sourceTree = "<group>"; };
+		0A9484921E16493200B01371 /* LeaveDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaveDetails.xib; sourceTree = "<group>"; };
+		0A9484931E16493200B01371 /* AttendanceFallout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceFallout.swift; sourceTree = "<group>"; };
+		0A9484941E16493200B01371 /* AttendanceFallout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttendanceFallout.xib; sourceTree = "<group>"; };
+		0A9484951E16493200B01371 /* AttendanceSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceSummary.swift; sourceTree = "<group>"; };
+		0A9484961E16493200B01371 /* AttendanceSummary.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AttendanceSummary.xib; sourceTree = "<group>"; };
 		0A9484971E16493200B01371 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardVC.swift; sourceTree = "<group>"; };
 		0A9484981E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutEmployeeCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A9484991E16493200B01371 /* FalloutEmployeeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FalloutEmployeeVC.swift; sourceTree = "<group>"; };
@@ -190,18 +190,18 @@
 			isa = PBXGroup;
 			children = (
 				0A9484891E16493200B01371 /* LoginVC.swift */,
-				0A94848C1E16493200B01371 /* CollectionViewCell5.swift */,
-				0A94848D1E16493200B01371 /* CollectionViewCell6.swift */,
-				0A94848E1E16493200B01371 /* CollectionViewCell6.xib */,
-				0A94848F1E16493200B01371 /* CollectionViewCell5.xib */,
-				0A9484901E16493200B01371 /* CollectionViewCell4.swift */,
-				0A9484911E16493200B01371 /* CollectionViewCell4.xib */,
-				0A94848B1E16493200B01371 /* CollectionViewCell3.swift */,
-				0A9484921E16493200B01371 /* CollectionViewCell3.xib */,
-				0A9484931E16493200B01371 /* CollectionViewCell2.swift */,
-				0A9484941E16493200B01371 /* CollectionViewCell2.xib */,
-				0A9484961E16493200B01371 /* CollectionViewCell.xib */,
-				0A9484951E16493200B01371 /* CollectionViewCell.swift */,
+				0A94848D1E16493200B01371 /* ReportDetails.swift */,
+				0A94848E1E16493200B01371 /* ReportDetails.xib */,
+				0A94848C1E16493200B01371 /* ClientDetails.swift */,
+				0A94848F1E16493200B01371 /* ClientDetails.xib */,
+				0A9484901E16493200B01371 /* EngineersDetails.swift */,
+				0A9484911E16493200B01371 /* EngineersDetails.xib */,
+				0A94848B1E16493200B01371 /* LeaveDetails.swift */,
+				0A9484921E16493200B01371 /* LeaveDetails.xib */,
+				0A9484931E16493200B01371 /* AttendanceFallout.swift */,
+				0A9484941E16493200B01371 /* AttendanceFallout.xib */,
+				0A9484961E16493200B01371 /* AttendanceSummary.xib */,
+				0A9484951E16493200B01371 /* AttendanceSummary.swift */,
 				0A9484971E16493200B01371 /* DashBoardVC.swift */,
 				0A9484991E16493200B01371 /* FalloutEmployeeVC.swift */,
 				0A9484981E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift */,
@@ -367,17 +367,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A9484A01E16493200B01371 /* CollectionViewCell5.xib in Resources */,
+				0A9484A01E16493200B01371 /* ClientDetails.xib in Resources */,
 				0A73F3E61E14C1EA00157449 /* LaunchScreen.storyboard in Resources */,
-				0A9484A31E16493200B01371 /* CollectionViewCell3.xib in Resources */,
-				0A9484A21E16493200B01371 /* CollectionViewCell4.xib in Resources */,
-				0A9484A51E16493200B01371 /* CollectionViewCell2.xib in Resources */,
+				0A9484A31E16493200B01371 /* LeaveDetails.xib in Resources */,
+				0A9484A21E16493200B01371 /* EngineersDetails.xib in Resources */,
+				0A9484A51E16493200B01371 /* AttendanceFallout.xib in Resources */,
 				0A67CD4C1E39B8E70028056C /* UrlPlist.plist in Resources */,
 				0A73F3E31E14C1EA00157449 /* Assets.xcassets in Resources */,
 				0A9484AC1E16495D00B01371 /* Main.storyboard in Resources */,
-				0A9484A71E16493200B01371 /* CollectionViewCell.xib in Resources */,
+				0A9484A71E16493200B01371 /* AttendanceSummary.xib in Resources */,
 				0A70DA5A1E2CE01C001267AC /* GoogleService-Info.plist in Resources */,
-				0A94849F1E16493200B01371 /* CollectionViewCell6.xib in Resources */,
+				0A94849F1E16493200B01371 /* ReportDetails.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,7 +439,7 @@
 				0A664ED61E1A32D90065E717 /* DashBoardService.swift in Sources */,
 				0A67134A1E2214D8009C0BE3 /* LoginService.swift in Sources */,
 				0A664B6F1E209DF5006AE30D /* FalloutTotalEmployees.swift in Sources */,
-				0A9484A61E16493200B01371 /* CollectionViewCell.swift in Sources */,
+				0A9484A61E16493200B01371 /* AttendanceSummary.swift in Sources */,
 				0A745A251E30E1F40045AF38 /* EngineersModel.swift in Sources */,
 				0A9484AA1E16493200B01371 /* FalloutEmployeeVC.swift in Sources */,
 				0AACDAF71E321427007E2853 /* LeaveSummaryTotalEmployees.swift in Sources */,
@@ -457,26 +457,26 @@
 				0A73F3E11E14C1EA00157449 /* FundooHR_admin.xcdatamodeld in Sources */,
 				0A6D99201E31D6D7004927B8 /* LeaveSummaryController.swift in Sources */,
 				0A664EDA1E1A33320065E717 /* DashBoardController.swift in Sources */,
-				0A94849E1E16493200B01371 /* CollectionViewCell6.swift in Sources */,
-				0A94849D1E16493200B01371 /* CollectionViewCell5.swift in Sources */,
+				0A94849E1E16493200B01371 /* ReportDetails.swift in Sources */,
+				0A94849D1E16493200B01371 /* ClientDetails.swift in Sources */,
 				0A859D421E1E5FEE00845818 /* Fallout.swift in Sources */,
 				0A6D991E1E31D6BD004927B8 /* LeaveSummaryViewModel.swift in Sources */,
 				0A73F3D91E14C1EA00157449 /* AppDelegate.swift in Sources */,
 				0A859D3C1E1E5EF600845818 /* FalloutService.swift in Sources */,
 				0A94849A1E16493200B01371 /* LoginVC.swift in Sources */,
 				0A6D99221E31D6F1004927B8 /* LeavesummaryService.swift in Sources */,
-				0A9484A41E16493200B01371 /* CollectionViewCell2.swift in Sources */,
+				0A9484A41E16493200B01371 /* AttendanceFallout.swift in Sources */,
 				0A6713481E2214C7009C0BE3 /* LoginController.swift in Sources */,
 				0AACDAFB1E3242F7007E2853 /* LeaveSummaryEmployeeImageModel.swift in Sources */,
 				0A70DA581E2CB5D8001267AC /* FalloutImageModel.swift in Sources */,
 				0A7D7C221E29DD3900DC9431 /* ReportsVC.swift in Sources */,
-				0A94849C1E16493200B01371 /* CollectionViewCell3.swift in Sources */,
+				0A94849C1E16493200B01371 /* LeaveDetails.swift in Sources */,
 				0A664B711E212411006AE30D /* LoginViewModel.swift in Sources */,
 				0A859D3E1E1E5F1200845818 /* FalloutController.swift in Sources */,
 				0A72CA911E35EF9900CBB809 /* TableViewContentModel.swift in Sources */,
 				0A6461971E1B67AC000C417D /* Protocols.swift in Sources */,
 				0A6D991C1E31D673004927B8 /* LeaveSummaryVC.swift in Sources */,
-				0A9484A11E16493200B01371 /* CollectionViewCell4.swift in Sources */,
+				0A9484A11E16493200B01371 /* EngineersDetails.swift in Sources */,
 				0A745A2B1E30E3580045AF38 /* EngineersViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

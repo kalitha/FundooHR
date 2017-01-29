@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewCell2: UICollectionViewCell {
+class AttendanceFallout: UICollectionViewCell {
     @IBOutlet weak var falloutEmployees: UILabel!
 
     @IBOutlet weak var totalEmployees: UILabel!

@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionViewCell3" customModule="FundooHR_admin" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LeaveDetails" customModule="FundooHR_admin" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -99,8 +99,8 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="date" destination="rp4-NO-n28" id="j8w-E7-OUa"/>
-                <outlet property="leave" destination="bo3-LD-2p2" id="2fF-2H-cQ9"/>
+                <outlet property="mDate" destination="rp4-NO-n28" id="1hP-xZ-a2c"/>
+                <outlet property="mLeave" destination="bo3-LD-2p2" id="sDh-ge-1yX"/>
             </connections>
             <point key="canvasLocation" x="106" y="56"/>
         </collectionViewCell>

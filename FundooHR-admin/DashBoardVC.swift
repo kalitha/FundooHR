@@ -11,6 +11,14 @@
 
 import UIKit
 
+enum DashBoardControls:Int{
+    case ATTENDANCESUMMARY = 0
+    case ATTENDANCEFALLOUT
+    case LEAVESUMMARY
+    case ENGINEERS
+    case CLIENTS
+}
+
 class DashBoardVC: UIViewController,DashBoardVCProtocol{
    
     //create the variable of type DashBoardViewModel
@@ -47,17 +55,17 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         mDashBoardViewModelObj = DashBoardViewModel(pDashBoardVCProtocolObj: self)
         
         //registering each xib cell with collectionview cell
-        self.mCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell1")
+        self.mCollectionView.register(UINib(nibName: "AttendanceSummary", bundle: nil), forCellWithReuseIdentifier: "attendanceSummaryCell")
         
-        self.mCollectionView.register(UINib(nibName: "CollectionViewCell2", bundle: nil), forCellWithReuseIdentifier: "cell2")
+        self.mCollectionView.register(UINib(nibName: "AttendanceFallout", bundle: nil), forCellWithReuseIdentifier: "attendanceFalloutCell")
         
-        self.mCollectionView.register(UINib(nibName: "CollectionViewCell3", bundle: nil), forCellWithReuseIdentifier: "cell3")
+        self.mCollectionView.register(UINib(nibName: "LeaveDetails", bundle: nil), forCellWithReuseIdentifier: "leaveSummaryCell")
         
-        self.mCollectionView.register(UINib(nibName: "CollectionViewCell4", bundle: nil), forCellWithReuseIdentifier: "cell4")
+        self.mCollectionView.register(UINib(nibName: "EngineersDetails", bundle: nil), forCellWithReuseIdentifier: "engineersDetailsCell")
         
-        self.mCollectionView.register(UINib(nibName: "CollectionViewCell5", bundle: nil), forCellWithReuseIdentifier: "cell5")
+        self.mCollectionView.register(UINib(nibName: "ClientDetails", bundle: nil), forCellWithReuseIdentifier: "clientDetailsCell")
         
-        self.mCollectionView.register(UINib(nibName: "CollectionViewCell6", bundle: nil), forCellWithReuseIdentifier: "cell6")
+        self.mCollectionView.register(UINib(nibName: "ReportDetails", bundle: nil), forCellWithReuseIdentifier: "reportDetailsCell")
         
         let lConvertedDate = mUtilityClassObj.date()
         
@@ -163,45 +171,47 @@ extension DashBoardVC: UICollectionViewDataSource{
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let lDate = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.timeStamp)!)/1000)
-        if(indexPath.row == 0){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as! CollectionViewCell
+        let temp = DashBoardControls.ATTENDANCESUMMARY
+
+        if(indexPath.row == temp.rawValue){
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "attendanceSummaryCell", for: indexPath) as! AttendanceSummary
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.mDashBoardContents?.marked)! as Int)
             cell.unmarkedEmployees.text = mDashBoardViewModelObj?.mDashBoardContents?.unmarked as? String
             cell.date.text = retunedDate
             return cell
         }
-        else if(indexPath.row == 1){
+        else if(indexPath.row == DashBoardControls.ATTENDANCEFALLOUT.rawValue){
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! CollectionViewCell2
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "attendanceFalloutCell", for: indexPath) as! AttendanceFallout
             cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.falloutEmployee)! as Int)
             cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.totalEmployee)! as Int)
              let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.date.text = retunedDate
             return  cell
         }
-        else if(indexPath.row == 2){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! CollectionViewCell3
-            cell.leave.text = mDashBoardViewModelObj?.mDashBoardContents?.leave as! String
+        else if(indexPath.row == DashBoardControls.LEAVESUMMARY.rawValue){
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leaveSummaryCell", for: indexPath) as! LeaveDetails
+            cell.mLeave.text = mDashBoardViewModelObj?.mDashBoardContents?.leave as! String
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
-            cell.date.text = retunedDate
+            cell.mDate.text = retunedDate
             return cell
         }
-        else if(indexPath.row == 3) {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath)
+        else if(indexPath.row == DashBoardControls.ENGINEERS.rawValue) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "engineersDetailsCell", for: indexPath)
             mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
-        else if(indexPath.row == 4){
+        else if(indexPath.row == DashBoardControls.CLIENTS.rawValue){
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell5", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clientDetailsCell", for: indexPath)
           
             mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
         else{
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell6", for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reportDetailsCell", for: indexPath)
              mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
