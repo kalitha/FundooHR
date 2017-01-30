@@ -250,7 +250,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
-        if (indexPath.row == 0) {
+        if (indexPath.row == FalloutTableview.EMAILID.rawValue) {
             let color = UIColor.init(red: 157/255, green: 212/255, blue: 237/255, alpha: 1)
             cell.backgroundColor = color
             cell.imageView?.frame = CGRect(x: (cell.imageView?.frame.origin.x)!, y: (cell.imageView?.frame.origin.y)!, width: 60, height: 60)
@@ -259,7 +259,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == (mFalloutViewModelObj?.mArrayOfTableViewContentModel.count)!-1){
+        if(indexPath.row == FalloutTableview.LOGOUT.rawValue){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell

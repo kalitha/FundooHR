@@ -63,6 +63,7 @@
 		0AED0AC31E3F037A00F64F47 /* AttendanceSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED0AC21E3F037A00F64F47 /* AttendanceSummaryVC.swift */; };
 		0AED0AC51E3F0B9300F64F47 /* AttendanceSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED0AC41E3F0B9300F64F47 /* AttendanceSummaryCollectionViewCell.swift */; };
 		0AED0AC71E3F179000F64F47 /* AttendanceSummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED0AC61E3F179000F64F47 /* AttendanceSummaryModel.swift */; };
+		0AED0AC91E3F2ACE00F64F47 /* AttendanceSummaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AED0AC81E3F2ACE00F64F47 /* AttendanceSummaryService.swift */; };
 		51DC108B9F0DB93DCDD13CFF /* Pods_FundooHR_admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8DBED68792E48FA3C71A8D /* Pods_FundooHR_admin.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +126,7 @@
 		0AED0AC21E3F037A00F64F47 /* AttendanceSummaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceSummaryVC.swift; sourceTree = "<group>"; };
 		0AED0AC41E3F0B9300F64F47 /* AttendanceSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
 		0AED0AC61E3F179000F64F47 /* AttendanceSummaryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceSummaryModel.swift; sourceTree = "<group>"; };
+		0AED0AC81E3F2ACE00F64F47 /* AttendanceSummaryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendanceSummaryService.swift; sourceTree = "<group>"; };
 		0FBD1FEE8B976BA6F2C148CB /* Pods-FundooHR-admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundooHR-admin.release.xcconfig"; path = "Pods/Target Support Files/Pods-FundooHR-admin/Pods-FundooHR-admin.release.xcconfig"; sourceTree = "<group>"; };
 		7E5EFF29A7EAD2BB377E9AB9 /* Pods-FundooHR-admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundooHR-admin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FundooHR-admin/Pods-FundooHR-admin.debug.xcconfig"; sourceTree = "<group>"; };
 		8A8DBED68792E48FA3C71A8D /* Pods_FundooHR_admin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FundooHR_admin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -210,13 +212,13 @@
 				0A9484951E16493200B01371 /* AttendanceSummary.swift */,
 				0A9484971E16493200B01371 /* DashBoardVC.swift */,
 				0A9484991E16493200B01371 /* FalloutEmployeeVC.swift */,
+				0AED0AC21E3F037A00F64F47 /* AttendanceSummaryVC.swift */,
 				0A9484981E16493200B01371 /* FalloutEmployeeCollectionViewCell.swift */,
 				0A6D991B1E31D673004927B8 /* LeaveSummaryVC.swift */,
 				0AACDAF81E321CFF007E2853 /* LeaveSummaryCollectionViewCell.swift */,
-				0AED0AC21E3F037A00F64F47 /* AttendanceSummaryVC.swift */,
+				0AED0AC41E3F0B9300F64F47 /* AttendanceSummaryCollectionViewCell.swift */,
 				0A6361551E290B74006B9AD7 /* EngineersVC.swift */,
 				0A7D7C211E29DD3900DC9431 /* ReportsVC.swift */,
-				0AED0AC41E3F0B9300F64F47 /* AttendanceSummaryCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -228,8 +230,8 @@
 				0A859D3F1E1E5FBF00845818 /* FalloutViewModel.swift */,
 				0A664B701E212411006AE30D /* LoginViewModel.swift */,
 				0A6D991D1E31D6BD004927B8 /* LeaveSummaryViewModel.swift */,
-				0A745A2A1E30E3580045AF38 /* EngineersViewModel.swift */,
 				0A796B081E3E369E00F75C78 /* AttendanceSummaryViewModel.swift */,
+				0A745A2A1E30E3580045AF38 /* EngineersViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -255,6 +257,7 @@
 				0A6713491E2214D8009C0BE3 /* LoginService.swift */,
 				0A745A261E30E3280045AF38 /* EngineersService.swift */,
 				0A6D99211E31D6F1004927B8 /* LeavesummaryService.swift */,
+				0AED0AC81E3F2ACE00F64F47 /* AttendanceSummaryService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				0A73F3D91E14C1EA00157449 /* AppDelegate.swift in Sources */,
 				0A859D3C1E1E5EF600845818 /* FalloutService.swift in Sources */,
 				0A94849A1E16493200B01371 /* LoginVC.swift in Sources */,
+				0AED0AC91E3F2ACE00F64F47 /* AttendanceSummaryService.swift in Sources */,
 				0A6D99221E31D6F1004927B8 /* LeavesummaryService.swift in Sources */,
 				0A9484A41E16493200B01371 /* AttendanceFallout.swift in Sources */,
 				0A6713481E2214C7009C0BE3 /* LoginController.swift in Sources */,

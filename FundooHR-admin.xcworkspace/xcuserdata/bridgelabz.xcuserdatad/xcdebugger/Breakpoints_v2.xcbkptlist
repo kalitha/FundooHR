@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/DashBoardVC.swift"
-            timestampString = "507392411.058466"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "356"
-            endingLineNumber = "356">
+            startingLineNumber = "362"
+            endingLineNumber = "362">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/DashBoardVC.swift"
-            timestampString = "507392411.058466"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
             landmarkName = "DashBoardVC"
             landmarkType = "4">
          </BreakpointContent>
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/DashBoardVC.swift"
-            timestampString = "507392411.058466"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -392,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "fetchNumberOfCellsFromFalloutController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -408,11 +408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147">
+            startingLineNumber = "148"
+            endingLineNumber = "148">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -486,11 +486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "fetchImageFromController(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -518,7 +518,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/FalloutEmployeeVC.swift"
-                  timestampString = "507454584.287335"
+                  timestampString = "507477905.158386"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -533,7 +533,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/FalloutEmployeeVC.swift"
-                  timestampString = "507454584.289256"
+                  timestampString = "507477905.161087"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -548,7 +548,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/FalloutEmployeeVC.swift"
-                  timestampString = "507454584.291292"
+                  timestampString = "507477905.163767"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -563,7 +563,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/FalloutEmployeeVC.swift"
-                  timestampString = "507454584.294139"
+                  timestampString = "507477905.166451"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -580,11 +580,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "imageFetchedFromController(image:index:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -596,11 +596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "imageFetchedFromController(image:index:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -676,11 +676,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "fetchEachImage(i:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -708,7 +708,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/FalloutService.swift"
-                  timestampString = "507454584.330222"
+                  timestampString = "507477905.207715"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
@@ -723,12 +723,12 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/FalloutService.swift"
-                  timestampString = "507454584.332082"
+                  timestampString = "507477905.210575"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "158"
                   endingLineNumber = "158"
-                  offsetFromSymbolStart = "2187">
+                  offsetFromSymbolStart = "2326">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -852,7 +852,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/LeaveSummaryViewModel.swift"
-                  timestampString = "507454584.357031"
+                  timestampString = "507477905.251937"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "41"
@@ -867,7 +867,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/LeaveSummaryViewModel.swift"
-                  timestampString = "507454584.359069"
+                  timestampString = "507477905.257668"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "41"
@@ -882,7 +882,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/LeaveSummaryViewModel.swift"
-                  timestampString = "507454584.360914"
+                  timestampString = "507477905.261159"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "41"
@@ -963,7 +963,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/EngineersService.swift"
-                  timestampString = "507454584.379251"
+                  timestampString = "507477905.291155"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -978,7 +978,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/EngineersService.swift"
-                  timestampString = "507454584.381217"
+                  timestampString = "507477905.296026"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
@@ -1043,7 +1043,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/EngineersViewModel.swift"
-                  timestampString = "507454584.392488"
+                  timestampString = "507477905.31388"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "47"
@@ -1058,7 +1058,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/EngineersViewModel.swift"
-                  timestampString = "507454584.394507"
+                  timestampString = "507477905.316678"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "48"
@@ -1123,7 +1123,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/EngineersViewModel.swift"
-                  timestampString = "507454584.405701"
+                  timestampString = "507477905.333633"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "50"
@@ -1138,7 +1138,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/EngineersViewModel.swift"
-                  timestampString = "507454584.407704"
+                  timestampString = "507477905.336598"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "50"
@@ -1315,11 +1315,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/DashBoardVC.swift"
-            timestampString = "507392411.058466"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "highlightCell2(_:flag:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1443,11 +1443,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "FalloutViewModel"
             landmarkType = "3">
          </BreakpointContent>
@@ -1459,11 +1459,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "tableViewContentsFetchedFromController(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1475,11 +1475,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "contentAtEachRow(i:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1523,11 +1523,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "fetchTableviewContentsFromFalloutController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1795,7 +1795,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/LeaveSummaryVC.swift"
-                  timestampString = "507454584.55629"
+                  timestampString = "507477905.627495"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "181"
@@ -1810,7 +1810,7 @@
                   moduleName = "FundooHR-admin"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bridgelabz/Desktop/FundooHR/FundooHR-admin/LeaveSummaryVC.swift"
-                  timestampString = "507454584.559153"
+                  timestampString = "507477905.629499"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "183"
@@ -2035,11 +2035,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "callSendEmailInController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2051,11 +2051,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FundooHR-admin/FalloutViewModel.swift"
-            timestampString = "507391269.360426"
+            timestampString = "507471358.861126"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "fetchedDataFromSendEmailFunctionInController(status:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2185,6 +2185,134 @@
             startingLineNumber = "204"
             endingLineNumber = "204"
             landmarkName = "fetchedDataFromSendEmailFunctionInViewModel(status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryService.swift"
+            timestampString = "507476722.98519"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "sendEmailToUnmarkedEmployees()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryController.swift"
+            timestampString = "507477903.722964"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "fetchedStatusAfterSendingMail(status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryViewModel.swift"
+            timestampString = "507476741.198737"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "fetchedStatusAfterSendingMail(status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryVC.swift"
+            timestampString = "507477035.328372"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
+            landmarkName = "fetchedStatusAfterSendingMail(status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryVC.swift"
+            timestampString = "507477671.914916"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
+            landmarkName = "onEmailButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryViewModel.swift"
+            timestampString = "507477016.321661"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "makingRestCallToSendMail()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryController.swift"
+            timestampString = "507477903.722964"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "makingRestCallToSendMail()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FundooHR-admin/AttendanceSummaryVC.swift"
+            timestampString = "507477373.053241"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
+            landmarkName = "fetchedStatusAfterSendingMail(status:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

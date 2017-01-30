@@ -85,19 +85,20 @@ protocol LeaveSummaryViewModelProtocol {
 protocol LeaveSummaryVCProtocol {
     func reload()
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
+}
 
+//protocol of AttendanceSummaryViewcontroller
+protocol AttendanceSummaryVCProtocol {
+    func attendanceSummaryCollectionViewReload()
+    func attendanceSummaryTableviewReload()
+    func fetchedStatusAfterSendingMail(status:Int)
 }
 
 //protocol of AttendanceSummary
-protocol AttendanceSummaryVCProtocol {
-    func falloutTableviewReload()
-    func falloutCollectionviewReload()
-    func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
-}
-
 protocol AttendanceSummaryProtocol{
-   // func dataFetchedFromService(data:[Att],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
-    //func fetchedDataFromSendEmailFunctionInService(status:Int)
+    func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel])
+    func dataFetchedFromTheRestCall(_ data:[EmployeeDetails],totalEmployeesObj:TotalEmployees)
+    func fetchedStatusAfterSendingMail(status:Int)
 }
 //protocol of EngineersController
 protocol EngineersControllerProtocol{

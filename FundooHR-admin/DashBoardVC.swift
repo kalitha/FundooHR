@@ -162,8 +162,8 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     //reload tableview data when the data is loaded into it
     func tableviewReload(){
         //disabling the activity indictor
-       // mTableViewActivityIndicator.isHidden = true
-      // mTableViewActivityIndicator.stopAnimating()
+        mTableViewActivityIndicator.isHidden = true
+       mTableViewActivityIndicator.stopAnimating()
         self.mTableView.reloadData()
     }
     
@@ -238,6 +238,12 @@ extension DashBoardVC: UICollectionViewDataSource{
 //CollectionView Delegate
 extension DashBoardVC: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
+        
+        if(indexPath.row == DashBoardControls.ATTENDANCESUMMARY.rawValue){
+            performSegue(withIdentifier: "segueFromAttendanceSummaryCellInCollectionView", sender: nil)
+            highlightCell2(indexPath, flag: true)
+        }
+
         
         if(indexPath.row == DashBoardControls.ATTENDANCEFALLOUT.rawValue){
             performSegue(withIdentifier: "segueFromAttendanceSummaryCell", sender: nil)

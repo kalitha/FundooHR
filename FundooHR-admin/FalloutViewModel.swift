@@ -32,6 +32,7 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     
     //variable of type FalloutTotalEmployees class
     var falloutTotalEmployeesContents : TotalEmployees?
+    
     //initialy setting response count of tableview to 0
     var mResponseCountForTableView = 0
     
