@@ -43,7 +43,7 @@ protocol DashBoardViewModelProtocol{
 //protocol of FalloutController
 protocol FalloutControllerProtocol {
     func tableViewContentsFetchedFromService(data:[TableViewContentModel])
-    func dataFetchedFromFalloutService(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
+    func dataFetchedFromFalloutService(_ data: [EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees)
     func employeeImageUrlFetchedFromService(url:[FalloutImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInService(status:Int)
@@ -52,7 +52,7 @@ protocol FalloutControllerProtocol {
 //protocol of FalloutViewModel
 protocol FalloutViewModelProtocol {
      func tableViewContentsFetchedFromController(data:[TableViewContentModel])
-    func dataFetchedFromFalloutController(_ data: [Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees)
+    func dataFetchedFromFalloutController(_ data: [EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees)
     func employeeImageUrlFetchedFromController(data:[FalloutImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInController(status:Int)
@@ -67,7 +67,7 @@ protocol FalloutVCProtocol {
 
 //protocol of LeaveSummaryController
 protocol LeaveSummaryControllerProtocol{
-    func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
+    func dataFetchedFromService(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees)
     func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInService(status:Int)
@@ -75,7 +75,7 @@ protocol LeaveSummaryControllerProtocol{
 
 //protocol of LeaveSummaryViewModel
 protocol LeaveSummaryViewModelProtocol {
-    func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
+    func dataFetchedFromController(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees)
     func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInController(status:Int)
@@ -88,6 +88,17 @@ protocol LeaveSummaryVCProtocol {
 
 }
 
+//protocol of AttendanceSummary
+protocol AttendanceSummaryVCProtocol {
+    func falloutTableviewReload()
+    func falloutCollectionviewReload()
+    func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
+}
+
+protocol AttendanceSummaryProtocol{
+   // func dataFetchedFromService(data:[Att],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees)
+    //func fetchedDataFromSendEmailFunctionInService(status:Int)
+}
 //protocol of EngineersController
 protocol EngineersControllerProtocol{
     func dataFetchedFromService(data:[EngineersModel])

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FalloutTotalEmployees: NSObject {
+class TotalEmployees: NSObject {
     var unmarkedEmployee : Int?
     var totalEmployee : Int?
     var timeStamp : String?

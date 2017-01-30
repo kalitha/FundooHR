@@ -21,16 +21,19 @@ class LoginVC: UIViewController,LoginVCProtocol{
     
     //outlet of email id
     @IBOutlet weak var mEmail: UITextField!
+    
     //outlet of password
     @IBOutlet weak var mPassword: UITextField!
+    
     //outlet of activityIndicator
-    @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var mActivityIndicator:
+    UIActivityIndicatorView!
+    
     //outlet of bridgelabz logo
     @IBOutlet weak var mLogo: UIImageView!
+    
     //outlet of loginView
     @IBOutlet weak var mLoginView: UIView!
-    // outlet of login buttton
-    @IBOutlet weak var mLoginButton: UIButton!
     
     //used to specify the keyboard state
     var mOffsetCheckBOOL = false

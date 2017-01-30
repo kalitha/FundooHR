@@ -20,7 +20,7 @@ class LeavesummaryService: NSObject {
     var protocolLeaveSummaryControllerObj : LeaveSummaryControllerProtocol?
     
     //model type array of LeaveSummary
-    var arrayOfLeaveSummaryEmloyees = [LeaveSummary]()
+    var arrayOfLeaveSummaryEmloyees = [EmployeeDetails]()
     
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
@@ -54,24 +54,25 @@ class LeavesummaryService: NSObject {
                     let employeeLeaveValue = completeleaveOutEmployeeData.value(forKey: "employeeLeave") as! Int
                     let totalEmployeeValue = completeleaveOutEmployeeData.value(forKey: "totalEmployee") as! Int
                     let timeStamp = completeleaveOutEmployeeData.value(forKey: "timeStamp") as! String
-                    let leaveSummaryTotalEmployeesObj = LeaveSummaryTotalEmployees(employeeLeave: employeeLeaveValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
+                    let leaveSummaryTotalEmployeesObj = TotalEmployees(unmarkedEmployee: employeeLeaveValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
                     let leaveOutEmployeeData =  completeleaveOutEmployeeData.value(forKey: "leaveOutEmployee") as! [NSDictionary]
                     print("--leaveOutEmployeeData--",leaveOutEmployeeData)
                     
                     for index in 0..<leaveOutEmployeeData.count{
                         let valueAtEachIndex = leaveOutEmployeeData[index] as NSDictionary
-                        let employeeNameValue = valueAtEachIndex["employeeName"] as! String
-                        let employeeStatusValue = valueAtEachIndex["employeeStatus"] as! String
-                        let companyValue = valueAtEachIndex["company"] as! String
-                        let mobileValue = valueAtEachIndex["mobile"] as! String
-                        let emailIdValue = valueAtEachIndex["emailId"] as! String
-                        let blStartDateValue = valueAtEachIndex["blStartDate"] as! String
-                        let companyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
-                        let companyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
-                        let leaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
-                        let engineerIdValue = valueAtEachIndex["engineerId"] as! String
-                        let eachFalloutEmployeeObj = LeaveSummary(employeeName: employeeNameValue, employeeStatus: employeeStatusValue, company: companyValue, emailId: emailIdValue, mobile: mobileValue, blStartDate: blStartDateValue, companyJoinDate: companyJoinDateValue, companyLeaveDate: companyLeaveDateValue, leaveTaken: leaveTakenValue, engineerId: engineerIdValue)
-                        self.arrayOfLeaveSummaryEmloyees.append(eachFalloutEmployeeObj)
+                        let lEmployeeNameValue = valueAtEachIndex["employeeName"] as! String
+                        let lEmployeeStatusValue = valueAtEachIndex["employeeStatus"] as! String
+                        let lCompanyValue = valueAtEachIndex["company"] as! String
+                        let lMobileValue = valueAtEachIndex["mobile"] as! String
+                        let lEmailIdValue = valueAtEachIndex["emailId"] as! String
+                        let lBlStartDateValue = valueAtEachIndex["blStartDate"] as! String
+                        let lCompanyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
+                        let lCompanyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
+                        let lLeaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
+                        let lEngineerIdValue = valueAtEachIndex["engineerId"] as! String
+                        let lEmployeeImageUrl = valueAtEachIndex["imageUrl"] as! String
+                        let lEachEmployeeObj = EmployeeDetails(pEmployeeName: lEmployeeNameValue, pEmployeeStatus: lEmployeeStatusValue, pCompany: lCompanyValue, pEmailId: lEmailIdValue, pMobile: lMobileValue, pBlStartDate: lBlStartDateValue, pCompanyJoinDate: lCompanyJoinDateValue, pCompanyLeaveDate: lCompanyLeaveDateValue, pLeaveTaken: lLeaveTakenValue, pEngineerId: lEngineerIdValue, pImageUrl: lEmployeeImageUrl)
+                self.arrayOfLeaveSummaryEmloyees.append(lEachEmployeeObj)
                         
                     }
                     print("---count of employees---",self.arrayOfLeaveSummaryEmloyees.count)

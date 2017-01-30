@@ -26,7 +26,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     var arrayOfImages = [UIImage]()
     
     //create the object of type LeaveSummary
-    var arrayOfLeaveEmployees = [LeaveSummary]()
+    var arrayOfLeaveEmployees = [EmployeeDetails]()
     
     //create variable of type LeaveSummaryController
     var leaveSummaryControllerObj : LeaveSummaryController?
@@ -35,7 +35,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     var mProtocolDashBoardViewControllerObj : LeaveSummaryVCProtocol?
     
     //create variable of type LeaveSummaryTotalEmployees
-    var leaveSummaryTotalEmployeesContent : LeaveSummaryTotalEmployees?
+    var leaveSummaryTotalEmployeesContent : TotalEmployees?
     
     //create the array variable of type LeaveSummaryEmployeeImageModel
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
@@ -57,7 +57,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     }
     
     //storing the fetched data of collectionview cells in variable of type leavesummary model
-    func dataFetchedFromController(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees){
+    func dataFetchedFromController(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees){
         arrayOfLeaveEmployees = data
         leaveSummaryTotalEmployeesContent = leaveSummaryTotalEmployees
         leaveSummaryControllerObj?.fetchEmployeeImageUrlFromService()

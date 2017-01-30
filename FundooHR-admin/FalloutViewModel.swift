@@ -25,13 +25,13 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     var protocolFalloutVC : FalloutVCProtocol?
     
     //model type array of falloutemployees
-    var arrayOfFalloutEmployees = [Fallout]()
+    var arrayOfFalloutEmployees = [EmployeeDetails]()
     
     //variable of type FalloutController
     var falloutControllerObj : FalloutController?
     
     //variable of type FalloutTotalEmployees class
-    var falloutTotalEmployeesContents : FalloutTotalEmployees?
+    var falloutTotalEmployeesContents : TotalEmployees?
     //initialy setting response count of tableview to 0
     var mResponseCountForTableView = 0
     
@@ -59,7 +59,7 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
         contentInIndex = mArrayOfTableViewContentModel[i]
         
         print("content in index=",contentInIndex! )
-        let name = contentInIndex?.rowName
+        let name = contentInIndex?.mRowName
         
         return name!
     }
@@ -86,7 +86,7 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     }
     
     //storing the fetched data of collectionview cells in variable of type falloutemployees model
-    func dataFetchedFromFalloutController(_ data:[Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees){
+    func dataFetchedFromFalloutController(_ data:[EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees){
         arrayOfFalloutEmployees = data
         falloutTotalEmployeesContents = falloutTotalEmployeesObj
         falloutControllerObj?.fetchEmployeeImageUrlFromService()

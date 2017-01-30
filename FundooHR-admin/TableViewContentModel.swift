@@ -9,10 +9,10 @@
 import UIKit
 
 class TableViewContentModel: NSObject {
-    var rowName : String?
+    var mRowName : String?
     
     init(rowName: String) {
-        self.rowName = rowName
+        self.mRowName = rowName
     }
 
 }

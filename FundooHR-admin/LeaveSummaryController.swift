@@ -21,10 +21,10 @@ class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     func fetchNumberOFCellsFromService(token:String){
         leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
         // leaveSummaryServiceObj?.protocolLeaveSummaryControllerObj = self
-        let arrayOfLeaveEmployees = [LeaveSummary]()
+        let arrayOfLeaveEmployees = [EmployeeDetails]()
         leaveSummaryServiceObj?.fetchData(token: token)
     }
-    func dataFetchedFromService(data:[LeaveSummary],leaveSummaryTotalEmployees:LeaveSummaryTotalEmployees){
+    func dataFetchedFromService(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees){
         self.protocolLeaveSummaryViewModelObj?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)
     }
     // ----====----- FETCHING IMAGE -----=====----

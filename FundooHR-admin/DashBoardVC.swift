@@ -162,8 +162,8 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     //reload tableview data when the data is loaded into it
     func tableviewReload(){
         //disabling the activity indictor
-        mTableViewActivityIndicator.isHidden = true
-        mTableViewActivityIndicator.startAnimating()
+       // mTableViewActivityIndicator.isHidden = true
+      // mTableViewActivityIndicator.stopAnimating()
         self.mTableView.reloadData()
     }
     

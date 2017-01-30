@@ -56,7 +56,7 @@ class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
         contentInIndex = mArrayOfTableViewContentModel[i]
         
         print("content in index=",contentInIndex! )
-        let name = contentInIndex?.rowName
+        let name = contentInIndex?.mRowName
         
         return name!
         

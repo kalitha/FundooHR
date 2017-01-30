@@ -21,25 +21,20 @@ enum FalloutTableview:Int{
     case LOGOUT
 }
 
-
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var mTableviewActivityIndicator: UIActivityIndicatorView!
     // create outlet of collectionview
-    
     @IBOutlet weak var mCollectionView: UICollectionView!
+    
     //create outlet to store number of fallout employees
-    
     @IBOutlet weak var mNumberOfUnmarkedEmployees: UILabel!
+    
     //create outlet to display the month of fallout employees
-    
     @IBOutlet weak var mUnmarkedDate: UILabel!
+    
     //create the outlet of total employees
-    
     @IBOutlet weak var mTotalEmployees: UILabel!
-    //create the outlet of outer lable surrounding the number of fallout employees
-    
-    @IBOutlet weak var mOuterLabelOfUnmarkedEmployees: UILabel!
     
     //create outlet for date
     @IBOutlet weak var mDate: UILabel!
@@ -152,11 +147,11 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         
         let color = UIColor.init(red: 240/255, green: 237/255, blue: 234/255, alpha: 1)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FalloutEmployeeCollectionViewCell
-        cell.name.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeName
-        cell.fellowShip.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].employeeStatus
-        cell.company.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].company
-        cell.email.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].emailId
-        cell.mobileNum.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mobile
+        cell.name.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mEmployeeName
+        cell.fellowShip.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mEmployeeStatus
+        cell.company.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mCompany
+        cell.email.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mEmailId
+        cell.mobileNum.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mMobile
        let employeeImage = mFalloutViewModelObj?.fetchEachImage(i: indexPath.row)
         print("employee image...",employeeImage)
         cell.employeeImage.image = employeeImage

@@ -27,7 +27,7 @@ import FirebaseStorage
     var protocolFalloutController : FalloutControllerProtocol?
     
     //var falloutEmployeeData = [NSDictionary]()
-    var arrayOfFalloutEmloyees = [Fallout]()
+    var arrayOfFalloutEmloyees = [EmployeeDetails]()
     
     //model type array of FalloutImageModel
     var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
@@ -82,28 +82,29 @@ import FirebaseStorage
                     let falloutNumberValue = completeFalloutData.value(forKey: "falloutNumber") as! Int
                     let totalEmployeeValue = completeFalloutData.value(forKey: "totalEmployee") as! Int
                     let timeStamp = completeFalloutData.value(forKey: "timeStamp") as! String
-                    let falloutTotalEmployeesObj = FalloutTotalEmployees(unmarkedEmployee: falloutNumberValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
+                    let falloutTotalEmployeesObj = TotalEmployees(unmarkedEmployee: falloutNumberValue, totalEmployee: totalEmployeeValue, timeStamp: timeStamp)
                     let falloutEmployeeData =  completeFalloutData.value(forKey: "falloutEmployee") as! [NSDictionary]
                     print("--falloutEmployeeData--",falloutEmployeeData)
                     
                     for index in 0..<falloutEmployeeData.count{
                         let valueAtEachIndex = falloutEmployeeData[index] as NSDictionary
-                        let employeeNameValue = valueAtEachIndex["employeeName"] as! String
-                        let employeeStatusValue = valueAtEachIndex["employeeStatus"] as! String
-                        let companyValue = valueAtEachIndex["company"] as! String
-                        let mobileValue = valueAtEachIndex["mobile"] as! String
-                        let emailIdValue = valueAtEachIndex["emailId"] as! String
-                        let blStartDateValue = valueAtEachIndex["blStartDate"] as! String
-                        let companyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
-                        let companyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
-                        let leaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
-                        let engineerIdValue = valueAtEachIndex["engineerId"] as! String
-                        let eachFalloutEmployeeObj = Fallout(employeeName: employeeNameValue, employeeStatus: employeeStatusValue, company: companyValue, emailId: emailIdValue, mobile: mobileValue, blStartDate: blStartDateValue, companyJoinDate: companyJoinDateValue, companyLeaveDate: companyLeaveDateValue, leaveTaken: leaveTakenValue, engineerId: engineerIdValue)
-                        self.arrayOfFalloutEmloyees.append(eachFalloutEmployeeObj)
+                        let lEmployeeNameValue = valueAtEachIndex["employeeName"] as! String
+                        let lEmployeeStatusValue = valueAtEachIndex["employeeStatus"] as! String
+                        let lCompanyValue = valueAtEachIndex["company"] as! String
+                        let lMobileValue = valueAtEachIndex["mobile"] as! String
+                        let lEmailIdValue = valueAtEachIndex["emailId"] as! String
+                        let lBlStartDateValue = valueAtEachIndex["blStartDate"] as! String
+                        let lCompanyJoinDateValue = valueAtEachIndex["companyJoinDate"] as! String
+                        let lCompanyLeaveDateValue = valueAtEachIndex["companyLeaveDate"] as! String
+                        let lLeaveTakenValue = valueAtEachIndex["leaveTaken"] as! Int
+                        let lEngineerIdValue = valueAtEachIndex["engineerId"] as! String
+                        let lEmployeeImageUrl = valueAtEachIndex["imageUrl"] as! String
+                        let lEachFalloutEmployeeObj = EmployeeDetails(pEmployeeName: lEmployeeNameValue, pEmployeeStatus: lEmployeeStatusValue, pCompany: lCompanyValue, pEmailId: lEmailIdValue, pMobile: lMobileValue, pBlStartDate: lBlStartDateValue, pCompanyJoinDate: lCompanyJoinDateValue, pCompanyLeaveDate: lCompanyLeaveDateValue, pLeaveTaken: lLeaveTakenValue, pEngineerId: lEngineerIdValue, pImageUrl: lEmployeeImageUrl)
+                        self.arrayOfFalloutEmloyees.append(lEachFalloutEmployeeObj)
                         
                     }
                     print("---count of employees---",self.arrayOfFalloutEmloyees.count)
-                    self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [Fallout],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
+                    self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [EmployeeDetails],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
                 }
         }
     }
@@ -145,8 +146,8 @@ import FirebaseStorage
             path.data(withMaxSize: 1*1024*1024) {(data,error) -> Void in//we r making rest call here
                 print("count of arrayOfFalloutEmloyees ",self.arrayOfFalloutEmloyees.count)
                 print("i value",i)
-                print("data",data)
-                print("image",UIImage(data: data!))
+                print("data",data!)
+                print("image",UIImage(data: data!)!)
                 if(error != nil){
                     print("error occured")
                 }else{

@@ -32,7 +32,7 @@ class FalloutController: NSObject,FalloutControllerProtocol {
     func fetchNumberOfCellsFromFalloutService(){
         falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
         
-        let arrayOfFalloutEmployees = [Fallout]()
+        let arrayOfFalloutEmployees = [EmployeeDetails]()
         
         if(arrayOfFalloutEmployees.count == 0){
             falloutServiceObj?.fetchData()
@@ -40,7 +40,7 @@ class FalloutController: NSObject,FalloutControllerProtocol {
     }
     
     //fetching collection view cells from rest call
-    func dataFetchedFromFalloutService(_ data:[Fallout],falloutTotalEmployeesObj:FalloutTotalEmployees){
+    func dataFetchedFromFalloutService(_ data:[EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees){
         self.protocolFalloutViewModel?.dataFetchedFromFalloutController(data,falloutTotalEmployeesObj: falloutTotalEmployeesObj)
     }
     
