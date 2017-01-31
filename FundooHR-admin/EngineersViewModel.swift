@@ -9,11 +9,12 @@
 import UIKit
 
 class EngineersViewModel: NSObject,EngineersviewModelProtocol {
+    
     var engineersModelArray = [EngineersModel]()
     var engineersControllerObj : EngineersController?
     var count = 0
     var protocolEngineersVC : EngineersVCProtocol?
-    //var engineersObj : EngineersVC?
+    
     func fetchNumberOfRows()->Int{
         engineersControllerObj = EngineersController()
         engineersControllerObj?.protocolEngineersViewModel = self

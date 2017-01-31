@@ -18,9 +18,7 @@ class EngineersService: NSObject {
     func fetchData()  {
           ref = FIRDatabase.database().reference()//responsible to make a call to firebase
         ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            //            self.teams = (snapshot.value as? NSArray)!
-            //            self.teamsDataControllerObj?.fetchDataFromService(data: self.teams)
+            
             self.slideMenuContents = (snapshot.value) as! [NSDictionary]
             
             for index in 0..<self.slideMenuContents.count{

@@ -21,6 +21,8 @@ import FirebaseStorage
     
     //create object of type
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
+    
+    
     let mUtilityClassObj = UtilityClass()
     
     //creating the variable of FalloutControllerProtocol type

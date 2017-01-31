@@ -243,6 +243,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         return (mFalloutViewModelObj?.fetchTableviewContentsFromFalloutController())!
     }
     
+    //
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         cell.textLabel?.text = mFalloutViewModelObj?.contentAtEachRow(i: indexPath.row)
@@ -330,7 +331,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         // show the alert
         self.present(alert, animated: true, completion: nil)
     }
-    
+    //fetch the status after sending mail
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
         if(status == 200)
         {

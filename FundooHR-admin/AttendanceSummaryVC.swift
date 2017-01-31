@@ -41,8 +41,8 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         //enabling activity indicator
-        mTableActivityIndicator.isHidden = false
-        mTableActivityIndicator.startAnimating()
+        mCollectionActivityIndicator.isHidden = false
+        mCollectionActivityIndicator.startAnimating()
         mAttendanceSummaryViewModelObj = AttendanceSummaryViewModel(pAttendanceSummaryVCProtocolObj: self)
         // get the date time String from the date object
         let convertedDate = mUtilityClassObj.date()
@@ -142,8 +142,8 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     
     func attendanceSummaryCollectionViewReload(){
         //disabling the activity indicator
-        mTableActivityIndicator.isHidden = true
-        mTableActivityIndicator.stopAnimating()
+        mCollectionActivityIndicator.isHidden = true
+        mCollectionActivityIndicator.stopAnimating()
         
         mNumberOfUnmarkedEmployees.text = String(describing:(mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.unmarkedEmployee)! as Int)
         mTotalEmployees.text = String(describing:(mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.totalEmployee)! as Int)
@@ -159,7 +159,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     func attendanceSummaryTableviewReload(){
         //disabling the activity indictor
         mTableActivityIndicator.isHidden = true
-        mTableActivityIndicator.startAnimating()
+        mTableActivityIndicator.stopAnimating()
         self.mTableView.reloadData()
         
     }
@@ -278,9 +278,9 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         cell.mCompany.text = mAttendanceSummaryViewModelObj?.mArrayOfUnmarkedEmployees[indexPath.row].mCompany
         cell.mMobile.text = mAttendanceSummaryViewModelObj?.mArrayOfUnmarkedEmployees[indexPath.row].mEmailId
         cell.mEmailId.text = mAttendanceSummaryViewModelObj?.mArrayOfUnmarkedEmployees[indexPath.row].mMobile
-       // let employeeImage = mAttendanceSummaryViewModelObj.fetchEachImage(i: indexPath.row)
-        //print("employee image...",employeeImage)
-      //  cell.mEmployeeImage.image = employeeImage
+        let employeeImage = mAttendanceSummaryViewModelObj?.fetchEachImageOfEmployee(i: indexPath.row)
+        print("employee image...",employeeImage!)
+        cell.mEmployeeImage.image = employeeImage
         
         cell.layer.borderColor = color.cgColor
         cell.layer.backgroundColor = color.cgColor

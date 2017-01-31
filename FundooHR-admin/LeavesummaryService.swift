@@ -25,7 +25,7 @@ class LeavesummaryService: NSObject {
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     
-    
+    //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
     
     init(pLeaveSummaryProtocolObj : LeaveSummaryControllerProtocol) {

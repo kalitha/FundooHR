@@ -19,6 +19,8 @@ class AttendanceSummaryService: NSObject {
     
     //create object of type
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
+    
+    //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
     
     //creating the variable of AttendanceSummaryProtocol type
@@ -30,7 +32,7 @@ class AttendanceSummaryService: NSObject {
     init(pAttendanceSummaryProtocolObj : AttendanceSummaryProtocol) {
         mAttendanceSummaryProtocolObj = pAttendanceSummaryProtocolObj
     }
-
+    
     //making rest call to firebase to fetch tableview contents
     func fetchTableViewContents(){
         var ref: FIRDatabaseReference!
@@ -103,7 +105,7 @@ class AttendanceSummaryService: NSObject {
                 }
         }
     }
-
+    
     //making rest call to send email
     func sendEmailToUnmarkedEmployees(){
         let lUrl = mUtilityClassObj.fetchUrlFromPlist()

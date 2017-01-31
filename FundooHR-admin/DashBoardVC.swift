@@ -63,6 +63,8 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         //enabling the activity indicator
         mActivityIndicator.isHidden = false
         mActivityIndicator.startAnimating()
+        mTableViewActivityIndicator.isHidden = false
+        mTableViewActivityIndicator.startAnimating() 
         mDashBoardViewModelObj = DashBoardViewModel(pDashBoardVCProtocolObj: self)
         
         //registering each xib cell with collectionview cell

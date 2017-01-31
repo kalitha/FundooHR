@@ -12,15 +12,17 @@ class AttendanceSummaryViewModel: NSObject,AttendanceSummaryProtocol {
     
     //model type array of tableviewcontents
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
-
+    
     //variable of type ui images
     var mArrayOfImages = [UIImage]()
+    
+    //count of FetchedImages
     var mCountOfFetchedImages = 0
     var mCount = 0
     
     //model type array of falloutemployees
     var mArrayOfUnmarkedEmployees = [EmployeeDetails]()
-
+    
     //variable of type AttendanceSummaryVC protocol
     var mAttendanceSummaryVCProtocolObj : AttendanceSummaryVCProtocol?
     
@@ -89,14 +91,35 @@ class AttendanceSummaryViewModel: NSObject,AttendanceSummaryProtocol {
     func dataFetchedFromTheRestCall(_ data:[EmployeeDetails],totalEmployeesObj:TotalEmployees){
         mArrayOfUnmarkedEmployees = data
         mTotalEmployeesContents = totalEmployeesObj
-        mAttendanceSummaryVCProtocolObj?.attendanceSummaryCollectionViewReload()
         
+        fetchImageFromUrl(mArrayOfUnmarkedEmployees: data)
     }
+    
+    //getting image from url
+    func fetchImageFromUrl(mArrayOfUnmarkedEmployees:[EmployeeDetails]){
+        for i in 0..<self.mArrayOfUnmarkedEmployees.count{
+            let lUrlFetched =  mArrayOfUnmarkedEmployees[i].mImageUrl
+            if let lUrl = NSURL(string: lUrlFetched){
+                if let data = NSData(contentsOf: lUrl as URL){
+                    let image = UIImage(data: data as Data)
+                    mArrayOfImages.append(image!)
+                }
+            }
+        }
+        mAttendanceSummaryVCProtocolObj?.attendanceSummaryCollectionViewReload()
+    }
+    
+    func fetchEachImageOfEmployee(i:Int)->UIImage{
+        print("i...",i)
+        return mArrayOfImages[i]
+    }
+    
     //rest call to send mail
     func makingRestCallToSendMail(){
         mAttendanceSummaryControllerObj?.makingRestCallToSendMail()
     }
     
+    //fetching the status after sending mail
     func fetchedStatusAfterSendingMail(status:Int){
         mAttendanceSummaryVCProtocolObj?.fetchedStatusAfterSendingMail(status: status)
     }

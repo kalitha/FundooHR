@@ -10,8 +10,10 @@ import UIKit
 
 class AttendanceSummaryController: NSObject,AttendanceSummaryProtocol {
     
+    //create variable of type AttendanceSummaryProtocol
     var mAttendanceSummaryProtocolObj : AttendanceSummaryProtocol?
     
+    //create variable of type AttendanceSummaryService
     var mAttendanceSummaryServiceObj : AttendanceSummaryService?
     
     init(pAttendanceSummaryProtocolObj : AttendanceSummaryProtocol) {
@@ -52,6 +54,7 @@ class AttendanceSummaryController: NSObject,AttendanceSummaryProtocol {
         mAttendanceSummaryServiceObj?.sendEmailToUnmarkedEmployees()
     }
     
+    //fetching the status after sending mail
     func fetchedStatusAfterSendingMail(status: Int){
         mAttendanceSummaryProtocolObj?.fetchedStatusAfterSendingMail(status: status)
     }
