@@ -88,7 +88,6 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        mMenuShowing = !mMenuShowing
         //to remove custom view after removing slidemenu
         self.mCustomView.removeFromSuperview()
         mMenuShowing = !mMenuShowing
@@ -108,7 +107,7 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         print("views width",view.frame.width)
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
         mCustomView.backgroundColor = UIColor.clear
-        
+        print("menushowing=-=-=",mMenuShowing)
         if(mMenuShowing){
             mSlideMenuLeadingConstraint.constant = -250
             //1st case of removing tap gesture(papre) when we click on the icon
@@ -128,7 +127,12 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
             self.view.layoutIfNeeded()
         })
         mMenuShowing = !mMenuShowing
+        print("menushowing=-=-=",mMenuShowing)
         //falloutTableviewReload()
+    }
+    
+    func leaveSummaryTableviewReload(){
+        
     }
     
     func reload() {

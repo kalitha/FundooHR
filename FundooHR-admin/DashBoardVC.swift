@@ -11,6 +11,7 @@
 
 import UIKit
 
+//enumeration 
 enum DashBoardControls:Int{
     case ATTENDANCESUMMARY = 0
     case ATTENDANCEFALLOUT
@@ -23,7 +24,7 @@ enum DashBoardTableview:Int{
     case EMAILID = 0
     case DASHBOARD
     case ENGINEERS
-    case FALLOUT
+    case ATTENDANCESUMMARY
     case REPORTS
     case CLIENTS
     case LOGOUT
@@ -123,7 +124,6 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        mMenuShowing = !mMenuShowing
         //to remove custom view after removing slidemenu
         self.mCustomView.removeFromSuperview()
         mMenuShowing = !mMenuShowing
@@ -248,7 +248,7 @@ extension DashBoardVC: UICollectionViewDelegate{
 
         
         if(indexPath.row == DashBoardControls.ATTENDANCEFALLOUT.rawValue){
-            performSegue(withIdentifier: "segueFromAttendanceSummaryCell", sender: nil)
+            performSegue(withIdentifier: "segueFromAttendanceFalloutInCollectionView", sender: nil)
             highlightCell2(indexPath, flag: true)
         }
         else if(indexPath.row == DashBoardControls.LEAVESUMMARY.rawValue){
@@ -308,8 +308,8 @@ extension DashBoardVC: UITableViewDelegate{
             performSegue(withIdentifier: "segueFromEngineersCell", sender: nil)
         }
             
-        else if(indexPath.row == DashBoardTableview.FALLOUT.rawValue){
-            performSegue(withIdentifier: "segueFromAttendanceSummaryCell", sender: nil)
+        else if(indexPath.row == DashBoardTableview.ATTENDANCESUMMARY.rawValue){
+            performSegue(withIdentifier: "segueFromAttendanceSummaryCellInTableview", sender: nil)
         }
         else if(indexPath.row == DashBoardTableview.REPORTS.rawValue){
             performSegue(withIdentifier: "segueFromReportsCell", sender: nil)

@@ -9,13 +9,27 @@
 import UIKit
 
 class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
+    
     //create variable of type LeavesummaryService
     var leaveSummaryServiceObj : LeavesummaryService?
+    
     //create variable of type LeaveSummaryViewModelProtocol
     var protocolLeaveSummaryViewModelObj : LeaveSummaryViewModelProtocol?
     
     init(pLeaveSummaryViewModelProtocolObj : LeaveSummaryViewModelProtocol) {
         protocolLeaveSummaryViewModelObj = pLeaveSummaryViewModelProtocolObj
+    }
+    
+    //rest call to fetch tableview's data
+    func fetchTableViewContentsFromService(){
+        let lArrayOfTableViewContentModel = [TableViewContentModel]()
+        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        leaveSummaryServiceObj?.fetchTableViewContents()
+    }
+    
+    //fetching the tableview contents
+    func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel]){
+        protocolLeaveSummaryViewModelObj?.tableViewContentsFetchedFromRestCall(data: data)
     }
     
     func fetchNumberOFCellsFromService(token:String){

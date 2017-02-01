@@ -8,16 +8,6 @@
 
 import UIKit
 
-enum AttendanceTableview:Int{
-    case EMAILID = 0
-    case DASHBOARD
-    case ENGINEERS
-    case FALLOUT
-    case REPORTS
-    case CLIENTS
-    case LOGOUT
-}
-
 class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var mDate: UILabel!
@@ -34,9 +24,11 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     var mAttendanceSummaryViewModelObj : AttendanceSummaryViewModel?
     var mCustomView = UIView()
     var mMenuShowing = false
+    
     //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
-
+    
+    //create outlet for collectionview
     @IBOutlet weak var mCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,7 +168,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
-        if (indexPath.row == AttendanceTableview.EMAILID.rawValue) {
+        if (indexPath.row == DashBoardTableview.EMAILID.rawValue) {
             let color = UIColor.init(red: 157/255, green: 212/255, blue: 237/255, alpha: 1)
             cell.backgroundColor = color
             cell.imageView?.frame = CGRect(x: (cell.imageView?.frame.origin.x)!, y: (cell.imageView?.frame.origin.y)!, width: 60, height: 60)
@@ -185,7 +177,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == AttendanceTableview.LOGOUT.rawValue){
+        if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell
@@ -193,23 +185,19 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        if(indexPath.row == AttendanceTableview.DASHBOARD.rawValue){
+        if(indexPath.row == DashBoardTableview.DASHBOARD.rawValue){
             performSegue(withIdentifier: "segueFromDashboardCell", sender: nil)
         }
-        else if(indexPath.row == AttendanceTableview.FALLOUT.rawValue){
-            performSegue(withIdentifier: "segueFromFalloutCell", sender: nil)
-        }
-
-        else if(indexPath.row == AttendanceTableview.ENGINEERS.rawValue){
+        else if(indexPath.row == DashBoardTableview.ENGINEERS.rawValue){
             performSegue(withIdentifier: "segueFromEngineersCell", sender: nil)
         }
-        else if(indexPath.row == AttendanceTableview.REPORTS.rawValue){
+        else if(indexPath.row == DashBoardTableview.REPORTS.rawValue){
             performSegue(withIdentifier: "segueFromReportsCell", sender: nil)
         }
-        else if(indexPath.row == AttendanceTableview.CLIENTS.rawValue){
+        else if(indexPath.row == DashBoardTableview.CLIENTS.rawValue){
             performSegue(withIdentifier: "segueFromClientsCell", sender: nil)
         }
-        else if(indexPath.row == AttendanceTableview.LOGOUT.rawValue){
+        else if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
             let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
             // add the actions (buttons)
             let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {

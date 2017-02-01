@@ -16,6 +16,12 @@ class LeavesummaryService: NSObject {
     // create firebase reference
     var ref: FIRDatabaseReference!
     
+    //create variable of type NSDictionary
+    var mSlideMenuContents = [NSDictionary]()
+    
+    //create object of type
+    var mArrayOfTableViewContentModel = [TableViewContentModel]()
+
     //creating the variable of LeaveSummaryControllerProtocol type
     var protocolLeaveSummaryControllerObj : LeaveSummaryControllerProtocol?
     
@@ -30,6 +36,33 @@ class LeavesummaryService: NSObject {
     
     init(pLeaveSummaryProtocolObj : LeaveSummaryControllerProtocol) {
         protocolLeaveSummaryControllerObj = pLeaveSummaryProtocolObj
+    }
+    
+    //making rest call to firebase to fetch tableview contents
+    func fetchTableViewContents(){
+        var ref: FIRDatabaseReference!
+        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
+        ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.mSlideMenuContents = (snapshot.value) as! [NSDictionary]
+            
+            for index in 0..<self.mSlideMenuContents.count{
+                let valueAtEachIndex = self.mSlideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
+                
+                let rowName = valueAtEachIndex["row_name"] as! String
+                
+                let tableviewContents = TableViewContentModel(rowName: rowName)
+                
+                self.mArrayOfTableViewContentModel.append(tableviewContents)
+            }
+            print("slideMenuContents",self.mSlideMenuContents)
+            print("count=======",self.mArrayOfTableViewContentModel.count)
+           self.protocolLeaveSummaryControllerObj?.tableViewContentsFetchedFromRestCall(data: self.mArrayOfTableViewContentModel)
+            
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     //making rest call to fetch collectionview contents

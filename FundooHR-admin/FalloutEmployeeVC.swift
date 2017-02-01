@@ -11,16 +11,6 @@
 
 import UIKit
 
-enum FalloutTableview:Int{
-    case EMAILID = 0
-    case DASHBOARD
-    case ENGINEERS
-    case FALLOUT
-    case REPORTS
-    case CLIENTS
-    case LOGOUT
-}
-
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var mTableviewActivityIndicator: UIActivityIndicatorView!
@@ -125,7 +115,6 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        mMenuShowing = !mMenuShowing
         //to remove custom view after removing slidemenu
         self.mCustomView.removeFromSuperview()
         mMenuShowing = !mMenuShowing
@@ -251,7 +240,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         cell.textLabel?.textColor = color
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
-        if (indexPath.row == FalloutTableview.EMAILID.rawValue) {
+        if (indexPath.row == DashBoardTableview.EMAILID.rawValue) {
             let color = UIColor.init(red: 157/255, green: 212/255, blue: 237/255, alpha: 1)
             cell.backgroundColor = color
             cell.imageView?.frame = CGRect(x: (cell.imageView?.frame.origin.x)!, y: (cell.imageView?.frame.origin.y)!, width: 60, height: 60)
@@ -260,7 +249,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             cell.backgroundColor = UIColor.white
         }
         
-        if(indexPath.row == FalloutTableview.LOGOUT.rawValue){
+        if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell
@@ -268,20 +257,22 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     }
     
      public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        if(indexPath.row == FalloutTableview.DASHBOARD.rawValue){
+        if(indexPath.row == DashBoardTableview.DASHBOARD.rawValue){
             performSegue(withIdentifier: "segueFromDashboardCell", sender: nil)
         }
-            
-        else if(indexPath.row == FalloutTableview.ENGINEERS.rawValue){
+        else if(indexPath.row == DashBoardTableview.ATTENDANCESUMMARY.rawValue){
+            performSegue(withIdentifier: "segueFromAttendanceSummaryCellInTableview", sender: nil)
+        }
+        else if(indexPath.row == DashBoardTableview.ENGINEERS.rawValue){
             performSegue(withIdentifier: "segueFromEngineersCell", sender: nil)
         }
-        else if(indexPath.row == FalloutTableview.REPORTS.rawValue){
+        else if(indexPath.row == DashBoardTableview.REPORTS.rawValue){
             performSegue(withIdentifier: "segueFromReportsCell", sender: nil)
         }
-        else if(indexPath.row == FalloutTableview.CLIENTS.rawValue){
+        else if(indexPath.row == DashBoardTableview.CLIENTS.rawValue){
             performSegue(withIdentifier: "segueFromClientsCell", sender: nil)
         }
-        else if(indexPath.row == FalloutTableview.LOGOUT.rawValue){
+        else if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
             let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
             // add the actions (buttons)
             let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {

@@ -22,6 +22,12 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     //initially setting the count of fetched images to 0
     var countOfFetchedImages = 0
     
+    //used to make only one rest call
+    var mCount = 0
+    
+    //initialy setting response count of tableview to 0
+    var mResponseCountForTableView = 0
+    
     //create variable of type ui images
     var arrayOfImages = [UIImage]()
     
@@ -32,7 +38,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     var leaveSummaryControllerObj : LeaveSummaryController?
     
     //create variable of type LeaveSummaryVCProtocol
-    var mProtocolDashBoardViewControllerObj : LeaveSummaryVCProtocol?
+    var mLeaveSummaryVCProtocolObj : LeaveSummaryVCProtocol?
     
     //create variable of type LeaveSummaryTotalEmployees
     var leaveSummaryTotalEmployeesContent : TotalEmployees?
@@ -40,9 +46,46 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     //create the array variable of type LeaveSummaryEmployeeImageModel
     var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     
+    //model type array of tableviewcontents
+    var mArrayOfTableViewContentModel = [TableViewContentModel]()
+
+    
     init(pLeaveSummaryVCProtocolObj : LeaveSummaryVCProtocol) {
-        mProtocolDashBoardViewControllerObj = pLeaveSummaryVCProtocolObj
+        mLeaveSummaryVCProtocolObj = pLeaveSummaryVCProtocolObj
     }
+    
+    //making the rest call to fetch tableview contents from api
+    func fetchTableviewContentsFromController()->Int{
+        leaveSummaryControllerObj = LeaveSummaryController(pLeaveSummaryViewModelProtocolObj: self)
+        if(self.mCount==0){
+            leaveSummaryControllerObj?.fetchTableViewContentsFromService()
+            mCount += 1
+        }
+        return mArrayOfTableViewContentModel.count
+        
+    }
+    
+    //used to retriew content at each row of tableview
+    func contentAtEachRow(i:Int)->String{
+        var contentInIndex : TableViewContentModel?
+        
+        contentInIndex = mArrayOfTableViewContentModel[i]
+        
+        print("content in index=",contentInIndex! )
+        let name = contentInIndex?.mRowName
+        
+        return name!
+    }
+    
+    //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
+    func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel]){
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
+        }
+        
+        mArrayOfTableViewContentModel = data
+        }
     
     //making rest call to fetch data of collectionview cells from api
     func fetchDataFromController(token:String)->Int{
@@ -92,7 +135,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
             //protocolFalloutVC?.reload() //reloading after getting the image
             print("arrayOfFalloutEmployees==-=-=-",arrayOfLeaveEmployees)
             DispatchQueue.main.async {
-                self.mProtocolDashBoardViewControllerObj?.reload()
+                self.mLeaveSummaryVCProtocolObj?.reload()
             }
             
         }
@@ -110,7 +153,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     
     //fetching the status after sending mail
     func fetchedDataFromSendEmailFunctionInController(status:Int){
-        mProtocolDashBoardViewControllerObj?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
+        mLeaveSummaryVCProtocolObj?.fetchedDataFromSendEmailFunctionInViewModel(status: status)
     }
     
 }

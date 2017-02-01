@@ -71,6 +71,7 @@ protocol LeaveSummaryControllerProtocol{
     func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromService(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInService(status:Int)
+    func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel])
 }
 
 //protocol of LeaveSummaryViewModel
@@ -79,6 +80,7 @@ protocol LeaveSummaryViewModelProtocol {
     func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
     func imageFetchedFromController(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInController(status:Int)
+    func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel])
 }
 
 //protocol of LeaveSummaryVC
