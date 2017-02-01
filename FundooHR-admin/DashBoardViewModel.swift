@@ -59,7 +59,6 @@ class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
         let name = contentInIndex?.mRowName
         
         return name!
-        
     }
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
@@ -83,7 +82,6 @@ class DashBoardViewModel: NSObject,DashBoardViewModelProtocol {
         }
         return mResponseCount
     }
-    
     
     //storing the fetched data of collectionview cells in variable of type dashboard model
     func dataFetchedFromDashBoardController(_ dashBoardData: DashBoard){

@@ -46,7 +46,7 @@ class LoginVC: UIViewController,LoginVCProtocol{
         mLoginViewModelObj = LoginViewModel(pLoginVCProtocolObj: self)
         mLoginView.layer.shadowColor = UIColor.black.cgColor
         mLogo.layer.shadowColor = UIColor.black.cgColor
-      
+        
         //adding observer for notification when keyboard appears
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
@@ -63,10 +63,10 @@ class LoginVC: UIViewController,LoginVCProtocol{
         let lEmailChecked = NSPredicate(format:"SELF MATCHES %@", lEmailRegEx)
         let lPasswordChecked = NSPredicate(format:"SELF MATCHES %@", lPasswordRegEx)
         if lEmailChecked.evaluate(with: emailId) && lPasswordChecked.evaluate(with: password){
-        return true
-    }
+            return true
+        }
         else{
-           return false
+            return false
         }
     }
     
@@ -81,24 +81,26 @@ class LoginVC: UIViewController,LoginVCProtocol{
             self.alertMessage(title: "Alert", message: "Please enter the credentials", buttnTitle: "OK")
         }
         else{
-         lValueOfClientSideValidation = self.clientSideValidationOfUserCredentials(emailId:lEmailId!, password:lPassword!)
+            lValueOfClientSideValidation = self.clientSideValidationOfUserCredentials(emailId:lEmailId!, password:lPassword!)
             print(lValueOfClientSideValidation!)
-        
             
-        if(lValueOfClientSideValidation == true){
-            //enabling the activity indictor
-            mActivityIndicator.isHidden = false
-            mActivityIndicator.startAnimating()
             
-           //making call to LoginViewModels method for valid user credentials
-            mLoginViewModelObj?.passingEmailAndPasswordToController(lEmailId!, password: lPassword!)
-        }
-            //pop up of alert box for invalid user credentials
-        else{
-             self.alertMessage(title: "Alert", message: "Please enter the valid credentials", buttnTitle: "OK")
+            if(lValueOfClientSideValidation == true){
+                //enabling the activity indictor
+                mActivityIndicator.isHidden = false
+                mActivityIndicator.startAnimating()
+                
+                //making call to LoginViewModels method for valid user credentials
+                mLoginViewModelObj?.passingEmailAndPasswordToController(lEmailId!, password: lPassword!)
             }
+                //pop up of alert box for invalid user credentials
+            else{
+                self.alertMessage(title: "Alert", message: "Please enter the valid credentials", buttnTitle: "OK")
+            }
+        }
     }
-}
+    
+    //navigating to dashboard
     func performingNavigationToDashboard(status:Int){
         //disabling the activity indicator
         mActivityIndicator.isHidden = true
@@ -107,7 +109,7 @@ class LoginVC: UIViewController,LoginVCProtocol{
             //navigating to dashboard viewController
             self.performSegue(withIdentifier: "navigateToDashboard", sender: nil)
         }
-            //alert for unautherized user
+        //alert for unautherized user
         else if(status == 401){
             let lAlert = UIAlertController(title: "Alert", message: "Unautherized user", preferredStyle: UIAlertControllerStyle.alert)
             lAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -117,7 +119,7 @@ class LoginVC: UIViewController,LoginVCProtocol{
             let alert = UIAlertController(title: "Alert", message: "not modified", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-            }
+        }
         
     }
     
@@ -179,8 +181,8 @@ class LoginVC: UIViewController,LoginVCProtocol{
         let lAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         lAlert.addAction(UIAlertAction(title: buttnTitle , style: UIAlertActionStyle.default, handler: nil))
         self.present(lAlert, animated: true, completion: nil)
-
-
+        
+        
     }
     
 }

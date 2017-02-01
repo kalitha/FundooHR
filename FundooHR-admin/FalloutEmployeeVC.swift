@@ -5,6 +5,7 @@
 //  1)It is a Fallout UIClass with IBOutlet and IBAction of Fallout UIViewController
 //  2)In this class we display the information of fallout employees
 //  3)From this class we send mail to fallout employees
+//
 //  Created by BridgeLabz on 26/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
@@ -12,8 +13,9 @@
 import UIKit
 
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
-    
+    //create outlet of tableviewactivity indicator
     @IBOutlet weak var mTableviewActivityIndicator: UIActivityIndicatorView!
+    
     // create outlet of collectionview
     @IBOutlet weak var mCollectionView: UICollectionView!
     
@@ -126,7 +128,6 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     //collectionview datasource
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
-            //let token = UserDefaults.standard.value(forKey: "tokenKey")
         mFalloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
         }
         return mFalloutViewModelObj!.arrayOfFalloutEmployees.count

@@ -34,7 +34,6 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     
     //create the variable of type DashBoardViewModel
     var mDashBoardViewModelObj : DashBoardViewModel?
-    var mMenuShowing = false
     
     //creating uiview type varible
     var mCustomView = UIView()
@@ -42,22 +41,32 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     //creating UtilityClass object
     let mUtilityClassObj = UtilityClass()
     
+    //create outlet of activity indicator
     @IBOutlet weak var mTableViewActivityIndicator: UIActivityIndicatorView!
+    
     //create outlet of dashboard's header label
     @IBOutlet weak var mHeaderLabel: UILabel!
+    
     //create outlet of tableView
     @IBOutlet weak var mTableView: UITableView!
+    
     //create outlet of slidemenu of dashboard
     @IBOutlet weak var mSlideMenu: UIView!
+    
     //create outlet of collectionview
     @IBOutlet weak var mCollectionView: UICollectionView!
+    
     //create outlet of SlideMenuLeadingConstraint
     @IBOutlet weak var mSlideMenuLeadingConstraint: NSLayoutConstraint!
+    
     //create outlet of date
     @IBOutlet weak var mDate: UILabel!
+    
     //create outlet of activity indicator
     @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
     
+    var mMenuShowing = false
+
     // executes when screen gets loaded
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,7 +185,6 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         self.mCollectionView.reloadData()
     }
 }
-
 
 //extension of collectionview cell
 extension DashBoardVC: UICollectionViewDataSource{
