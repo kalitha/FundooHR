@@ -65,7 +65,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         mActivityIndicator.isHidden = false
         mActivityIndicator.startAnimating()
         mTableViewActivityIndicator.isHidden = false
-        mTableViewActivityIndicator.startAnimating() 
+        mTableViewActivityIndicator.startAnimating()
         mDashBoardViewModelObj = DashBoardViewModel(pDashBoardVCProtocolObj: self)
         
         //registering each xib cell with collectionview cell
@@ -84,7 +84,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         let lConvertedDate = mUtilityClassObj.date()
         
         mDate.text = lConvertedDate
-        
+
         //notifies when screen rotated
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
@@ -165,7 +165,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     func tableviewReload(){
         //disabling the activity indictor
         mTableViewActivityIndicator.isHidden = true
-       mTableViewActivityIndicator.stopAnimating()
+        mTableViewActivityIndicator.stopAnimating()
         self.mTableView.reloadData()
     }
     
@@ -245,7 +245,7 @@ extension DashBoardVC: UICollectionViewDelegate{
             performSegue(withIdentifier: "segueFromAttendanceSummaryCellInCollectionView", sender: nil)
             highlightCell2(indexPath, flag: true)
         }
-
+        
         
         if(indexPath.row == DashBoardControls.ATTENDANCEFALLOUT.rawValue){
             performSegue(withIdentifier: "segueFromAttendanceFalloutInCollectionView", sender: nil)
