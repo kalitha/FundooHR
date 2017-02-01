@@ -13,12 +13,9 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     //model type array of tableviewcontents
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
     
-    //model type array of FalloutImageModel
-    var arrayOfFalloutImageModel = [FalloutImageModel]()
-    
     //variable of type ui images
-    var arrayOfImages = [UIImage]()
-    var countOfFetchedImages = 0
+    var mArrayOfImages = [UIImage]()
+   
     var count = 0
     
     //variable of type falloutViewcontroller protocol
@@ -90,46 +87,27 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     func dataFetchedFromFalloutController(_ data:[EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees){
         arrayOfFalloutEmployees = data
         falloutTotalEmployeesContents = falloutTotalEmployeesObj
-        falloutControllerObj?.fetchEmployeeImageUrlFromService()
+        fetchImageFromUrl(arrayOfFalloutEmployees:data)
     }
     
-    //storing the employee url fetched from rest call made to firebase
-    func employeeImageUrlFetchedFromController(data:[FalloutImageModel]){
-        arrayOfFalloutImageModel = data
-        print("arrayOfFalloutImageModel count===--==",arrayOfFalloutImageModel.count)
-        for i in 0..<self.arrayOfFalloutImageModel.count{
-            let image = #imageLiteral(resourceName: "dummyImage")
-            arrayOfImages.append(image)
+    //getting image from url
+    func fetchImageFromUrl(arrayOfFalloutEmployees:[EmployeeDetails]){
+        for i in 0..<self.arrayOfFalloutEmployees.count{
+            let lUrlFetched =  arrayOfFalloutEmployees[i].mImageUrl
+            if let lUrl = NSURL(string: lUrlFetched){
+                if let data = NSData(contentsOf: lUrl as URL){
+                    let image = UIImage(data: data as Data)
+                    mArrayOfImages.append(image!)
+                }
+            }
         }
-        print("arrayOfImages count=-=-==",arrayOfImages.count)
-        fetchImageFromController(arrayOfFalloutImageModel)
+        protocolFalloutVC?.falloutCollectionviewReload()
     }
     
-    
-    //making rest call to fetch images of employees
-    func fetchImageFromController(_ image: [FalloutImageModel]){
-        //falloutControllerObj = FalloutController()
-        falloutControllerObj?.fetchImageFromService(image)
-    }
-    
-    //storing image fetched from rest call
-    func imageFetchedFromController(image: UIImage, index: Int){
-        countOfFetchedImages+=1
-        print("index",index)
-        print("countOfFetchedImages",countOfFetchedImages)
-        print("arrayOfImages.count",arrayOfImages.count)
-        print("arrayOfFalloutEmployees=-=-=-",arrayOfFalloutEmployees.count)
-        arrayOfImages[index] = image
-        if(countOfFetchedImages == arrayOfImages.count){
-            print("arrayOfFalloutEmployees==-=-=-",arrayOfFalloutEmployees)
-            self.protocolFalloutVC?.falloutCollectionviewReload()
-        }
-    }
-    
-    //fetching each image
-    func fetchEachImage(i:Int)->UIImage{
-        print("i....",i)
-        return arrayOfImages[i]
+    //fetch image of each employee
+    func fetchEachImageOfEmployee(i:Int)->UIImage{
+        print("i...",i)
+        return mArrayOfImages[i]
     }
     
     //rest call to send mail

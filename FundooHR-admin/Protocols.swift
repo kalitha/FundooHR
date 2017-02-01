@@ -36,27 +36,23 @@ protocol DashBoardViewModelProtocol{
     
 }
 //protocol of DashDoard ViewController
-    protocol DashBoardVCProtocol {
-        func dashBoardCollectionviewreload()
-        func tableviewReload()
-    }
+protocol DashBoardVCProtocol {
+    func dashBoardCollectionviewreload()
+    func tableviewReload()
+}
 //protocol of FalloutController
 protocol FalloutControllerProtocol {
     func tableViewContentsFetchedFromService(data:[TableViewContentModel])
     func dataFetchedFromFalloutService(_ data: [EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees)
-    func employeeImageUrlFetchedFromService(url:[FalloutImageModel])
-    func imageFetchedFromService(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInService(status:Int)
 }
 
 //protocol of FalloutViewModel
 protocol FalloutViewModelProtocol {
-     func tableViewContentsFetchedFromController(data:[TableViewContentModel])
+    func tableViewContentsFetchedFromController(data:[TableViewContentModel])
     func dataFetchedFromFalloutController(_ data: [EmployeeDetails],falloutTotalEmployeesObj:TotalEmployees)
-    func employeeImageUrlFetchedFromController(data:[FalloutImageModel])
-    func imageFetchedFromController(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInController(status:Int)
-    }
+}
 
 //protocol of FalloutViewController
 protocol FalloutVCProtocol {
@@ -68,8 +64,6 @@ protocol FalloutVCProtocol {
 //protocol of LeaveSummaryController
 protocol LeaveSummaryControllerProtocol{
     func dataFetchedFromService(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees)
-    func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel])
-    func imageFetchedFromService(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInService(status:Int)
     func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel])
 }
@@ -77,8 +71,6 @@ protocol LeaveSummaryControllerProtocol{
 //protocol of LeaveSummaryViewModel
 protocol LeaveSummaryViewModelProtocol {
     func dataFetchedFromController(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees)
-    func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel])
-    func imageFetchedFromController(image: UIImage, index: Int)
     func fetchedDataFromSendEmailFunctionInController(status:Int)
     func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel])
 }

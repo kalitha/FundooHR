@@ -11,62 +11,49 @@ import UIKit
 class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     
     //create variable of type LeavesummaryService
-    var leaveSummaryServiceObj : LeavesummaryService?
+    var mLeaveSummaryServiceObj : LeavesummaryService?
     
     //create variable of type LeaveSummaryViewModelProtocol
-    var protocolLeaveSummaryViewModelObj : LeaveSummaryViewModelProtocol?
+    var mProtocolLeaveSummaryViewModelObj : LeaveSummaryViewModelProtocol?
     
     init(pLeaveSummaryViewModelProtocolObj : LeaveSummaryViewModelProtocol) {
-        protocolLeaveSummaryViewModelObj = pLeaveSummaryViewModelProtocolObj
+        mProtocolLeaveSummaryViewModelObj = pLeaveSummaryViewModelProtocolObj
     }
     
     //rest call to fetch tableview's data
     func fetchTableViewContentsFromService(){
         let lArrayOfTableViewContentModel = [TableViewContentModel]()
-        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
-        leaveSummaryServiceObj?.fetchTableViewContents()
+        mLeaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        mLeaveSummaryServiceObj?.fetchTableViewContents()
     }
     
     //fetching the tableview contents
     func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel]){
-        protocolLeaveSummaryViewModelObj?.tableViewContentsFetchedFromRestCall(data: data)
+        mProtocolLeaveSummaryViewModelObj?.tableViewContentsFetchedFromRestCall(data: data)
     }
     
+    //making rest call to fetch collection view cells
     func fetchNumberOFCellsFromService(){
-        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        mLeaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
         // leaveSummaryServiceObj?.protocolLeaveSummaryControllerObj = self
         let arrayOfLeaveEmployees = [EmployeeDetails]()
-        leaveSummaryServiceObj?.fetchData()
+        mLeaveSummaryServiceObj?.fetchData()
     }
+    
+    //fetching collection view cells from rest call
     func dataFetchedFromService(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees){
-        self.protocolLeaveSummaryViewModelObj?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)
-    }
-    // ----====----- FETCHING IMAGE -----=====----
-    func fetchEmployeeImageUrlFromService(){
-        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
-        //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
-        leaveSummaryServiceObj?.fetchEmployeeImageUrlFromFirebase()
+        self.mProtocolLeaveSummaryViewModelObj?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)
     }
     
-    func employeeImageUrlFetchedFromService(url:[LeaveSummaryEmployeeImageModel]){
-        self.protocolLeaveSummaryViewModelObj?.employeeImageUrlFetchedFromController(data: url)
-    }
-    
-    func fetchImageFromService(_ image:[LeaveSummaryEmployeeImageModel]){
-        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
-        //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
-        leaveSummaryServiceObj?.fetchEmployeeImage(image)
-    }
-    func imageFetchedFromService(image: UIImage, index: Int){
-        self.protocolLeaveSummaryViewModelObj?.imageFetchedFromController(image: image, index: index)
-    }
-    
+    //rest call to send mail
     func callSendEmailFunctionInService(){
-        leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
+        mLeaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
         //leaveSummaryServiceObj?.protocolLeaveSummaryController = self
-        leaveSummaryServiceObj?.sendEmailToEmployeesTakenLeave()
+        mLeaveSummaryServiceObj?.sendEmailToEmployeesTakenLeave()
     }
+    
+    //fetching the status after sending mail
     func fetchedDataFromSendEmailFunctionInService(status:Int){
-        protocolLeaveSummaryViewModelObj?.fetchedDataFromSendEmailFunctionInController(status: status)
+        mProtocolLeaveSummaryViewModelObj?.fetchedDataFromSendEmailFunctionInController(status: status)
     }
 }

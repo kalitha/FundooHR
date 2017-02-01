@@ -4,14 +4,14 @@
 //  Purpose:-
 //  1)It is a Dashboard UIClass with IBOutlet and IBAction of DashBoard UIViewController
 //  2)In this class we are displaying Number of Unmarked and Marked Employees,FalloutEmployees and Leave summary of Employees
-//  
+//
 //  Created by BridgeLabz Solutions LLP on 09/12/16.
 //  Copyright © 2016 BridgeLabz Solutions LLP. All rights reserved.
 //
 
 import UIKit
 
-//enumeration 
+//enumeration
 enum DashBoardControls:Int{
     case ATTENDANCESUMMARY = 0
     case ATTENDANCEFALLOUT
@@ -66,7 +66,9 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     @IBOutlet weak var mActivityIndicator: UIActivityIndicatorView!
     
     var mMenuShowing = false
-
+    
+    var mSlideMenuValueFomPlist : Int?
+    
     // executes when screen gets loaded
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,9 +95,11 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         let lConvertedDate = mUtilityClassObj.date()
         
         mDate.text = lConvertedDate
-
+        
         //notifies when screen rotated
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        
     }
     
     //function to rotate the screen
@@ -129,7 +133,12 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
     
     //called by addGestureRecognizer method
     func tapBlurButton(_ sender: UIButton) {
-        mSlideMenuLeadingConstraint.constant = -250
+        
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+        }
+        mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
@@ -148,29 +157,29 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
         mCustomView.backgroundColor = UIColor.clear
         
-        if(mMenuShowing){
-            mSlideMenuLeadingConstraint.constant = -250
-            //1st case of removing tap gesture(papre) when we click on the icon
-            
-            removeGestureRecognizer()
-            
-        }else{
-            //enabling the activity indictor
-            mTableViewActivityIndicator.isHidden = false
-            mTableViewActivityIndicator.startAnimating()
-            mSlideMenuLeadingConstraint.constant = 0
-            self.view.addSubview(mCustomView)
-            mCustomView.alpha = 0.5
-            addGestureRecognizer()
-            tableviewReload()
-        }
+        //        if(mMenuShowing){
+        //            mSlideMenuLeadingConstraint.constant = -250
+        //            //1st case of removing tap gesture(papre) when we click on the icon
+        //
+        //            removeGestureRecognizer()
+        
+        
+        //enabling the activity indictor
+        mTableViewActivityIndicator.isHidden = false
+        mTableViewActivityIndicator.startAnimating()
+        mSlideMenuLeadingConstraint.constant = 0
+        self.view.addSubview(mCustomView)
+        mCustomView.alpha = 0.5
+        addGestureRecognizer()
+        tableviewReload()
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
         mMenuShowing = !mMenuShowing
     }
     
-    //reload tableview data when the data is loaded into it
+    //reload tableview
     func tableviewReload(){
         //disabling the activity indictor
         mTableViewActivityIndicator.isHidden = true
@@ -355,12 +364,6 @@ extension DashBoardVC: UITableViewDelegate{
         
         removeGestureRecognizer()
         
-    }
-    
-    //func to set the height of the cell
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
-        return 70.0;//Choose your custom row height
     }
 }
 

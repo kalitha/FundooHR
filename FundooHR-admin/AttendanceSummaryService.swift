@@ -11,6 +11,7 @@ import Firebase
 import Alamofire
 
 class AttendanceSummaryService: NSObject {
+    
     // create firebase reference
     var ref: FIRDatabaseReference!
     
@@ -44,17 +45,12 @@ class AttendanceSummaryService: NSObject {
                 let valueAtEachIndex = self.mSlideMenuContents[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
                 
                 let rowName = valueAtEachIndex["row_name"] as! String
-                
                 let tableviewContents = TableViewContentModel(rowName: rowName)
-                
                 self.mArrayOfTableViewContentModel.append(tableviewContents)
             }
             print("slideMenuContents",self.mSlideMenuContents)
             print("count=======",self.mArrayOfTableViewContentModel.count)
             self.mAttendanceSummaryProtocolObj?.tableViewContentsFetchedFromRestCall(data: self.mArrayOfTableViewContentModel)
-            
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }

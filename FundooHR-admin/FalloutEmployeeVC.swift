@@ -13,6 +13,7 @@
 import UIKit
 
 class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,FalloutVCProtocol,UITableViewDelegate,UITableViewDataSource {
+    
     //create outlet of tableviewactivity indicator
     @IBOutlet weak var mTableviewActivityIndicator: UIActivityIndicatorView!
     
@@ -51,6 +52,8 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     
     var mCustomView = UIView()
     
+    var mSlideMenuValueFomPlist : Int?
+    
     //create variable of type FalloutViewModel
     var mFalloutViewModelObj : FalloutViewModel?
     
@@ -69,7 +72,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         //notifies when collectionview's orientation is changed
-         NotificationCenter.default.addObserver(self, selector: #selector(self.changeOrientationFunc), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeOrientationFunc), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
         //-----========----------==========-------
         self.mCollectionView!.collectionViewLayout = self.getLayout()
@@ -113,7 +116,12 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     
     //called by addGestureRecognizer method
     func tapBlurButton(_ sender: UIButton) {
-        mSlideMenuLeadingConstraint.constant = -250
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+        }
+        
+        mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
@@ -128,12 +136,13 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     //collectionview datasource
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
-        mFalloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
+            mFalloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
         }
         return mFalloutViewModelObj!.arrayOfFalloutEmployees.count
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+    //fetches data in each cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         
         let color = UIColor.init(red: 240/255, green: 237/255, blue: 234/255, alpha: 1)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FalloutEmployeeCollectionViewCell
@@ -142,7 +151,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         cell.company.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mCompany
         cell.email.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mEmailId
         cell.mobileNum.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mMobile
-       let employeeImage = mFalloutViewModelObj?.fetchEachImage(i: indexPath.row)
+        let employeeImage = mFalloutViewModelObj?.fetchEachImageOfEmployee(i: indexPath.row)
         print("employee image...",employeeImage)
         cell.employeeImage.image = employeeImage
         
@@ -153,7 +162,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         print("cells width====",cell.bounds.width)
         return cell
     }
-
+    
     //open slidemenu when clicked on menu button
     @IBAction func openMenuOnButtonclick(_ sender: UIButton) {
         //changing the custom view's size while we change to landscape mode
@@ -161,27 +170,19 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
         mCustomView.backgroundColor = UIColor.clear
         
-        if(mMenuShowing){
-            mSlideMenuLeadingConstraint.constant = -250
-            //1st case of removing tap gesture(papre) when we click on the icon
-            
-            removeGestureRecognizer()
-            
-        }else{
-            //enabling the activity indictor
-            mTableviewActivityIndicator.isHidden = false
-            mTableviewActivityIndicator.startAnimating()
-            mSlideMenuLeadingConstraint.constant = 0
-            self.view.addSubview(mCustomView)
-            mCustomView.alpha = 0.5
-            addGestureRecognizer()
-        }
+        //enabling the activity indictor
+        mTableviewActivityIndicator.isHidden = false
+        mTableviewActivityIndicator.startAnimating()
+        mSlideMenuLeadingConstraint.constant = 0
+        self.view.addSubview(mCustomView)
+        addGestureRecognizer()
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
         mMenuShowing = !mMenuShowing
         falloutTableviewReload()
-
+        
     }
     //reload tableview data when the data is loaded into it
     func falloutTableviewReload(){
@@ -213,8 +214,8 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: collectionView.frame.size.width - 20, height: collectionView.frame.size.width - 20)
-        }
-
+    }
+    
     //decides the size of collectionview cell
     func getLayout() -> UICollectionViewLayout
     {
@@ -233,7 +234,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         return (mFalloutViewModelObj?.fetchTableviewContentsFromFalloutController())!
     }
     
-    //
+    //displays the data in each row
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         cell.textLabel?.text = mFalloutViewModelObj?.contentAtEachRow(i: indexPath.row)
@@ -254,10 +255,11 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             cell.imageView?.image = #imageLiteral(resourceName: "logout")
         }
         return cell
-
+        
     }
     
-     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    //called when particular tableview row is selected
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         if(indexPath.row == DashBoardTableview.DASHBOARD.rawValue){
             performSegue(withIdentifier: "segueFromDashboardCell", sender: nil)
         }
@@ -303,7 +305,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         removeGestureRecognizer()
     }
     
-    //used to show alert on the tapping of button
+    //used to show alert on the tapping of email button
     @IBAction func showAlertOnButtonTapping(_ sender: UIButton) {
         // create the alert
         let alert = UIAlertController(title: "Alert", message: "Would you like to send the email?", preferredStyle: UIAlertControllerStyle.alert)
@@ -323,6 +325,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         // show the alert
         self.present(alert, animated: true, completion: nil)
     }
+    
     //fetch the status after sending mail
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int){
         if(status == 200)
@@ -330,13 +333,12 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             let alert = UIAlertController(title: "Alert", message: "Successfully sent mail to users", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-
+            
         }
         else{
             let alert = UIAlertController(title: "Alert", message: "email not sent", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-
         }
     }
 }

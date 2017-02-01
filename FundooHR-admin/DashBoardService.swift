@@ -51,9 +51,6 @@ class DashBoardService: NSObject {
             print("slideMenuContents",self.mSlideMenuContents)
             print("count=======",self.mArrayOfTableViewContentModel.count)
             self.mProtocolDashBoardController?.tableViewContentsFetchedFromService(data: self.mArrayOfTableViewContentModel)
-            
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }

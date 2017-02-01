@@ -16,7 +16,7 @@ class EngineersService: NSObject {
     var protocolEngineersController : EngineersControllerProtocol?
     
     func fetchData()  {
-          ref = FIRDatabase.database().reference()//responsible to make a call to firebase
+        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
         ref.child("slideMenuContents").observeSingleEvent(of: .value, with: { (snapshot) in
             
             self.slideMenuContents = (snapshot.value) as! [NSDictionary]
@@ -33,9 +33,6 @@ class EngineersService: NSObject {
             print("slideMenuContents",self.slideMenuContents)
             print("count=======",self.arrayOfEngineerNames.count)
             self.protocolEngineersController?.dataFetchedFromService(data: self.arrayOfEngineerNames)
-           
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }

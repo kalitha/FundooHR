@@ -21,15 +21,12 @@ class LeavesummaryService: NSObject {
     
     //create object of type
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
-
+    
     //creating the variable of LeaveSummaryControllerProtocol type
     var protocolLeaveSummaryControllerObj : LeaveSummaryControllerProtocol?
     
     //model type array of LeaveSummary
     var arrayOfLeaveSummaryEmloyees = [EmployeeDetails]()
-    
-    //var falloutEmployeeData = [NSDictionary]()
-    var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     
     //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
@@ -56,10 +53,7 @@ class LeavesummaryService: NSObject {
             }
             print("slideMenuContents",self.mSlideMenuContents)
             print("count=======",self.mArrayOfTableViewContentModel.count)
-           self.protocolLeaveSummaryControllerObj?.tableViewContentsFetchedFromRestCall(data: self.mArrayOfTableViewContentModel)
-            
-            
-            
+            self.protocolLeaveSummaryControllerObj?.tableViewContentsFetchedFromRestCall(data: self.mArrayOfTableViewContentModel)
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -105,63 +99,12 @@ class LeavesummaryService: NSObject {
                         let lEngineerIdValue = valueAtEachIndex["engineerId"] as! String
                         let lEmployeeImageUrl = valueAtEachIndex["imageUrl"] as! String
                         let lEachEmployeeObj = EmployeeDetails(pEmployeeName: lEmployeeNameValue, pEmployeeStatus: lEmployeeStatusValue, pCompany: lCompanyValue, pEmailId: lEmailIdValue, pMobile: lMobileValue, pBlStartDate: lBlStartDateValue, pCompanyJoinDate: lCompanyJoinDateValue, pCompanyLeaveDate: lCompanyLeaveDateValue, pLeaveTaken: lLeaveTakenValue, pEngineerId: lEngineerIdValue, pImageUrl: lEmployeeImageUrl)
-                self.arrayOfLeaveSummaryEmloyees.append(lEachEmployeeObj)
+                        self.arrayOfLeaveSummaryEmloyees.append(lEachEmployeeObj)
                         
                     }
                     print("---count of employees---",self.arrayOfLeaveSummaryEmloyees.count)
                     self.protocolLeaveSummaryControllerObj?.dataFetchedFromService(data: self.arrayOfLeaveSummaryEmloyees, leaveSummaryTotalEmployees: leaveSummaryTotalEmployeesObj)
                 }
-        }
-    }
-    
-    //making rest call to fetch employee url
-    func fetchEmployeeImageUrlFromFirebase(){
-        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
-        ref.child("leaveOutEmployee").observeSingleEvent(of: .value, with: { snapshot in
-            
-            let leaveSummaryEmployee = (snapshot.value) as! [NSDictionary]
-            
-            print("==leaveSummaryEmployee==",leaveSummaryEmployee)
-            for index in 0..<leaveSummaryEmployee.count{
-                let valueAtEachIndex = leaveSummaryEmployee[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
-                let employeeImageValue = valueAtEachIndex["employee_Image"] as! String
-                let employeeNameValue = valueAtEachIndex["employee_name"] as! String
-                let employeeObj = LeaveSummaryEmployeeImageModel(employeeImage: employeeImageValue, employeeName: employeeNameValue)
-                self.arrayOfLeaveSummaryEmployeeImages.append(employeeObj)
-            }
-            print("count of arrayOfFalloutEmloyees ",self.arrayOfLeaveSummaryEmloyees.count)
-            print("count=======",self.arrayOfLeaveSummaryEmployeeImages.count)
-            print("arrayOfFalloutEmployeeImages",self.arrayOfLeaveSummaryEmployeeImages)
-            self.protocolLeaveSummaryControllerObj?.employeeImageUrlFetchedFromService(url: self.arrayOfLeaveSummaryEmployeeImages)
-        })
-        { (error) in
-            print(error.localizedDescription)
-        }
-        
-    }
-    
-    //making rest call to fetch employee images
-    func fetchEmployeeImage(_ image:[LeaveSummaryEmployeeImageModel]){
-        let storage = FIRStorage.storage()
-        let storageRef = storage.reference(forURL: "gs://fundoohr16-3d816.appspot.com")
-        for i in 0..<image.count{
-            let employeeImageUrl = image[i].employeeImageUrl
-            let path = storageRef.child(employeeImageUrl!)
-            
-            path.data(withMaxSize: 1*1024*1024) {(data,error) -> Void in//we r making rest call here
-                print("count of arrayOfFalloutEmloyees ",self.arrayOfLeaveSummaryEmloyees.count)
-                print("i value",i)
-                print("data",
-                      data)
-                print("image",UIImage(data: data!))
-                if(error != nil){
-                    print("error occured")
-                }else{
-                    let image = UIImage(data: data!)
-                    self.protocolLeaveSummaryControllerObj?.imageFetchedFromService(image: image!, index: i)
-                    
-                }
-            }
         }
     }
     
@@ -179,15 +122,15 @@ class LeavesummaryService: NSObject {
         let params = ["timeStamp":  (lCalculatedTimeStamp), "token" : (token)] as [String : Any]
         Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .responseJSON{
-            response in
+                response in
                 print("value----",response.result.value)
-            if let json = response.result.value{
-                let emailData = json as! NSDictionary
-                print("emailData",emailData)
-                let status = emailData.value(forKey: "status") as! Int
-                print("status---",status)
-                self.protocolLeaveSummaryControllerObj?.fetchedDataFromSendEmailFunctionInService(status: status)
-            }
+                if let json = response.result.value{
+                    let emailData = json as! NSDictionary
+                    print("emailData",emailData)
+                    let status = emailData.value(forKey: "status") as! Int
+                    print("status---",status)
+                    self.protocolLeaveSummaryControllerObj?.fetchedDataFromSendEmailFunctionInService(status: status)
+                }
         }
     }
 }

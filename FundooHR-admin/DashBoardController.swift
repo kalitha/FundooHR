@@ -12,6 +12,7 @@ class DashBoardController: NSObject,DashBoardControllerProtocol{
     
     //create variable of type DashBoardViewModelProtocol
     var mProtocolDashBoardViewModel : DashBoardViewModelProtocol?
+    
     //create variable of type DashBoardService
     var mDashBoardServiceObj : DashBoardService?
     

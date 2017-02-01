@@ -9,7 +9,11 @@
 import UIKit
 
 class EngineersController: NSObject,EngineersControllerProtocol {
+    
+    //create variable of type EngineersService
     var engineersServiceObj : EngineersService?
+    
+    //create variable of type EngineersviewModelProtocol
     var protocolEngineersViewModel : EngineersviewModelProtocol?
     
     func fetchNumOfRows(){

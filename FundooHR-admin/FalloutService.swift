@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Firebase
 import FirebaseStorage
-
+ 
  class FalloutService: NSObject {
     
     // create firebase reference
@@ -22,7 +22,7 @@ import FirebaseStorage
     //create object of type
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
     
-    
+    //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
     
     //creating the variable of FalloutControllerProtocol type
@@ -30,9 +30,6 @@ import FirebaseStorage
     
     //var falloutEmployeeData = [NSDictionary]()
     var arrayOfFalloutEmloyees = [EmployeeDetails]()
-    
-    //model type array of FalloutImageModel
-    var arrayOfFalloutEmployeeImages = [FalloutImageModel]()
     
     init(pFalloutControllerProtocolObj : FalloutControllerProtocol) {
         protocolFalloutController = pFalloutControllerProtocolObj
@@ -57,9 +54,6 @@ import FirebaseStorage
             print("slideMenuContents",self.mSlideMenuContents)
             print("count=======",self.mArrayOfTableViewContentModel.count)
             self.protocolFalloutController?.tableViewContentsFetchedFromService(data: self.mArrayOfTableViewContentModel)
-            
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -108,56 +102,6 @@ import FirebaseStorage
                     print("---count of employees---",self.arrayOfFalloutEmloyees.count)
                     self.protocolFalloutController?.dataFetchedFromFalloutService(self.arrayOfFalloutEmloyees as [EmployeeDetails],falloutTotalEmployeesObj: falloutTotalEmployeesObj )
                 }
-        }
-    }
-    
-    //making rest call to fetch employee url
-    func fetchEmployeeImageUrlFromFirebase(){
-        ref = FIRDatabase.database().reference()//responsible to make a call to firebase
-        ref.child("falloutEmployee").observeSingleEvent(of: .value, with: { snapshot in
-            
-            let falloutEmployee = (snapshot.value) as! [NSDictionary]
-            
-            print("==falloutEmployee==",falloutEmployee)
-            for index in 0..<falloutEmployee.count{
-                let valueAtEachIndex = falloutEmployee[index] as NSDictionary //valueAtEachIndex is 1 nsdictionary
-                let employeeImageValue = valueAtEachIndex["employee_Image"] as! String
-                let employeeNameValue = valueAtEachIndex["employee_name"] as! String
-                let employeeObj = FalloutImageModel(employeeImage: employeeImageValue, employeeName: employeeNameValue)
-                self.arrayOfFalloutEmployeeImages.append(employeeObj)
-            }
-            print("count of arrayOfFalloutEmloyees ",self.arrayOfFalloutEmloyees.count)
-            print("count=======",self.arrayOfFalloutEmployeeImages.count)
-            print("arrayOfFalloutEmployeeImages",self.arrayOfFalloutEmployeeImages)
-            self.protocolFalloutController?.employeeImageUrlFetchedFromService(url: self.arrayOfFalloutEmployeeImages)
-        })
-        { (error) in
-            print(error.localizedDescription)
-        }
-        
-    }
-    
-    //making rest call to fetch employee images
-    func fetchEmployeeImage(_ image:[FalloutImageModel]){
-        let storage = FIRStorage.storage()
-        let storageRef = storage.reference(forURL: "gs://fundoohr16-3d816.appspot.com")
-        for i in 0..<image.count{
-            let employeeImageUrl = image[i].employeeImageUrl
-            let path = storageRef.child(employeeImageUrl!)
-            
-            path.data(withMaxSize: 1*1024*1024) {(data,error) -> Void in//we r making rest call here
-                print("count of arrayOfFalloutEmloyees ",self.arrayOfFalloutEmloyees.count)
-                print("i value",i)
-                print("data",data!)
-                print("image",UIImage(data: data!)!)
-                if(error != nil){
-                    print("error occured")
-                }else{
-                    let image = UIImage(data: data!)
-                    self.protocolFalloutController?.imageFetchedFromService(image: image!, index: i)
-                    
-                }
-            }
         }
     }
     

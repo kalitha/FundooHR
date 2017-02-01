@@ -13,11 +13,11 @@ class AttendanceSummaryViewModel: NSObject,AttendanceSummaryProtocol {
     //model type array of tableviewcontents
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
     
+    var mAttendanceSummaryVCObj : AttendanceSummaryVC?
+    
     //variable of type ui images
     var mArrayOfImages = [UIImage]()
     
-    //count of FetchedImages
-    var mCountOfFetchedImages = 0
     var mCount = 0
     
     //model type array of falloutemployees
@@ -73,6 +73,7 @@ class AttendanceSummaryViewModel: NSObject,AttendanceSummaryProtocol {
         }
         
         mArrayOfTableViewContentModel = data
+        
         fetchNumberOfCellsFromController()
         
     }

@@ -11,6 +11,7 @@ import  Alamofire
 
 class LoginService: NSObject {
     
+    //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
     
     var loginControllerProtocolObj :LoginControllerProtocol?
@@ -23,7 +24,6 @@ class LoginService: NSObject {
     
     //making rest api call
     func fetchToken(_ email:String, password:String){
-        
         //getting url from plist
         let url = mUtilityClassObj.fetchUrlFromPlist()
         let urlString: String = "\(url)/login"

@@ -19,17 +19,11 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     //initially setting the collection count to 0
     var mCountForCollectionview = 0
     
-    //initially setting the count of fetched images to 0
-    var countOfFetchedImages = 0
-    
     //used to make only one rest call
     var mCount = 0
     
     //initialy setting response count of tableview to 0
     var mResponseCountForTableView = 0
-    
-    //create variable of type ui images
-    var arrayOfImages = [UIImage]()
     
     //create the object of type LeaveSummary
     var arrayOfLeaveEmployees = [EmployeeDetails]()
@@ -48,7 +42,9 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     
     //model type array of tableviewcontents
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
-
+    
+    //variable of type ui images
+    var mArrayOfImages = [UIImage]()
     
     init(pLeaveSummaryVCProtocolObj : LeaveSummaryVCProtocol) {
         mLeaveSummaryVCProtocolObj = pLeaveSummaryVCProtocolObj
@@ -85,7 +81,7 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
         }
         mArrayOfTableViewContentModel = data
         fetchDataFromController()
-        }
+    }
     
     //making rest call to fetch data of collectionview cells from api
     func fetchDataFromController()->Int{
@@ -103,47 +99,26 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     func dataFetchedFromController(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees){
         arrayOfLeaveEmployees = data
         leaveSummaryTotalEmployeesContent = leaveSummaryTotalEmployees
-        leaveSummaryControllerObj?.fetchEmployeeImageUrlFromService()
+        fetchImageFromUrl(arrayOfLeaveEmployees: data)
     }
     
-    //storing the employee url fetched from rest call made to firebase
-    func employeeImageUrlFetchedFromController(data:[LeaveSummaryEmployeeImageModel]){
-        arrayOfLeaveSummaryEmployeeImages = data
-        print("arrayOfFalloutImageModel count===--==",arrayOfLeaveSummaryEmployeeImages.count)
-        for i in 0..<self.arrayOfLeaveSummaryEmployeeImages.count{
-            let image = #imageLiteral(resourceName: "dummyImage")
-            arrayOfImages.append(image)
-        }
-        print("arrayOfImages count=-=-==",arrayOfImages.count)
-        fetchImageFromController(arrayOfLeaveSummaryEmployeeImages)
-    }
-    
-    //making rest call to fetch images of employees
-    func fetchImageFromController(_ image: [LeaveSummaryEmployeeImageModel]){
-        leaveSummaryControllerObj?.fetchImageFromService(image)
-    }
-    
-    //storing image fetched from rest call
-    func imageFetchedFromController(image: UIImage, index: Int){
-        countOfFetchedImages+=1
-        print("index",index)
-        print("countOfFetchedImages",countOfFetchedImages)
-        print("arrayOfImages.count",arrayOfImages.count)
-        print("arrayOfFalloutEmployees=-=-=-",arrayOfLeaveEmployees.count)
-        arrayOfImages[index] = image
-        if(countOfFetchedImages == arrayOfImages.count){
-            //protocolFalloutVC?.reload() //reloading after getting the image
-            print("arrayOfFalloutEmployees==-=-=-",arrayOfLeaveEmployees)
-            DispatchQueue.main.async {
-                self.mLeaveSummaryVCProtocolObj?.reload()
+    //getting image from url
+    func fetchImageFromUrl(arrayOfLeaveEmployees:[EmployeeDetails]){
+        for i in 0..<self.arrayOfLeaveEmployees.count{
+            let lUrlFetched =  arrayOfLeaveEmployees[i].mImageUrl
+            if let lUrl = NSURL(string: lUrlFetched){
+                if let data = NSData(contentsOf: lUrl as URL){
+                    let image = UIImage(data: data as Data)
+                    mArrayOfImages.append(image!)
+                }
             }
-            
         }
+        mLeaveSummaryVCProtocolObj?.reload()
     }
     
-    //fetching each image
-    func fetchEachImage(i:Int)->UIImage{
-        return arrayOfImages[i]
+    func fetchEachImageOfEmployee(i:Int)->UIImage{
+        print("i...",i)
+        return mArrayOfImages[i]
     }
     
     //rest call to send mail

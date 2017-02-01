@@ -9,27 +9,53 @@
 import UIKit
 
 class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource {
-
+    
+    //create outlet for date
     @IBOutlet weak var mDate: UILabel!
+    
+    //create outlet to display the month of fallout employees
     @IBOutlet weak var mUnmarkedDate: UILabel!
+    
+    //create outlet to store number of unmarked employees
     @IBOutlet weak var mNumberOfUnmarkedEmployees: UILabel!
+    
+    //create the outlet of total employees
     @IBOutlet weak var mTotalEmployees: UILabel!
+    
+    //create outlet for activity indicator
     @IBOutlet weak var mCollectionActivityIndicator: UIActivityIndicatorView!
+    
+    //create outlet for slidemenu that contains tableview
     @IBOutlet weak var mSlideMenu: UIView!
+    
+    //create outlet for tableview
     @IBOutlet weak var mTableView: UITableView!
+    
+    //create outlet of tableviewactivity indicator
     @IBOutlet weak var mTableActivityIndicator: UIActivityIndicatorView!
     
+    //create outlet for slidemenu leading constraint
     @IBOutlet weak var mSlideMenuLeadingConstraint: NSLayoutConstraint!
     
+    //create variable of type AttendanceSummaryViewModel
     var mAttendanceSummaryViewModelObj : AttendanceSummaryViewModel?
+    
+    //create variable of type uiview
     var mCustomView = UIView()
+    
     var mMenuShowing = false
+    
+    var mSlideMenuValueFomPlist : Int?
+    
+    //create timestamp of type double
+    var mTimeStamp : Double?
     
     //create object of UtilityClass
     let mUtilityClassObj = UtilityClass()
     
     //create outlet for collectionview
     @IBOutlet weak var mCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //enabling activity indicator
@@ -89,7 +115,12 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     
     //called by addGestureRecognizer method
     func tapBlurButton(_ sender: UIButton) {
-        mSlideMenuLeadingConstraint.constant = -250
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+        }
+        
+        mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
@@ -101,37 +132,31 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         //3rd case of removing  gesture when we click on collectionview
         removeGestureRecognizer()
     }
-
-
+    
+    //open slidemenu when clicked on menu button
     @IBAction func onClickOfMenuButton(_ sender: UIButton) {
         //changing the custom view's size while we change to landscape mode
         print("views width",view.frame.width)
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
         mCustomView.backgroundColor = UIColor.clear
         
-        if(mMenuShowing){
-            mSlideMenuLeadingConstraint.constant = -250
-            //1st case of removing tap gesture(papre) when we click on the icon
-            
-            removeGestureRecognizer()
-            
-        }else{
-            //enabling the activity indictor
-            mTableActivityIndicator.isHidden = false
-            mTableActivityIndicator.startAnimating()
-            mSlideMenuLeadingConstraint.constant = 0
-            self.view.addSubview(mCustomView)
-            mCustomView.alpha = 0.5
-            addGestureRecognizer()
-        }
+        //enabling the activity indictor
+        mTableActivityIndicator.isHidden = false
+        mTableActivityIndicator.startAnimating()
+        mSlideMenuLeadingConstraint.constant = 0
+        self.view.addSubview(mCustomView)
+        mCustomView.alpha = 0.5
+        addGestureRecognizer()
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
         mMenuShowing = !mMenuShowing
         attendanceSummaryTableviewReload()
-
+        
     }
     
+    //reload collectionview
     func attendanceSummaryCollectionViewReload(){
         //disabling the activity indicator
         mCollectionActivityIndicator.isHidden = true
@@ -148,6 +173,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         
     }
     
+    //reload tableview
     func attendanceSummaryTableviewReload(){
         //disabling the activity indictor
         mTableActivityIndicator.isHidden = true
@@ -278,6 +304,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         return cell
     }
     
+    //used to show alert on the tapping of email button
     @IBAction func onEmailButton(_ sender: UIButton) {
         // create the alert
         let alert = UIAlertController(title: "Alert", message: "Would you like to send the email?", preferredStyle: UIAlertControllerStyle.alert)
@@ -297,8 +324,8 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         // show the alert
         self.present(alert, animated: true, completion: nil)
     }
-
-        
+    
+    //fetch the status after sending mail
     func fetchedStatusAfterSendingMail(status:Int){
         if(status == 200)
         {
