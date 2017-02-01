@@ -86,6 +86,7 @@ protocol LeaveSummaryViewModelProtocol {
 //protocol of LeaveSummaryVC
 protocol LeaveSummaryVCProtocol {
     func reload()
+    func leaveSummaryTableviewReload()
     func fetchedDataFromSendEmailFunctionInViewModel(status:Int)
 }
 

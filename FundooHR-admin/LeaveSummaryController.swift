@@ -32,11 +32,11 @@ class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
         protocolLeaveSummaryViewModelObj?.tableViewContentsFetchedFromRestCall(data: data)
     }
     
-    func fetchNumberOFCellsFromService(token:String){
+    func fetchNumberOFCellsFromService(){
         leaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
         // leaveSummaryServiceObj?.protocolLeaveSummaryControllerObj = self
         let arrayOfLeaveEmployees = [EmployeeDetails]()
-        leaveSummaryServiceObj?.fetchData(token: token)
+        leaveSummaryServiceObj?.fetchData()
     }
     func dataFetchedFromService(data:[EmployeeDetails],leaveSummaryTotalEmployees:TotalEmployees){
         self.protocolLeaveSummaryViewModelObj?.dataFetchedFromController(data: data, leaveSummaryTotalEmployees: leaveSummaryTotalEmployees)

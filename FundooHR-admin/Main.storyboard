@@ -772,7 +772,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XEq-Mb-UQ6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="-2750"/>
+            <point key="canvasLocation" x="1087" y="-2468"/>
         </scene>
         <!--Attendance SummaryVC-->
         <scene sceneID="MaJ-4I-lEW">
@@ -1187,7 +1187,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xbS-e9-byp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1746" y="-2529"/>
+            <point key="canvasLocation" x="1546" y="-2980"/>
         </scene>
         <!--ClientsVC-->
         <scene sceneID="hnT-cl-c0c">
@@ -1279,7 +1279,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3b-dy-eIh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1326" y="-1418"/>
+            <point key="canvasLocation" x="1155" y="-2938"/>
         </scene>
         <!--ReportsVC-->
         <scene sceneID="bkm-9z-Pi7">
@@ -1371,7 +1371,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bbc-Ct-nYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1829" y="-388"/>
+            <point key="canvasLocation" x="-1206" y="-3240"/>
         </scene>
         <!--EngineersVC-->
         <scene sceneID="cOl-Md-n4O">
@@ -1507,7 +1507,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GQq-cP-Ab0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="-604"/>
+            <point key="canvasLocation" x="-70" y="-1952"/>
         </scene>
         <!--Leave SummaryVC-->
         <scene sceneID="51s-d1-XCX">
@@ -1853,7 +1853,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="736"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="C7G-ch-0zT">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" rowHeight="77" id="C7G-ch-0zT">
                                                 <rect key="frame" x="0.0" y="28" width="250" height="77"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7G-ch-0zT" id="GeR-Hh-CLG">
@@ -1862,6 +1862,10 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="5AX-pK-gf7" id="m6z-wH-lYD"/>
+                                            <outlet property="delegate" destination="5AX-pK-gf7" id="PwM-4V-uN4"/>
+                                        </connections>
                                     </tableView>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-2H-Mcp">
                                         <rect key="frame" x="107" y="350" width="37" height="37"/>
@@ -1909,11 +1913,16 @@
                         <outlet property="numberOfUnmarkedEmployees" destination="VT5-J4-rLq" id="hM6-GG-YxL"/>
                         <outlet property="totalEmployees" destination="8l3-Yx-9nB" id="hwg-uJ-6LY"/>
                         <outlet property="unmarkedDate" destination="OnT-7h-Xqe" id="AyQ-Wb-Chk"/>
+                        <segue destination="lc4-6l-uzw" kind="show" identifier="segueFromDashboardCell" id="VnM-gw-IOW"/>
+                        <segue destination="xmk-ta-wNg" kind="show" identifier="segueFromAttendanceSummary" id="sb3-zw-Xbw"/>
+                        <segue destination="eii-0s-ihY" kind="show" identifier="segueFromEngineersCell" id="ViR-vd-Ghn"/>
+                        <segue destination="Ogb-Ol-gxI" kind="show" identifier="segueFromClientsCell" id="2vd-Kn-7nF"/>
+                        <segue destination="p6Y-DW-VNk" kind="show" identifier="segueFromReportsCell" id="PlX-ci-MOe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MYD-tG-e0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2001" y="-1686"/>
+            <point key="canvasLocation" x="401" y="-3297"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="PyP-Mr-3PC">
@@ -1972,12 +1981,12 @@
         <image name="previous " width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GsZ-9d-VGp"/>
-        <segue reference="dAB-6f-8oX"/>
+        <segue reference="2vd-Kn-7nF"/>
         <segue reference="YX4-gk-es6"/>
-        <segue reference="PT2-f4-H7H"/>
-        <segue reference="mwF-m4-A4I"/>
-        <segue reference="YoM-b2-hUu"/>
-        <segue reference="qBg-QW-BIl"/>
+        <segue reference="ViR-vd-Ghn"/>
+        <segue reference="sb3-zw-Xbw"/>
+        <segue reference="PlX-ci-MOe"/>
+        <segue reference="h3c-D1-rUg"/>
+        <segue reference="vur-7Y-Pdz"/>
     </inferredMetricsTieBreakers>
 </document>

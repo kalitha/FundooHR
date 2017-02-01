@@ -83,16 +83,16 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
         if let urlDictionary = NSDictionary(contentsOfFile: path!){
             mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
         }
-        
         mArrayOfTableViewContentModel = data
+        fetchDataFromController()
         }
     
     //making rest call to fetch data of collectionview cells from api
-    func fetchDataFromController(token:String)->Int{
+    func fetchDataFromController()->Int{
         leaveSummaryControllerObj = LeaveSummaryController(pLeaveSummaryViewModelProtocolObj: self)
         //leaveSummaryControllerObj?.protocolLeaveSummaryViewModel = self
         if(mCountForCollectionview == 0){
-            leaveSummaryControllerObj?.fetchNumberOFCellsFromService(token: token)
+            leaveSummaryControllerObj?.fetchNumberOFCellsFromService()
             mCountForCollectionview += 1
         }
         print("arrayOfLeaveEmployees.count",arrayOfLeaveEmployees.count)

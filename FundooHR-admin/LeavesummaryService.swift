@@ -66,7 +66,7 @@ class LeavesummaryService: NSObject {
     }
     
     //making rest call to fetch collectionview contents
-    func fetchData(token:String){
+    func fetchData(){
         let token = UserDefaults.standard.value(forKey: "tokenKey")! as! String
         print("tokenKey=-=-=",token)
         let url = mUtilityClassObj.fetchUrlFromPlist()

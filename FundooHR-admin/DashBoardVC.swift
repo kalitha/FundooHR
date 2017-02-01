@@ -153,12 +153,12 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
             self.view.addSubview(mCustomView)
             mCustomView.alpha = 0.5
             addGestureRecognizer()
+            tableviewReload()
         }
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
         mMenuShowing = !mMenuShowing
-        tableviewReload()
     }
     
     //reload tableview data when the data is loaded into it

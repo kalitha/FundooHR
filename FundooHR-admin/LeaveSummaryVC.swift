@@ -9,7 +9,7 @@
 import UIKit
 
 class
-LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSource,UICollectionViewDelegate{
+LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource{
     
     var leaveSummaryViewModelObj : LeaveSummaryViewModel?
     
@@ -128,11 +128,14 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         })
         mMenuShowing = !mMenuShowing
         print("menushowing=-=-=",mMenuShowing)
-        //falloutTableviewReload()
+        leaveSummaryTableviewReload()
     }
     
     func leaveSummaryTableviewReload(){
-        
+        //disabling the activity indictor
+        mTableViewActivityIndicator.isHidden = true
+        mTableViewActivityIndicator.stopAnimating()
+        self.mTableView.reloadData()
     }
     
     func reload() {
@@ -152,7 +155,7 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
             let token
                 = UserDefaults.standard.value(forKey: "tokenKey")
-            leaveSummaryViewModelObj?.fetchDataFromController(token: token as! String)
+            leaveSummaryViewModelObj?.fetchDataFromController()
         }
         print("arrayOfLeaveEmployees.count",leaveSummaryViewModelObj?.arrayOfLeaveEmployees.count)
         return leaveSummaryViewModelObj!.arrayOfLeaveEmployees.count
@@ -234,4 +237,78 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         return layout as UICollectionViewLayout
     }
     
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+       return (leaveSummaryViewModelObj!.fetchTableviewContentsFromController())
+    }
+    
+    @available(iOS 2.0, *)
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        cell.textLabel?.text = leaveSummaryViewModelObj?.contentAtEachRow(i: indexPath.row)
+        let color = UIColor.init(red: 59/255, green: 83/255, blue: 114/255, alpha: 1)
+        cell.textLabel?.textColor = color
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        if (indexPath.row == DashBoardTableview.EMAILID.rawValue) {
+            let color = UIColor.init(red: 157/255, green: 212/255, blue: 237/255, alpha: 1)
+            cell.backgroundColor = color
+            cell.imageView?.frame = CGRect(x: (cell.imageView?.frame.origin.x)!, y: (cell.imageView?.frame.origin.y)!, width: 60, height: 60)
+            cell.imageView?.image = #imageLiteral(resourceName: "user1")
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
+        
+        if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
+            cell.imageView?.image = #imageLiteral(resourceName: "logout")
+        }
+        return cell
+
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        if(indexPath.row == DashBoardTableview.DASHBOARD.rawValue){
+            performSegue(withIdentifier: "segueFromDashboardCell", sender: nil)
+        }
+        else if(indexPath.row == DashBoardTableview.ATTENDANCESUMMARY.rawValue){
+            performSegue(withIdentifier: "segueFromAttendanceSummary", sender: nil)
+        }
+
+        else if(indexPath.row == DashBoardTableview.ENGINEERS.rawValue){
+            performSegue(withIdentifier: "segueFromEngineersCell", sender: nil)
+        }
+        else if(indexPath.row == DashBoardTableview.REPORTS.rawValue){
+            performSegue(withIdentifier: "segueFromReportsCell", sender: nil)
+        }
+        else if(indexPath.row == DashBoardTableview.CLIENTS.rawValue){
+            performSegue(withIdentifier: "segueFromClientsCell", sender: nil)
+        }
+        else if(indexPath.row == DashBoardTableview.LOGOUT.rawValue){
+            let alert = UIAlertController(title: "Alert", message: "Would you like to logout?", preferredStyle: UIAlertControllerStyle.alert)
+            // add the actions (buttons)
+            let lContinueAction = UIAlertAction(title: "Continue", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+                self.performSegue(withIdentifier: "segueFromLogoutCell", sender: nil)
+                NSLog("Continue Pressed")
+            }
+            
+            let lCancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
+                UIAlertAction in
+                NSLog("Cancel Pressed")
+            }
+            alert.addAction(lContinueAction)
+            alert.addAction(lCancelAction)
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+        }
+        mSlideMenuLeadingConstraint.constant = -250
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        mMenuShowing = !mMenuShowing
+        
+        //2nd case of removing the tap gesture(paper) when we click on table view
+        self.mCustomView.removeFromSuperview()
+        
+        removeGestureRecognizer()
+    }
 }
