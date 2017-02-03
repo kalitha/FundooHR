@@ -110,7 +110,7 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     func tapBlurButton(_ sender: UIButton) {
         let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
         if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+            mSlideMenuValueFomPlist = (urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int)
         }
         mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
         UIView.animate(withDuration: 0.3, animations: {
@@ -165,9 +165,9 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     func reload() {
         activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
-        numberOfUnmarkedEmployees.text = String(describing:(mLeaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.unmarkedEmployee)! as Int)
-        totalEmployees.text = String(describing:(mLeaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.totalEmployee)! as Int)
-        let timeStampDate = Date.init(timeIntervalSince1970: Double((mLeaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.timeStamp!)!)!/1000)
+        numberOfUnmarkedEmployees.text = String(describing:(mLeaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.mUnmarkedEmployee)! as Int)
+        totalEmployees.text = String(describing:(mLeaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.mTotalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((mLeaveSummaryViewModelObj?.leaveSummaryTotalEmployeesContent?.mTimeStamp!)!)!/1000)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         let convertedtimeStampDate = formatter.string(from: timeStampDate)
@@ -178,11 +178,10 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
     //function that checks number of cells in collectionview
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
-            let token
-                = UserDefaults.standard.value(forKey: "tokenKey")
-            mLeaveSummaryViewModelObj?.fetchDataFromController()
+            let lCollectionviewCellsCount = mLeaveSummaryViewModelObj?.fetchDataFromController()
+            print("collectionview cells...",lCollectionviewCellsCount!)
+            
         }
-        print("arrayOfLeaveEmployees.count",mLeaveSummaryViewModelObj?.arrayOfLeaveEmployees.count)
         return mLeaveSummaryViewModelObj!.arrayOfLeaveEmployees.count
     }
     
@@ -196,7 +195,7 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
         cell.email.text = mLeaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].mEmailId
         cell.mobile.text = mLeaveSummaryViewModelObj?.arrayOfLeaveEmployees[indexPath.row].mMobile
         let employeeImage = mLeaveSummaryViewModelObj?.fetchEachImageOfEmployee(i: indexPath.row)
-        print("employee image...",employeeImage)
+        print("employee image...",employeeImage!)
         cell.employeeImage.image = employeeImage
         cell.layer.borderColor = color.cgColor
         cell.layer.backgroundColor = color.cgColor
@@ -328,7 +327,13 @@ LeaveSummaryVC: UIViewController,LeaveSummaryVCProtocol,UICollectionViewDataSour
             // show the alert
             self.present(alert, animated: true, completion: nil)
         }
-        mSlideMenuLeadingConstraint.constant = -250
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mSlideMenuValueFomPlist = (urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int)
+        }
+        
+        mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })

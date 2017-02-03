@@ -117,7 +117,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     func tapBlurButton(_ sender: UIButton) {
         let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
         if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as? Int
         }
         
         mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
@@ -145,7 +145,6 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         mTableActivityIndicator.startAnimating()
         mSlideMenuLeadingConstraint.constant = 0
         self.view.addSubview(mCustomView)
-        mCustomView.alpha = 0.5
         addGestureRecognizer()
         
         UIView.animate(withDuration: 0.3, animations: {
@@ -162,9 +161,9 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
         mCollectionActivityIndicator.isHidden = true
         mCollectionActivityIndicator.stopAnimating()
         
-        mNumberOfUnmarkedEmployees.text = String(describing:(mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.unmarkedEmployee)! as Int)
-        mTotalEmployees.text = String(describing:(mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.totalEmployee)! as Int)
-        let timeStampDate = Date.init(timeIntervalSince1970: Double((mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.timeStamp)!)!/1000)
+        mNumberOfUnmarkedEmployees.text = String(describing:(mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.mUnmarkedEmployee)! as Int)
+        mTotalEmployees.text = String(describing:(mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.mTotalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((mAttendanceSummaryViewModelObj?.mTotalEmployeesContents?.mTimeStamp)!)!/1000)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         let convertedtimeStampDate = formatter.string(from: timeStampDate)
@@ -277,8 +276,7 @@ class AttendanceSummaryVC: UIViewController,AttendanceSummaryVCProtocol,UICollec
     //collectionview datasource
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
-            //let token = UserDefaults.standard.value(forKey: "tokenKey")
-            mAttendanceSummaryViewModelObj?.fetchNumberOfCellsFromController()
+            var _ = mAttendanceSummaryViewModelObj?.fetchNumberOfCellsFromController()
         }
         return (mAttendanceSummaryViewModelObj?.mArrayOfUnmarkedEmployees.count)!
     }

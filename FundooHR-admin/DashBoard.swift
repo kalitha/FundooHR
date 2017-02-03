@@ -9,18 +9,18 @@
 import UIKit
 
 class DashBoard: NSObject {
-    var marked : Int?
-    var unmarked : NSString?
-    var falloutEmployee : Int?
-    var totalEmployee : Int?
-    var leave : NSString?
-    var timeStamp : Double!
+    var mMarked : Int?
+    var mUnmarked : NSString?
+    var mFalloutEmployee : Int?
+    var mTotalEmployee : Int?
+    var mLeave : NSString?
+    var mTimeStamp : Double!
     init(marked:Int, unmarked:NSString,falloutEmployee:Int, totalEmployee:Int, leave:NSString, timeStamp:Double) {
-        self.marked = marked
-        self.unmarked = unmarked
-        self.falloutEmployee = falloutEmployee
-        self.totalEmployee = totalEmployee
-        self.leave = leave
-        self.timeStamp = timeStamp
+        self.mMarked = marked
+        self.mUnmarked = unmarked
+        self.mFalloutEmployee = falloutEmployee
+        self.mTotalEmployee = totalEmployee
+        self.mLeave = leave
+        self.mTimeStamp = timeStamp
     }
 }

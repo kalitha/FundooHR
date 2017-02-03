@@ -26,7 +26,7 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,En
         engineersViewModelObj?.protocolEngineersVC = self
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,7 +58,7 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,En
         //3rd case of removing  gesture when we click on collectionview
         removeGestureRecognizer()
     }
-
+    
     @IBAction func onButtonClick(_ sender: UIButton) {
         if(menuShowing){
             slideMenuLeadingConstraint.constant = -250
@@ -75,17 +75,14 @@ class EngineersVC: UIViewController,UITableViewDataSource,UITableViewDelegate,En
         })
         menuShowing = !menuShowing
     }
-
+    
     func tableviewReload(){
         
         self.tableView.reloadData()//it reloads the tablview so that numberOfRowsInSection and cellForRowAt methods will be called
     }
-
     
-        open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-            
-            print(engineersViewModelObj?.fetchNumberOfRows())
-                
+    
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return (engineersViewModelObj?.fetchNumberOfRows())!
     }
     

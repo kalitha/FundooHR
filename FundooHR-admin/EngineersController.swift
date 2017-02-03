@@ -19,7 +19,6 @@ class EngineersController: NSObject,EngineersControllerProtocol {
     func fetchNumOfRows(){
         engineersServiceObj = EngineersService()
         engineersServiceObj?.protocolEngineersController = self
-        let engineerModelArray = [EngineersModel]()
         engineersServiceObj?.fetchData()
     }
     

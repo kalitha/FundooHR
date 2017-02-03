@@ -4,7 +4,7 @@
 
 //  Purpose:-
 //  1)Making Rest call to fetch tableview contents
-//  2)Making rest call to fetch collectionview contents
+//  2)Making rest call to fetch collectionview contents of DashBoard Viewcontroller
 
 //  Created by BridgeLabz on 02/01/17.
 //  Copyright © 2017 BridgeLabz. All rights reserved.
@@ -71,7 +71,7 @@ class DashBoardService: NSObject {
         
         Alamofire.request("\(url)/readDashboardData?timeStamp=\(calculatedTimeStamp)", headers: headers).responseJSON
             { response in
-                print("value----",response.result.value)
+                print("value----",response.result.value!)
                 
                 if let JSON = response.result.value {
                     let dashboardData = JSON as! NSDictionary

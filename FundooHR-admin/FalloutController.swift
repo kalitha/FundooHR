@@ -22,7 +22,6 @@ class FalloutController: NSObject,FalloutControllerProtocol {
     
     //rest call to fetch tableview's data
     func fetchTableViewContentsFromService(){
-        let arrayOfTableViewContentModel = [TableViewContentModel]()
         let falloutServiceObj = FalloutService(pFalloutControllerProtocolObj: self)
         falloutServiceObj.fetchTableViewContents()
     }

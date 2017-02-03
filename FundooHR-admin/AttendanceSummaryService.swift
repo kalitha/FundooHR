@@ -117,7 +117,7 @@ class AttendanceSummaryService: NSObject {
         Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .responseJSON{
                 response in
-                print("value----",response.result.value)
+                print("value----",response.result.value!)
                 if let json = response.result.value{
                     let emailData = json as! NSDictionary
                     print("emailData",emailData)

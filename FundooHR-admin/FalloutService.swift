@@ -1,7 +1,11 @@
  //
 //  FalloutService.swift
 //  FundooHR-admin
-//
+ 
+//  Purpose:-
+//  1)Making Rest call to fetch tableview contents
+//  2)Making rest call to fetch collectionview contents of Fallout Viewcontroller
+
 //  Created by BridgeLabz on 05/01/17.
 //  Copyright © 2017 BridgeLabz. All rights reserved.
 //
@@ -120,7 +124,7 @@ import FirebaseStorage
         Alamofire.request(lUrlString, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .responseJSON{
                 response in
-                print("value----",response.result.value)
+                print("value----",response.result.value!)
                 if let json = response.result.value{
                     let emailData = json as! NSDictionary
                     print("emailData",emailData)

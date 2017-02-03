@@ -118,7 +118,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     func tapBlurButton(_ sender: UIButton) {
         let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
         if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+            mSlideMenuValueFomPlist = (urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int)
         }
         
         mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
@@ -136,7 +136,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
     //collectionview datasource
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
-            mFalloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
+        var _ = mFalloutViewModelObj?.fetchNumberOfCellsFromFalloutController()
         }
         return mFalloutViewModelObj!.arrayOfFalloutEmployees.count
     }
@@ -152,7 +152,7 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         cell.email.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mEmailId
         cell.mobileNum.text = mFalloutViewModelObj?.arrayOfFalloutEmployees[indexPath.row].mMobile
         let employeeImage = mFalloutViewModelObj?.fetchEachImageOfEmployee(i: indexPath.row)
-        print("employee image...",employeeImage)
+        print("employee image...",employeeImage!)
         cell.employeeImage.image = employeeImage
         
         cell.layer.borderColor = color.cgColor
@@ -198,9 +198,9 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
         mActivityIndicator.isHidden = true
         mActivityIndicator.stopAnimating()
         
-        mNumberOfUnmarkedEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.unmarkedEmployee)! as Int)
-        mTotalEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.totalEmployee)! as Int)
-        let timeStampDate = Date.init(timeIntervalSince1970: Double((mFalloutViewModelObj?.falloutTotalEmployeesContents?.timeStamp!)!)!/1000)
+        mNumberOfUnmarkedEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.mUnmarkedEmployee)! as Int)
+        mTotalEmployees.text = String(describing:(mFalloutViewModelObj?.falloutTotalEmployeesContents?.mTotalEmployee)! as Int)
+        let timeStampDate = Date.init(timeIntervalSince1970: Double((mFalloutViewModelObj?.falloutTotalEmployeesContents?.mTimeStamp!)!)!/1000)
         let formatter = DateFormatter()
         formatter.dateFormat = "MMMM yyyy"
         let convertedtimeStampDate = formatter.string(from: timeStampDate)
@@ -293,7 +293,12 @@ class FalloutEmployeeVC: UIViewController,UICollectionViewDelegate,UICollectionV
             // show the alert
             self.present(alert, animated: true, completion: nil)
         }
-        mSlideMenuLeadingConstraint.constant = -250
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mSlideMenuValueFomPlist = (urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int)
+        }
+        
+        mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })

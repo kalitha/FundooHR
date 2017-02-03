@@ -9,13 +9,13 @@
 import UIKit
 
 class TotalEmployees: NSObject {
-    var unmarkedEmployee : Int?
-    var totalEmployee : Int?
-    var timeStamp : String?
+    var mUnmarkedEmployee : Int?
+    var mTotalEmployee : Int?
+    var mTimeStamp : String?
     
     init(unmarkedEmployee:Int, totalEmployee:Int, timeStamp:String) {
-        self.totalEmployee = totalEmployee
-        self.unmarkedEmployee = unmarkedEmployee
-        self.timeStamp = timeStamp
+        self.mTotalEmployee = totalEmployee
+        self.mUnmarkedEmployee = unmarkedEmployee
+        self.mTimeStamp = timeStamp
     }
 }

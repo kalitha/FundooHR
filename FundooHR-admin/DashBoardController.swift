@@ -22,7 +22,6 @@ class DashBoardController: NSObject,DashBoardControllerProtocol{
     
     //making the rest call to fetch tableview contents from api
     func fetchTableViewContentsFromService(){
-        let arrayOfTableViewContentModel = [TableViewContentModel]()
         let dashBoardServiceObj = DashBoardService(pDashBoardControllerProtocolObj: self)
         dashBoardServiceObj.fetchTableViewContents()
     }

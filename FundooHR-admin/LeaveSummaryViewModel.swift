@@ -10,9 +10,6 @@ import UIKit
 
 class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     
-    //create variable of type LeaveSummaryEmployeeImageModel
-    var arrayOfLeaveSummaryEmployeeImageModel = [LeaveSummaryEmployeeImageModel]()
-    
     //create variable of type LeaveSummaryVC
     var leaveSummaryVCObj : LeaveSummaryVC?
     
@@ -36,9 +33,6 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     
     //create variable of type LeaveSummaryTotalEmployees
     var leaveSummaryTotalEmployeesContent : TotalEmployees?
-    
-    //create the array variable of type LeaveSummaryEmployeeImageModel
-    var arrayOfLeaveSummaryEmployeeImages = [LeaveSummaryEmployeeImageModel]()
     
     //model type array of tableviewcontents
     var mArrayOfTableViewContentModel = [TableViewContentModel]()
@@ -75,18 +69,15 @@ class LeaveSummaryViewModel: NSObject,LeaveSummaryViewModelProtocol {
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
     func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel]){
-        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
-        if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
-        }
         mArrayOfTableViewContentModel = data
-        fetchDataFromController()
+        mResponseCountForTableView = mArrayOfTableViewContentModel.count
+        var _ = fetchDataFromController()
+        
     }
     
     //making rest call to fetch data of collectionview cells from api
     func fetchDataFromController()->Int{
         leaveSummaryControllerObj = LeaveSummaryController(pLeaveSummaryViewModelProtocolObj: self)
-        //leaveSummaryControllerObj?.protocolLeaveSummaryViewModel = self
         if(mCountForCollectionview == 0){
             leaveSummaryControllerObj?.fetchNumberOFCellsFromService()
             mCountForCollectionview += 1

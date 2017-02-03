@@ -19,19 +19,18 @@ class AttendanceSummaryController: NSObject,AttendanceSummaryProtocol {
     init(pAttendanceSummaryProtocolObj : AttendanceSummaryProtocol) {
         mAttendanceSummaryProtocolObj = pAttendanceSummaryProtocolObj
     }
-
+    
     //rest call to fetch tableview's data
     func fetchTableViewContentsFromService(){
-        let lArrayOfTableViewContentModel = [TableViewContentModel]()
-         mAttendanceSummaryServiceObj = AttendanceSummaryService(pAttendanceSummaryProtocolObj: self)
+        mAttendanceSummaryServiceObj = AttendanceSummaryService(pAttendanceSummaryProtocolObj: self)
         mAttendanceSummaryServiceObj?.fetchTableViewContents()
-
+        
     }
     
     //fetching the tableview contents
     func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel]){
         mAttendanceSummaryProtocolObj?.tableViewContentsFetchedFromRestCall(data: data)
-          }
+    }
     
     //making rest call to fetch collection view cells
     func fetchNumberOfCellsFromService(){
@@ -46,8 +45,8 @@ class AttendanceSummaryController: NSObject,AttendanceSummaryProtocol {
     //fetching collection view cells from rest call
     func dataFetchedFromTheRestCall(_ data:[EmployeeDetails],totalEmployeesObj:TotalEmployees){
         self.mAttendanceSummaryProtocolObj?.dataFetchedFromTheRestCall(data, totalEmployeesObj: totalEmployeesObj)
-        }
-
+    }
+    
     //rest call to send mail
     func makingRestCallToSendMail(){
         mAttendanceSummaryServiceObj = AttendanceSummaryService(pAttendanceSummaryProtocolObj: self)

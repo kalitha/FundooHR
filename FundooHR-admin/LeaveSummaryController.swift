@@ -22,7 +22,6 @@ class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     
     //rest call to fetch tableview's data
     func fetchTableViewContentsFromService(){
-        let lArrayOfTableViewContentModel = [TableViewContentModel]()
         mLeaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
         mLeaveSummaryServiceObj?.fetchTableViewContents()
     }
@@ -35,8 +34,6 @@ class LeaveSummaryController: NSObject ,LeaveSummaryControllerProtocol{
     //making rest call to fetch collection view cells
     func fetchNumberOFCellsFromService(){
         mLeaveSummaryServiceObj = LeavesummaryService(pLeaveSummaryProtocolObj: self)
-        // leaveSummaryServiceObj?.protocolLeaveSummaryControllerObj = self
-        let arrayOfLeaveEmployees = [EmployeeDetails]()
         mLeaveSummaryServiceObj?.fetchData()
     }
     

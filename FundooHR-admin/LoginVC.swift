@@ -167,7 +167,7 @@ class LoginVC: UIViewController,LoginVCProtocol{
     
     func keyboardWillHide(notification: NSNotification) {
         
-        if let lKeyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if ((notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if(mOffsetCheckBOOL == true)
             {
                 mOffsetCheckBOOL = false

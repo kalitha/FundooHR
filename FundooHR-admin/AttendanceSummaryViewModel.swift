@@ -67,15 +67,9 @@ class AttendanceSummaryViewModel: NSObject,AttendanceSummaryProtocol {
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
     func tableViewContentsFetchedFromRestCall(data:[TableViewContentModel]){
-        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
-        if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
-        }
-        
         mArrayOfTableViewContentModel = data
-        
-        fetchNumberOfCellsFromController()
-        
+        mResponseCountForTableView = mArrayOfTableViewContentModel.count
+        let _ = fetchNumberOfCellsFromController()
     }
     
     //making rest call to fetch data of collectionview cells from api
@@ -92,7 +86,6 @@ class AttendanceSummaryViewModel: NSObject,AttendanceSummaryProtocol {
     func dataFetchedFromTheRestCall(_ data:[EmployeeDetails],totalEmployeesObj:TotalEmployees){
         mArrayOfUnmarkedEmployees = data
         mTotalEmployeesContents = totalEmployeesObj
-        
         fetchImageFromUrl(mArrayOfUnmarkedEmployees: data)
     }
     

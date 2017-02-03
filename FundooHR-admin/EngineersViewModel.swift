@@ -33,22 +33,16 @@ class EngineersViewModel: NSObject,EngineersviewModelProtocol {
         var contentInIndex : EngineersModel?
         
         contentInIndex = engineersModelArray[i]
-        
-        print("content in index=",contentInIndex )
         let name = contentInIndex?.rowName
         
         return name!
     }
-
+    
     
     func dataFetchedFromController(data:[EngineersModel]){
         engineersModelArray = data// here the data is taken from the i/p arg and stors in arrayOfTeams
         print("engineersModelArray count=--=-",engineersModelArray.count)
-
-        DispatchQueue.main.async {
-                        self.protocolEngineersVC?.tableviewReload()
-            
-        }
+        self.protocolEngineersVC?.tableviewReload()
     }
 }
 

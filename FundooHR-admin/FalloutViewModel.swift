@@ -64,13 +64,9 @@ class FalloutViewModel: NSObject,FalloutViewModelProtocol{
     
     //storing the fetched tableview data in a variable and increasing the ResponseCountForTableView
     func tableViewContentsFetchedFromController(data:[TableViewContentModel]){
-        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
-        if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mResponseCountForTableView = urlDictionary["tableViewCellCount"] as! Int
-        }
-        
         mArrayOfTableViewContentModel = data
-        fetchNumberOfCellsFromFalloutController()
+        mResponseCountForTableView = mArrayOfTableViewContentModel.count
+       var _ = fetchNumberOfCellsFromFalloutController()
     }
     
     //making rest call to fetch data of collectionview cells from api

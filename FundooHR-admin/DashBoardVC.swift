@@ -11,7 +11,7 @@
 
 import UIKit
 
-//enumeration
+//enumeration for collectionview cells
 enum DashBoardControls:Int{
     case ATTENDANCESUMMARY = 0
     case ATTENDANCEFALLOUT
@@ -20,6 +20,7 @@ enum DashBoardControls:Int{
     case CLIENTS
 }
 
+//enumeration for tableview cells
 enum DashBoardTableview:Int{
     case EMAILID = 0
     case DASHBOARD
@@ -98,8 +99,6 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         
         //notifies when screen rotated
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        
-        
     }
     
     //function to rotate the screen
@@ -136,7 +135,7 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         
         let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
         if let urlDictionary = NSDictionary(contentsOfFile: path!){
-            mSlideMenuValueFomPlist = urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int
+            mSlideMenuValueFomPlist = (urlDictionary["tableviewSlideMenuLeadingConstraint"] as? Int)
         }
         mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
         UIView.animate(withDuration: 0.3, animations: {
@@ -156,14 +155,6 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
         print("views width",view.frame.width)
         mCustomView.frame = CGRect.init(x: mSlideMenu.frame.width, y: 0, width: view.frame.width-mSlideMenu.frame.width, height: view.frame.height)
         mCustomView.backgroundColor = UIColor.clear
-        
-        //        if(mMenuShowing){
-        //            mSlideMenuLeadingConstraint.constant = -250
-        //            //1st case of removing tap gesture(papre) when we click on the icon
-        //
-        //            removeGestureRecognizer()
-        
-        
         //enabling the activity indictor
         mTableViewActivityIndicator.isHidden = false
         mTableViewActivityIndicator.startAnimating()
@@ -199,56 +190,57 @@ class DashBoardVC: UIViewController,DashBoardVCProtocol{
 extension DashBoardVC: UICollectionViewDataSource{
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
         print("valueOfDictionary=-=-=-=",UserDefaults.standard.value(forKey: "tokenKey")!)
-        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){            mDashBoardViewModelObj?.fetchDataFromDashBoardController()
+        if(UserDefaults.standard.value(forKey: "tokenKey") != nil){
+            var _ = mDashBoardViewModelObj?.fetchDataFromDashBoardController()
         }
         print("dashBoardViewModelObj.responseCount",mDashBoardViewModelObj!.mResponseCount)
         return mDashBoardViewModelObj!.mResponseCount
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let lDate = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.timeStamp)!)/1000)
+        let lDate = Date.init(timeIntervalSince1970: Double((mDashBoardViewModelObj?.mDashBoardContents?.mTimeStamp)!)/1000)
         let temp = DashBoardControls.ATTENDANCESUMMARY
         
         if(indexPath.row == temp.rawValue){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "attendanceSummaryCell", for: indexPath) as! AttendanceSummary
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
-            cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.mDashBoardContents?.marked)! as Int)
-            cell.unmarkedEmployees.text = mDashBoardViewModelObj?.mDashBoardContents?.unmarked as? String
+            cell.markedEmployees.text = String(describing: (mDashBoardViewModelObj?.mDashBoardContents?.mMarked)! as Int)
+            cell.unmarkedEmployees.text = mDashBoardViewModelObj?.mDashBoardContents?.mUnmarked as? String
             cell.date.text = retunedDate
             return cell
         }
         else if(indexPath.row == DashBoardControls.ATTENDANCEFALLOUT.rawValue){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "attendanceFalloutCell", for: indexPath) as! AttendanceFallout
-            cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.falloutEmployee)! as Int)
-            cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.totalEmployee)! as Int)
+            cell.falloutEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.mFalloutEmployee)! as Int)
+            cell.totalEmployees.text = String(describing:(mDashBoardViewModelObj?.mDashBoardContents?.mTotalEmployee)! as Int)
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.date.text = retunedDate
             return  cell
         }
         else if(indexPath.row == DashBoardControls.LEAVESUMMARY.rawValue){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "leaveSummaryCell", for: indexPath) as! LeaveDetails
-            cell.mLeave.text = mDashBoardViewModelObj?.mDashBoardContents?.leave as! String
+            cell.mLeave.text = (mDashBoardViewModelObj?.mDashBoardContents?.mLeave as! String)
             let retunedDate = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             cell.mDate.text = retunedDate
             return cell
         }
         else if(indexPath.row == DashBoardControls.ENGINEERS.rawValue) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "engineersDetailsCell", for: indexPath)
-            mUtilityClassObj.cellDesign(cell: cell, date: lDate)
+            var _ = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
         else if(indexPath.row == DashBoardControls.CLIENTS.rawValue){
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "clientDetailsCell", for: indexPath)
             
-            mUtilityClassObj.cellDesign(cell: cell, date: lDate)
+            var _ = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
         else{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reportDetailsCell", for: indexPath)
-            mUtilityClassObj.cellDesign(cell: cell, date: lDate)
+            var _ = mUtilityClassObj.cellDesign(cell: cell, date: lDate)
             return cell
         }
     }
@@ -353,7 +345,13 @@ extension DashBoardVC: UITableViewDelegate{
             self.present(alert, animated: true, completion: nil)
             
         }
-        mSlideMenuLeadingConstraint.constant = -250
+        let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
+        if let urlDictionary = NSDictionary(contentsOfFile: path!){
+            mSlideMenuValueFomPlist = (urlDictionary["tableviewSlideMenuLeadingConstraint"] as! Int)
+        }
+        
+        mSlideMenuLeadingConstraint.constant = CGFloat(mSlideMenuValueFomPlist!)
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })

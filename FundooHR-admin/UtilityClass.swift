@@ -46,7 +46,7 @@ class UtilityClass: UIViewController {
         let path = Bundle.main.path(forResource: "UrlPlist", ofType: "plist")
         
         if let urlDictionary = NSDictionary(contentsOfFile: path!){
-             url = urlDictionary["url"] as! String
+             url = (urlDictionary["url"] as! String)
         }
         return url!
         
